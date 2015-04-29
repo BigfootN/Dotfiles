@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# border gaps and colors
+PANEL_HEIGHT=18
+PADDING_LEFT_AND_RIGHT=5
+PADDING_TOP=10
+PADDING_BOTTOM=5
+BORDER_WIDTH=5
+WINDOW_GAP=5
+
+# font
+#FONT="-*-source\ code\ pro-medium-*-*-*-14-*-*-*-*-*-*-*-*"
+
+# colors
+bspc config active_border_color "#484242"
+bspc config focused_border_color "#484242"
+bspc config normal_border_color "#F8C994"
+
+# splitting
+bspc config split_ratio 0.5
+
+# monitor padding
+bspc config top_padding $PADDING_TOP
+bspc config right_padding $PADDING_LEFT_AND_RIGHT
+bspc config left_padding $PADDING_LEFT_AND_RIGHT
+bspc config bottom_padding $PADDING_BOTTOM
+bspc config focus_follows_pointer false
+
+# gap and border
+bspc config border_width       5
+bspc config window_gap         20
+
+# desktops
+bspc monitor -d 1 2 3 4
+

@@ -96,7 +96,7 @@ map <F8>               :TagbarToggle<CR>            " toggle tagbar
 
 " set font and colorscheme
 set t_Co=256
-set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
+set guifont=Inconsolata\ for\ Powerline\ 10
 colorscheme gruvbox
 
 " gruvbox configuration

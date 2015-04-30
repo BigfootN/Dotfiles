@@ -12,6 +12,7 @@ FONT1="-*-terminus-*-*-*-12-*-*-*-*-*-*-*-*"
 FONT2="-*-stlarch-medium-r-*-*-11-*-*-*-*-*-*-*"
 FONT3="-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-*"
 FONT4="-misc-fixed-medium-r-normal-*-13-120-75-75-C-70-iso10646-1"
+FONT5="xft:Inconsolata for Powerline:size=9"
 
 function print_date {
     while true; do
@@ -101,4 +102,4 @@ cat "$PANEL_FIFO" | while read -r line; do
     esac
     echo -e "%{c}$ICONS_COLOR$desk%{B-}%{r}$ICONS_COLOR \uE0C1 $cpu |$ICONS_COLOR \uE146 $ram |$ICONS_COLOR \uE0EC $music |$ICONS_COLOR \uE016 $date"
     echo ""
-done | lemonbar -p -g "1920x20+0+0" -B#494844 -f "$FONT2","$FONT3"
+done | lemonbar -p -g "1920x20+0+0" -B#494844 -f "$FONT5"

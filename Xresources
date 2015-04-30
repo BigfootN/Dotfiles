@@ -6,7 +6,7 @@
 *scrollBar: false
 
 ! font
-*font: xft:Source Code Pro Medium:size=9
+*font: xft:Inconsolata for Powerline:size=10
 *faceName: Source Code Pro:size=9:antialias=true
 
 ! size

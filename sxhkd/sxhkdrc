@@ -1,0 +1,31 @@
+# launch urxvt
+super + e
+    urxvt
+
+# where to make the next window appear
+super + {Left,Down,Up,Right}
+    bspc window -p {left,down,up,right}
+
+# focus another window
+ctrl + {Left,Down,Up,Right}
+    bspc window -f {left,down,up,right}
+
+# launch vim
+super + v
+    gvim
+
+# launch firefox
+super + f
+    firefox
+
+# close window
+alt + F4
+    bspc window -c
+
+# change workspace
+ctrl + alt + {Left,Right}
+    bspc desktop -f {prev,next}
+
+# logout
+ctrl + alt + s
+    bash .config/bspwm/logout

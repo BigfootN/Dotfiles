@@ -8,15 +8,12 @@ ICONS_COLOR="$RED"
 TEXT_COLOR="%{F#FFB856}"
 
 # font
-FONT1="-*-terminus-*-*-*-12-*-*-*-*-*-*-*-*"
-FONT2="-*-stlarch-medium-r-*-*-11-*-*-*-*-*-*-*"
-FONT3="-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-*"
-FONT4="-misc-fixed-medium-r-normal-*-13-120-75-75-C-70-iso10646-1"
-FONT5="xft:Inconsolata for Powerline:size=9"
+FONT1="-*-stlarch-medium-r-*-*-11-*-*-*-*-*-*-*"
+FONT2="-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-*"
 
 function print_date {
     while true; do
-        echo "(date)$TEXT_COLOR$(date "+%H:%M")"
+        echo "(date)$ICONS_COLOR\uE016 $TEXT_COLOR$(date "+%H:%M")"
         sleep 1;
     done
 }
@@ -27,7 +24,7 @@ function print_current_song {
         if [ -z "$CURR_SONG" ]; then
             CURR_SONG="arrêté"
         fi
-        echo "(music)$TEXT_COLOR$CURR_SONG"
+        echo "(music)$ICONS_COLOR\uE0EC $TEXT_COLOR$CURR_SONG"
         sleep 1;
     done
 }
@@ -38,7 +35,7 @@ function print_mem_used {
         used_memory=$(free -mb | grep -n 2 | awk -F " *" '{ print $3 }' -)
         perc_mem=$(( used_memory*100 ))
         perc_mem=$(( perc_mem/total_memory ))
-        echo "(ram)$TEXT_COLOR$perc_mem%%"
+        echo "(ram)$ICONS_COLOR\uE146 $TEXT_COLOR$perc_mem%%"
         sleep 1;
     done
 }
@@ -46,7 +43,7 @@ function print_mem_used {
 function print_proc_used {
     while true; do
         proc_perc=$(mpstat 1 1 | grep "Moyenne" | awk -F ":" '{ print $2 }' | awk -F " *" '{print $3}')
-        echo "(cpu)$TEXT_COLOR$proc_perc%%"
+        echo "(cpu)$ICONS_COLOR \uE0C1 $TEXT_COLOR$proc_perc%%"
         sleep 1;
     done
 }
@@ -57,24 +54,23 @@ function print_desktop {
         desktop_num=$(bspc query -D -d)
         case "$desktop_num" in
             "1")
-                desktop_echo="●   ○   ○   ○"
+                desktop_echo="%{B#767171}  ●  %{B-}   ○   ○   ○"
                 ;;
             "2")
-                desktop_echo="○   ●   ○   ○"
+                desktop_echo="○   %{B#767171}  ●  %{B-}   ○   ○"
                 ;;
             "3")
-                desktop_echo="○   ○   ●   ○"
+                desktop_echo="○   ○   %{B#767171}  ●  %{B-}   ○"
                 ;;
             "4")
-                desktop_echo="○   ○   ○   ●"
+                desktop_echo="○   ○   ○   %{B#767171}  ●  %{B-}"
                 ;;
         esac
-        echo -e "(desk)$colors$desktop_echo"
+        echo -e "(desk)%{c}$colors$desktop_echo"
         sleep 0.2;
     done
 }
 
-#print_current_song > "$PANEL_FIFO" &
 print_date > "$PANEL_FIFO" &
 print_current_song > "$PANEL_FIFO" &
 print_mem_used > "$PANEL_FIFO" &
@@ -100,6 +96,6 @@ cat "$PANEL_FIFO" | while read -r line; do
             desk=${line:6}
             ;;
     esac
-    echo -e "%{c}$ICONS_COLOR$desk%{B-}%{r}$ICONS_COLOR \uE0C1 $cpu |$ICONS_COLOR \uE146 $ram |$ICONS_COLOR \uE0EC $music |$ICONS_COLOR \uE016 $date"
+    echo -e "%{c}$ICONS_COLOR$desk%{B-}%{r} $cpu | $ram | $music | $date"
     echo ""
-done | lemonbar -p -g "1920x20+0+0" -B#494844 -f "$FONT5"
+done | lemonbar -p -g "1920x20+0+0" -B#414040 -f "$FONT1" -f "$FONT2"

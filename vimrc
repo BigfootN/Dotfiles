@@ -27,6 +27,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'reedes/vim-lexical'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'morhetz/gruvbox'
+Plugin 'mhinz/vim-startify'
 
 call vundle#end()
 
@@ -119,6 +120,15 @@ set shiftwidth=4    " indent level of 4 spaces
 set tabstop=4       " tab of 4 spaces
 set softtabstop=4   " backspace of 4 spaces
 
+" getting startify and startify working at startup
+autocmd VimEnter *
+                \   if !argc()
+                \ |   Startify
+                \ |   NERDTree
+                \ |   wincmd w
+                \ | endif
+
+autocmd User Startified setlocal buftype=
 
 "=======================
 "   NERDTREE SETTINGS
@@ -269,3 +279,20 @@ let g:lightline.enable={
             \ 'statusline': 0,
             \ 'tabline': 1
             \ }
+
+"==============
+"   STARTIFY
+"==============
+
+let g:startify_session_dir = '~/.vim/sessions'
+let g:startify_list_order = [
+    \ [ '   Fichiers récents:'],
+    \ 'files',
+    \ [ '   Fichiers récents dans ce répertoire:' ],
+    \ 'dir',
+    \ [ '   Sessions:' ],
+    \ 'sessions']
+let g:startify_files_number = 5
+let g:startify_custom_indinces = ['f', 'g', 'h']
+let g:startify_custom_header =
+      \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']

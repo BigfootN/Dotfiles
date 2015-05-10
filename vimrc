@@ -10,10 +10,9 @@ call vundle#begin()
 " Vundle plugins
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-surround'
-Plugin 'majutsushi/tagbar'
-Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'tpope/vim-surround'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
@@ -27,7 +26,8 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'reedes/vim-lexical'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'morhetz/gruvbox'
-Plugin 'mhinz/vim-startify'
+Plugin 'xolox/vim-session'
+Plugin 'xolox/vim-misc'
 
 call vundle#end()
 
@@ -88,9 +88,6 @@ map <C-d>              :tabclose<CR>
 " Surrounding
 map <leader>b          ysiwb                        " wrap current word with brackets
 
-" ctags
-map <F8>               :TagbarToggle<CR>            " toggle tagbar
-
 "=====================
 "    LOOK AND FEEL
 "=====================
@@ -110,8 +107,9 @@ set nu                                      " show line numbers
 set cursorline                              " show line where the cursor is
 autocmd WinEnter * setlocal cursorline      " set cursorline on the entering of a new window
 autocmd WinLeave * setlocal nocursorline    " set off cursorline when leaving the curent window
-set listchars=eol:¬,tab:\ \ ,trail:-
+set listchars=eol:¬,tab:\ \ ,trail:\ 
 set list
+hi NonText ctermfg=7 guifg=#EF6D39
 
 " set indent space
 set autoindent      " always set autoindenting on
@@ -119,24 +117,6 @@ set expandtab       " use spaces, not tabs
 set shiftwidth=4    " indent level of 4 spaces
 set tabstop=4       " tab of 4 spaces
 set softtabstop=4   " backspace of 4 spaces
-
-" getting startify and startify working at startup
-autocmd VimEnter *
-                \   if !argc()
-                \ |   Startify
-                \ |   NERDTree
-                \ |   wincmd w
-                \ | endif
-
-autocmd User Startified setlocal buftype=
-
-"=======================
-"   NERDTREE SETTINGS
-"=======================
-
-" Open nerdtree in console
-let g:nerdtree_tabs_open_on_console_startup = 1
-
 
 "=======================
 "   SYNTASTIC OPTIONS
@@ -174,7 +154,7 @@ let g:EclimCompletionMethod='omnifunc'
 " ycm options
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_completion = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_confirm_extra_conf = 0
 set completeopt+=preview
@@ -264,9 +244,11 @@ let g:lightline = {
             \ 'separator': { 'left': '', 'right': '' },
             \ 'subseparator': { 'left': '', 'right': '' }
             \ }
+
 function! MyReadonly()
     return &readonly ? '' : ''
 endfunction
+
 function! MyFugitive()
     if exists('*fugitive#head')
         let _ = fugitive#head()
@@ -280,19 +262,11 @@ let g:lightline.enable={
             \ 'tabline': 1
             \ }
 
-"==============
-"   STARTIFY
-"==============
+"=====================
+"   SESSION OPTIONS
+"=====================
 
-let g:startify_session_dir = '~/.vim/sessions'
-let g:startify_list_order = [
-    \ [ '   Fichiers récents:'],
-    \ 'files',
-    \ [ '   Fichiers récents dans ce répertoire:' ],
-    \ 'dir',
-    \ [ '   Sessions:' ],
-    \ 'sessions']
-let g:startify_files_number = 5
-let g:startify_custom_indinces = ['f', 'g', 'h']
-let g:startify_custom_header =
-      \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
+set sessionoptions-=help
+set sessionoptions-=blank
+
+let g:session_autosave = 'yes'

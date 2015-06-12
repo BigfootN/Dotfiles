@@ -7,7 +7,7 @@
 
 ! font
 *font: xft:Inconsolata for Powerline:size=10
-*faceName: Source Code Pro:size=9:antialias=true
+!*letterSpace: -1
 
 ! size
 *geometry: 154x46+200+70

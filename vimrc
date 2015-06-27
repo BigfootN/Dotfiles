@@ -25,8 +25,6 @@ Plugin 'DoxygenToolkit.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Yggdroot/indentLine'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'reedes/vim-lexical'
 Plugin 'godlygeek/tabular'
 
 " session
@@ -59,8 +57,6 @@ set guioptions-=m
 set guioptions-=T
 set guioptions-=e
 
-" auto indent with F7
-noremap <F7> :Autoformat<CR><CR>
 
 " Increasive search
 set incsearch
@@ -69,6 +65,10 @@ set smartcase
 
 " enable c syntax for *.h files
 let g:c_syntax_for_h=1
+
+" enable plaintex syntax for *.tex files
+set cole=0
+au FileType * setl cole=0
 
 " highlight the line number column
 hi LineNr guibg=grey ctermbg=red
@@ -81,7 +81,7 @@ hi LineNr guibg=grey ctermbg=red
 let mapleader=","
 
 " white spaces
-nnoremap <silent> <F5> :%s/\s\+$//<CR>
+noremap <silent> <F5> :%s/\s\+$//<CR>
 
 " write and quit
 map <leader>q          :q<CR>
@@ -100,6 +100,12 @@ map <C-d>              :tabclose<CR>
 
 " Surrounding
 map <leader>b          ysiwb                        " wrap current word with brackets
+
+" auto indent with F7
+noremap <F7> :Autoformat<CR>
+
+" auto format on save
+au BufWrite * :Autoformat
 
 "=====================
 "    LOOK AND FEEL
@@ -125,6 +131,10 @@ autocmd WinLeave * setlocal nocursorline    " set off cursorline when leaving th
 set listchars=eol:¬,tab:\ \ ,trail:\ 
 set list
 hi NonText ctermfg=7 guifg=#EF6D39
+
+" Disable cursorline for tex files
+autocmd FileType tex :NoMatchParen
+au FileType tex setlocal nocursorline
 
 " set indent space
 set autoindent      " always set autoindenting on
@@ -179,6 +189,12 @@ let g:ycm_filetype_specific_completion_to_disable = {
             \ 'swap': 1
             \ }
 set completeopt+=preview
+
+" disable for tex files
+let g:ycm_filetype_blacklist = {
+    \ 'tex' : 1,
+    \ 'plaintex' : 1
+    \}
 
 "==========================
 "   DOXYGEN HIGHLIGHTING
@@ -236,30 +252,18 @@ let delimitMate_expand_cr = 2
 let delimitMate_expand_space = 1
 let delimitMate_balance_matchpairs=1
 
-"=========================
-"   SPELL CHECK OPTIONS
-"=========================
-
-augroup lexical
-    autocmd!
-    autocmd FileType markdown,mkd call lexical#init()
-    autocmd FileType textile call lexical#init()
-    autocmd FileType text call lexical#init({ 'spell': 0 })
-    autocmd FileType c,cpp,h,pp call lexical#init()
-augroup END
-
 "========================
 "   AUTOFORMAT OPTIONS
 "========================
 
-let g:formatprg_java = "astyle"
-let g:formatprg_args_expr_java = '"--mode=java -A2 --indent=spaces=4 --attach-classes -K -S"'
+let g:formatdef_java = '"astyle --mode=java -A2 --indent=spaces=4 --attach-classes -K -S"'
+let g:formatters_java = ['java']
 
-let g:formatprg_c = "astyle"
-let g:formatprg_args_c = "--mode=c -A3 -s4 -S -xW -Y -p -k1 -c"
+let g:formatdef_c = '"astyle --mode=c -A3 -s4 -S -xW -Y -p -k1 -c"'
+let g:formatters_c = ['c']
 
-let g:formatprg_py = "autopep8"
-let g:formatprg_args_py = "-i"
+let g:formatprg_python = '"autopep8 -i"'
+let g:formatprg_py = ['python']
 
 "=====================
 "   SESSION OPTIONS
@@ -281,6 +285,7 @@ let g:session_autosave_periodic = '1'
 "   NERDTREE OPTIONS
 "======================
 
+let g:nerdtree_tabs_open_on_console_startup = 1
 let NERDTreeDirArrows=0
 hi Directory guifg=#B33804 ctermfg=red
 hi Title guifg=#E15610 ctermfg=red

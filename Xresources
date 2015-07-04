@@ -21,33 +21,63 @@ URxvt.iconFile:  /usr/share/icons/Faenza/apps/scalable/terminal.svg
 *cursorBlink:  true
 *cursorUnderline:  false
 
-!gruvbox dark
-
-! hard contrast: *background: #1d2021
-*background: #282828
-! soft contrast: *background: #32302f
-*foreground: #ebdbb2
+! background and foreground
+urxvt.background: #32302f
+urxvt.foreground: #8b8282
 ! Black + DarkGrey
-*color0:  #282828
-*color8:  #928374
+urxvt.color0:  #282828
+urxvt.color8:  #928374
 ! DarkRed + Red
-*color1:  #cc241d
-*color9:  #fb4934
+urxvt.color1:  #875050
+urxvt.color9:  #fb4934
 ! DarkGreen + Green
-*color2:  #98971a
-*color10: #b8bb26
+urxvt.color2:  #98971a
+urxvt.color10: #b8bb26
 ! DarkYellow + Yellow
-*color3:  #d79921
-*color11: #fabd2f
+urxvt.color3:  #d79921
+urxvt.color11: #fabd2f
 ! DarkBlue + Blue
-*color4:  #458588
-*color12: #83a598
+urxvt.color4:  #458588
+urxvt.color12: #83a598
 ! DarkMagenta + Magenta
-*color5:  #b16286
-*color13: #d3869b
+urxvt.color5:  #b16286
+urxvt.color13: #d3869b
 ! DarkCyan + Cyan
-*color6:  #689d6a
-*color14: #8ec07c
+urxvt.color6:  #689d6a
+urxvt.color14: #8ec07c
 ! LightGrey + White
-*color7:  #a89984
-*color15: #ebdbb2
+urxvt.color7:  #a89984
+urxvt.color15: #ebdbb2
+
+urxvt.color24:  #076678
+urxvt.color66:  #427b58
+urxvt.color88:  #9d0006
+urxvt.color96:  #8f3f71
+urxvt.color100: #79740e
+urxvt.color108: #8ec07c
+urxvt.color109: #83a598
+urxvt.color130: #af3a03
+urxvt.color136: #b57614
+urxvt.color142: #b8bb26
+urxvt.color167: #fb4934
+urxvt.color175: #d3869b
+urxvt.color208: #fe8019
+urxvt.color214: #fabd2f
+urxvt.color223: #ebdbb2
+urxvt.color228: #f4e8ba
+urxvt.color229: #fdf4c1
+urxvt.color230: #ffffc8
+urxvt.color234: #1d2021
+urxvt.color235: #282828
+urxvt.color236: #32302f
+urxvt.color237: #3c3836
+urxvt.color239: #504945
+urxvt.color241: #665c54
+urxvt.color243: #7c6f64
+urxvt.color244: #928374
+urxvt.color245: #928374
+urxvt.color246: #a89984
+urxvt.color248: #bdae93
+urxvt.color250: #d5c4a1
+
+urxvt.cursorColor: #ab9c9c

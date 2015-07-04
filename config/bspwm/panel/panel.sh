@@ -1,101 +1,74 @@
-#!/usr/bin/bash
+basedir=$( dirname "${BASH_SOURCE[0]}" )
+source $basedir/config
 
-RED="%{F#F70303}"
-BLUE="%{F#3217AA}"
-GREEN="%{F#02B344}"
+rm -rf $FIFO
+mkfifo $FIFO
 
-ICONS_COLOR="$RED"
-TEXT_COLOR="%{F#FFB856}"
 
-# font
-FONT1="-*-stlarch-medium-r-*-*-11-*-*-*-*-*-*-*"
-FONT2="-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-*"
-
-function print_date {
+function cpu_calc {
     while true; do
-        echo "(date)$ICONS_COLOR\uE016 $TEXT_COLOR$(date "+%H:%M")"
-        sleep 1;
+        perc_cpu=$(mpstat | grep all | awk '{print $3,"%"}' | sed 's/ //g')
+        cpu=" %{T3}\ue020 %{T1}$perc_cpu \020"
+        echo -e "(cpu)%{B$RAM_BACKGROUND}%{F$CPU_BACKGROUND}$LEFT_ARROW%{B$CPU_BACKGROUND}%{F$WHITE}$cpu%{B-}"
+        sleep 1
     done
 }
 
-function print_current_song {
+function mem_calc {
     while true; do
-        CURR_SONG=$(mpc current -f "%artist% - %title%")
-        if [ -z "$CURR_SONG" ]; then
-            CURR_SONG="arrêté"
-        fi
-        echo "(music)$ICONS_COLOR\uE0EC $TEXT_COLOR$CURR_SONG"
-        sleep 1;
+        perc_mem=$(free -mh | grep -n 2 | awk '{print $3}')
+        mem=" %{T3}\ue132 %{T1}$perc_mem \020"
+        echo -e "(mem)%{B$TEMP_BACKGROUND}%{F$RAM_BACKGROUND}$LEFT_ARROW%{F$WHITE}%{B$RAM_BACKGROUND}$mem%{B-}"
+        sleep 1
     done
 }
 
-function print_mem_used {
+function cpu_temp {
     while true; do
-        total_memory=$(free -mb | grep -n 2 | awk -F " *" '{ print $2 }' -)
-        used_memory=$(free -mb | grep -n 2 | awk -F " *" '{ print $3 }' -)
-        perc_mem=$(( used_memory*100 ))
-        perc_mem=$(( perc_mem/total_memory ))
-        echo "(ram)$ICONS_COLOR\uE146 $TEXT_COLOR$perc_mem%%"
-        sleep 1;
+        cpu_temp=$(sensors | grep Physical | awk '{print $4}' | sed 's/+//g')
+        cpu=" %{T3}\ue01d %{T1}$cpu_temp \020"
+        echo -e "(tcpu)%{F$TEMP_BACKGROUND}$LEFT_ARROW%{F$WHITE}%{B$TEMP_BACKGROUND}$cpu%{B-}"
+        sleep 1
     done
 }
 
-function print_proc_used {
+function music_stdout {
+    music=$(mpc current)
+    music=" %{T3}\ue0fe %{T1}$music \020"
+    echo -e "(music)%{B-}%{F$WHITE}%{A:music.sh:}$music%{A}%{B-}"
     while true; do
-        proc_perc=$(mpstat 1 1 | grep "Moyenne" | awk -F ":" '{ print $2 }' | awk -F " *" '{print $3}')
-        echo "(cpu)$ICONS_COLOR \uE0C1 $TEXT_COLOR$proc_perc%%"
-        sleep 1;
+        music=$(mpc current --wait)
+        music=" %{T3}\ue0fe %{T1}$music \020"
+        echo -e "(music)%{B-}%{F$WHITE}$music%{B-}"
     done
 }
 
-function print_desktop {
-    colors="$ICONS_COLOR"
+function time {
     while true; do
-        desktop_num=$(bspc query -D -d)
-        case "$desktop_num" in
-            "1")
-                desktop_echo="%{B#767171}  ●  %{B-}   ○   ○   ○"
-                ;;
-            "2")
-                desktop_echo="○   %{B#767171}  ●  %{B-}   ○   ○"
-                ;;
-            "3")
-                desktop_echo="○   ○   %{B#767171}  ●  %{B-}   ○"
-                ;;
-            "4")
-                desktop_echo="○   ○   ○   %{B#767171}  ●  %{B-}"
-                ;;
-        esac
-        echo -e "(desk)%{c}$colors$desktop_echo"
-        sleep 0.2;
+        cpu_temp=$(date +%H:%M)
+        echo -e ""
     done
 }
 
-print_date > "$PANEL_FIFO" &
-print_current_song > "$PANEL_FIFO" &
-print_mem_used > "$PANEL_FIFO" &
-print_proc_used > "$PANEL_FIFO" &
-print_desktop > "$PANEL_FIFO" &
+cpu_calc > "$FIFO" &
+mem_calc > "$FIFO" &
+cpu_temp > "$FIFO" &
+music_stdout > "$FIFO" &
 
-# test
-cat "$PANEL_FIFO" | while read -r line; do
+cat "$FIFO" | while read -r line; do
     case $line in
-        "(date)"*)
-            date=${line:6}
+        "(cpu)"*)
+            cpu=${line:5}
+            ;;
+        "(mem)"*)
+            mem=${line:5}
+            ;;
+        "(tcpu)"*)
+            tcpu=${line:6}
             ;;
         "(music)"*)
             music=${line:7}
             ;;
-        "(ram)"*)
-            ram=${line:5}
-            ;;
-        "(cpu)"*)
-            cpu=${line:5}
-            ;;
-        "(desk)"*)
-            desk=${line:6}
-            ;;
     esac
-    echo -e "%{c}$ICONS_COLOR$desk%{B-}%{r} $cpu | $ram | $music | $date"
-    echo ""
-done | lemonbar -p -g "1920x20+0+0" -B#414040 -f "$FONT1" -f "$FONT2"
+    echo -e "%{c}$music%{r}$tcpu$mem$cpu"
+done | lemonbar -p -f "Inconsolata for Powerline-11" -f "Inconsolata for Powerline-14" -f "$FONT_ICONS" -g "1880x20+20+10" -o -2 -o 0 -o -3 -B#414040

@@ -1,0 +1,39 @@
+# vim: set ft=sh
+
+#--------
+# FONTS
+#--------
+FONT_POWER="Inconsolata for Powerline Medium-8"
+FONT_ICONS="-wuncon-siji-medium-r-normal-*-10-100-75-75-c-80-iso10646-1"
+FONT_TEXT="-*-inconsolata-medium-r-*-*-17-120-*-*-*-*-*-*"
+
+
+#-------
+# ICONS
+#-------
+LEFT_ARROW="%{T2}\ue0b2"
+
+
+#--------
+# COLORS
+#--------
+#BLUE="#1C3774"
+BLUE="#302A29"
+#BROWN="#AD421A"
+BROWN="#504948"
+#RED="#B4071F"
+RED="#423B3A"
+MAGENTA="#791855"
+#GREEN="#1D8029"
+GREEN="#806C69"
+YELLOW="#F1DF6A"
+ORANGE="#FC7700"
+WHITE="#ABA273"
+
+CPU_BACKGROUND="#302A29"
+RAM_BACKGROUND="#423B3A"
+TEMP_BACKGROUND="#504948"
+MUSIC_BACKGROUND="#5E5857"
+
+# fifo
+FIFO=/tmp/pfifo

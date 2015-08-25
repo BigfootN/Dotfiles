@@ -15,8 +15,11 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tpope/vim-surround'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'bling/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
+
+" eyecandy
+Plugin 'bling/vim-airline'
+Plugin 'edkolev/tmuxline.vim'
 
 " code
 Plugin 'scrooloose/syntastic'
@@ -32,16 +35,14 @@ Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
 
 " color syntax
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'morhetz/gruvbox'
-Plugin 'PotatoesMaster/i3-vim-syntax'
+Plugin 'zaiste/tmux.vim'
 
 call vundle#end()
 
 "================================
 "   VIM/MISCELLANEOUS SETTINGS
 "================================
-
 
 " syntax and filetype
 syntax on
@@ -73,6 +74,12 @@ au FileType * setl cole=0
 " highlight the line number column
 hi LineNr guibg=grey ctermbg=red
 
+" autoresize splits
+autocmd VimResized * exe "normal \<c-w>="
+
+" keep cursor centered
+set scrolloff=100
+
 "===============
 "    MAPPING
 "===============
@@ -97,6 +104,7 @@ map <leader>n          gt
 map <leader><right>    <C-w><C-w><right>            t
 map <C-n>              :tabnew<CR>
 map <C-d>              :tabclose<CR>
+map <leader>tv         :tabnew ~/.vimrc<CR>
 
 " Surrounding
 map <leader>b          ysiwb                        " wrap current word with brackets
@@ -113,8 +121,10 @@ au BufWrite * :Autoformat
 
 " set font and colorscheme
 set t_Co=256
-set guifont=Inconsolata\ for\ Powerline\ 10
+"set guifont=Inconsolata\ for\ Powerline\ 10
+set guifont=Fira\ Mono\ for\ Powerline\ Regular\ 8
 colorscheme gruvbox
+let g:molokai_original = 1
 
 " gruvbox configuration
 let g:gruvbox_improved_warnings=1
@@ -125,7 +135,7 @@ set background=dark
 
 " Set lines
 set nu                                      " show line numbers
-set cursorline                              " show line where the cursor is
+set cursorline&vim                              " show line where the cursor is
 autocmd WinEnter * setlocal cursorline      " set cursorline on the entering of a new window
 autocmd WinLeave * setlocal nocursorline    " set off cursorline when leaving the curent window
 set listchars=eol:¬,tab:\ \ ,trail:\ 
@@ -159,16 +169,19 @@ let g:syntastic_auto_loc_list = 1
 " c syntastic options
 let g:syntastic_c_compiler = 'gcc'
 let g:syntastic_c_config_file = '.config_c'
-let g:syntastic_c_check_header = 1
+let g:syntastic_c_check_header = 0
+let g:syntastic_c_no_include_search = 0
 let g:syntastic_c_auto_refresh_includes = 1
 let b:syntastic_c_includes = 1
 
 " c++ syntastic options
-let g:syntastic_cpp_checkers = ['g++']
+let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_auto_refresh_includes = 1
 let b:syntastic_cpp_includes = 1
 let g:syntastic_cpp_config_file = '.config_cpp'
+
+
 
 "============================
 "   YCM/COMPLETION OPTIONS
@@ -188,13 +201,23 @@ let g:ycm_filetype_specific_completion_to_disable = {
             \ 'gitcommit': 1,
             \ 'swap': 1
             \ }
-set completeopt+=preview
 
 " disable for tex files
 let g:ycm_filetype_blacklist = {
-    \ 'tex' : 1,
-    \ 'plaintex' : 1
-    \}
+            \ 'tex' : 1,
+            \ 'plaintex' : 1
+            \}
+
+"=====================
+"   GRUVBOX OPTIONS
+"=====================
+
+let g:gruvbox_bold = 0
+let g:gruvbox_italic = 1
+let g:gruvbox_underline = 1
+let g:gruvbox_termcolors = 256
+let g:gruvbox_contrast_dark = 'soft'
+
 
 "==========================
 "   DOXYGEN HIGHLIGHTING
@@ -208,8 +231,13 @@ let g:load_doxygen_syntax = 1
 "=============================
 
 " indent lines
-let g:indentLine_color_gui = '#696060'
-let g:indentLine_char = '|'
+let g:indentLine_color_gui = '#7A7373'
+let g:indentLine_char = '»'
+let g:indentLine_leadingSpaceChar = '·'
+let g:indentLine_leadingSpaceEnabled = 1
+
+" fix problems
+au BufRead,BufEnter,BufNewFile * IndentLinesReset
 
 "======================
 "   AIRLINE OPTIONS
@@ -226,12 +254,15 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 let g:airline#extensions#eclim#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 1
 
 " tabline
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_close_button = 0
+
+let g:tmuxline_preset = 'minimal'
 
 "===================
 "   CTRLP OPTIONS
@@ -259,11 +290,14 @@ let delimitMate_balance_matchpairs=1
 let g:formatdef_java = '"astyle --mode=java -A2 --indent=spaces=4 --attach-classes -K -S"'
 let g:formatters_java = ['java']
 
-let g:formatdef_c = '"astyle --mode=c -A3 -s4 -S -xW -Y -p -k1 -c"'
+let g:formatdef_c = '"astyle --mode=c -A3 -s4 -S -xw -Y -p -k1 -c"'
 let g:formatters_c = ['c']
 
-let g:formatprg_python = '"autopep8 -i"'
-let g:formatprg_py = ['python']
+let g:formatdef_cpp = '"astyle --mode=cpp -A3 -s4 -S -xw -Y -p -k1 -c"'
+let g:formatters_cpp = ['cpp']
+
+let g:formatdef_python = '"autopep8 -i"'
+let g:formatters_python = ['python']
 
 "=====================
 "   SESSION OPTIONS
@@ -273,7 +307,6 @@ set sessionoptions-=help
 set sessionoptions-=blank
 
 let g:session_persist_globals = ['&sessionoptions']
-call add(g:session_persist_globals, 'g:session_autoload')
 call add(g:session_persist_globals, 'g:session_autosave')
 call add(g:session_persist_globals, 'g:session_default_to_last')
 call add(g:session_persist_globals, 'g:session_persist_globals')

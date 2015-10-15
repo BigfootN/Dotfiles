@@ -1,47 +1,53 @@
-" improved
+" vim compatibilities
 set nocompatible
+
+" improved
 filetype off
 
-" set vundle path
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
-
-" Vundle plugin
-Plugin 'gmarik/Vundle.vim'
+" plugins
+call plug#begin('~/.vim/plugged')
 
 " file browser
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'tpope/vim-surround'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'tpope/vim-surround'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " eyecandy
-Plugin 'bling/vim-airline'
-Plugin 'edkolev/tmuxline.vim'
+Plug 'bling/vim-airline'
+Plug 'edkolev/tmuxline.vim'
 
 " code
-Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'DoxygenToolkit.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'Yggdroot/indentLine'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'godlygeek/tabular'
+Plug 'scrooloose/syntastic'
+Plug 'Valloric/YouCompleteMe'
+Plug 'DoxygenToolkit.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'Chiel92/vim-autoformat'
+Plug 'godlygeek/tabular'
+Plug 'Yggdroot/indentLine'
+
+" snippets
+Plug 'honza/vim-snippets'
+Plug 'garbas/vim-snipmate'
+Plug 'marcweber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
 
 " session
-Plugin 'xolox/vim-session'
-Plugin 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
 
 " color syntax
-Plugin 'morhetz/gruvbox'
-Plugin 'zaiste/tmux.vim'
+Plug 'morhetz/gruvbox'
 
-call vundle#end()
+call plug#end()
 
 "================================
 "   VIM/MISCELLANEOUS SETTINGS
 "================================
+
+" 256 Colors
+set t_Co=256
 
 " syntax and filetype
 syntax on
@@ -57,7 +63,6 @@ set guioptions-=m
 set guioptions-=T
 set guioptions-=e
 
-
 " Increasive search
 set incsearch
 set ignorecase
@@ -70,14 +75,17 @@ let g:c_syntax_for_h=1
 set cole=0
 au FileType * setl cole=0
 
-" highlight the line number column
-hi LineNr guibg=grey ctermbg=red
-
 " autoresize splits
 autocmd VimResized * exe "normal \<c-w>="
 
 " keep cursor centered
-set scrolloff=100
+"set scrolloff=100
+
+" set backspace
+set backspace=indent,eol,start
+
+" activate mouse
+set mouse=a
 
 "===============
 "    MAPPING
@@ -93,6 +101,7 @@ noremap <silent> <F5> :%s/\s\+$//<CR>
 map <leader>q          :q<CR>
 map <leader>w          :w<CR>
 map <leader>s          :so ~/.vimrc<CR>
+
 map <leader>x          :x<CR>
 map <leader>xa         :xa<CR>
 map <leader>wa         :wa<CR>
@@ -104,6 +113,10 @@ map <leader><right>    <C-w><C-w><right>            t
 map <C-n>              :tabnew<CR>
 map <C-d>              :tabclose<CR>
 map <leader>tv         :tabnew ~/.vimrc<CR>
+
+" updating
+map <leader>u          :PlugUpdate
+map <leader>c          :PlugClean
 
 " Surrounding
 map <leader>b          ysiwb                        " wrap current word with brackets
@@ -118,28 +131,21 @@ au BufWrite * :Autoformat
 "    LOOK AND FEEL
 "=====================
 
-" set font and colorscheme
-set t_Co=256
-"set guifont=Inconsolata\ for\ Powerline\ 10
-set guifont=Fira\ Mono\ for\ Powerline\ Regular\ 8
+" set colorscheme
 colorscheme gruvbox
-let g:molokai_original = 1
 
 " gruvbox configuration
 let g:gruvbox_improved_warnings=1
 let g:gruvbox_invert_indent_guides=1
-let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_contrast_dark='soft'
 let g:gruvbox_bold=0
 set background=dark
 
+" highlight the line number column
+hi LineNr ctermfg=26 ctermbg=25
+
 " Set lines
 set nu                                      " show line numbers
-set cursorline&vim                              " show line where the cursor is
-autocmd WinEnter * setlocal cursorline      " set cursorline on the entering of a new window
-autocmd WinLeave * setlocal nocursorline    " set off cursorline when leaving the curent window
-set listchars=eol:¬,tab:\ \ ,trail:\ 
-set list
-hi NonText ctermfg=7 guifg=#EF6D39
 
 " Disable cursorline for tex files
 autocmd FileType tex :NoMatchParen
@@ -152,8 +158,13 @@ set shiftwidth=4    " indent level of 4 spaces
 set tabstop=4       " tab of 4 spaces
 set softtabstop=4   " backspace of 4 spaces
 
-" linenr column
-hi LineNr         ctermfg=DarkMagenta guifg=#FFC390 guibg=#202020 
+
+"==================
+"   Plug OPTIONS
+"==================
+
+let g:plug_window = 'vertical right new'
+
 
 "=======================
 "   SYNTASTIC OPTIONS
@@ -181,7 +192,6 @@ let b:syntastic_cpp_includes = 1
 let g:syntastic_cpp_config_file = '.config_cpp'
 
 
-
 "============================
 "   YCM/COMPLETION OPTIONS
 "============================
@@ -192,7 +202,7 @@ let g:EclimCompletionMethod='omnifunc'
 
 " ycm options
 let g:ycm_show_diagnostics_ui = 0
-let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_confirm_extra_conf = 0
@@ -206,6 +216,9 @@ let g:ycm_filetype_blacklist = {
             \ 'tex' : 1,
             \ 'plaintex' : 1
             \}
+
+" prevents flickering from too long completion menu
+set pumheight=5
 
 "=====================
 "   GRUVBOX OPTIONS
@@ -224,19 +237,6 @@ let g:gruvbox_contrast_dark = 'soft'
 
 " Doxygen highlighting
 let g:load_doxygen_syntax = 1
-
-"=============================
-"   INDENTATION GUIDE LINES
-"=============================
-
-" indent lines
-let g:indentLine_color_gui = '#7A7373'
-let g:indentLine_char = '»'
-let g:indentLine_leadingSpaceChar = '·'
-let g:indentLine_leadingSpaceEnabled = 1
-
-" fix problems
-au BufRead,BufEnter,BufNewFile * IndentLinesReset
 
 "======================
 "   AIRLINE OPTIONS
@@ -295,8 +295,8 @@ let g:formatters_c = ['c']
 let g:formatdef_cpp = '"astyle --mode=cpp -A3 -s4 -S -xw -Y -p -k1 -c"'
 let g:formatters_cpp = ['cpp']
 
-let g:formatdef_python = '"autopep8 -i"'
-let g:formatters_python = ['python']
+"let g:formatdef_autopep8 = '"autopep8 --indent-size 4"'
+"let g:formatters_python = ['autopep8']
 
 "=====================
 "   SESSION OPTIONS
@@ -321,3 +321,11 @@ let g:nerdtree_tabs_open_on_console_startup = 1
 let NERDTreeDirArrows=0
 hi Directory guifg=#B33804 ctermfg=red
 hi Title guifg=#E15610 ctermfg=red
+
+
+"=======================
+"   SNIPMATE OPTIONS
+"=======================
+
+" use tab to complete snippets
+imap <tab> <esc>a<Plug>snipMateNextOrTrigger

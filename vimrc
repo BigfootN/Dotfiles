@@ -87,9 +87,15 @@ set backspace=indent,eol,start
 " activate mouse
 set mouse=a
 
+" keep status line
+"set laststatus=2
+
 "===============
 "    MAPPING
 "===============
+
+" mapping timeout
+set timeoutlen=500
 
 " map leader
 let mapleader=","
@@ -98,28 +104,28 @@ let mapleader=","
 noremap <silent> <F5> :%s/\s\+$//<CR>
 
 " write and quit
-map <leader>q          :q<CR>
-map <leader>w          :w<CR>
-map <leader>s          :so ~/.vimrc<CR>
+nmap <silent> <leader>q          :q<CR>
+nmap <silent> <leader>w          :w<CR>
+nmap <silent> <leader>s          :so ~/.vimrc<CR>
 
-map <leader>x          :x<CR>
-map <leader>xa         :xa<CR>
-map <leader>wa         :wa<CR>
+nmap <silent> <leader>x          :x<CR>
+nmap <silent> <leader>xa         :xa<CR>
+nmap <silent> <leader>wa         :wa<CR>
 
 " tab and split
-map <leader>p          gT
-map <leader>n          gt
-map <leader><right>    <C-w><C-w><right>            t
-map <C-n>              :tabnew<CR>
-map <C-d>              :tabclose<CR>
-map <leader>tv         :tabnew ~/.vimrc<CR>
+nmap <silent> <silent>p          :tabprevious<CR>
+nmap <silent> <leader>a          :tabn<CR>
+nmap <silent> <leader><right>    <C-w><C-w><right>            t
+nmap <silent> <C-n>              :tabnew<CR>
+nmap <silent> <C-d>              :tabclose<CR>
+nmap <silent> <leader>tv         :tabnew ~/.vimrc<CR>
 
 " updating
-map <leader>u          :PlugUpdate
-map <leader>c          :PlugClean
+nmap <silent> <leader>u          :PlugUpdate
+nmap <silent> <leader>c          :PlugClean
 
 " Surrounding
-map <leader>b          ysiwb                        " wrap current word with brackets
+nmap <silent> <leader>b          ysiwb                        " wrap current word with brackets
 
 " auto indent with F7
 noremap <F7> :Autoformat<CR>
@@ -127,22 +133,15 @@ noremap <F7> :Autoformat<CR>
 " auto format on save
 au BufWrite * :Autoformat
 
+" nerdtree
+nmap <silent> <leader>ft         :NERDTreeToggle<CR>
+
 "=====================
 "    LOOK AND FEEL
 "=====================
 
 " set colorscheme
 colorscheme gruvbox
-
-" gruvbox configuration
-let g:gruvbox_improved_warnings=1
-let g:gruvbox_invert_indent_guides=1
-let g:gruvbox_contrast_dark='soft'
-let g:gruvbox_bold=0
-set background=dark
-
-" highlight the line number column
-hi LineNr ctermfg=26 ctermbg=25
 
 " Set lines
 set nu                                      " show line numbers
@@ -229,7 +228,8 @@ let g:gruvbox_italic = 1
 let g:gruvbox_underline = 1
 let g:gruvbox_termcolors = 256
 let g:gruvbox_contrast_dark = 'soft'
-
+set background=dark
+hi LineNr ctermbg=25 ctermfg=26
 
 "==========================
 "   DOXYGEN HIGHLIGHTING
@@ -253,11 +253,10 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 let g:airline#extensions#eclim#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#tmuxline#enabled = 1
 
 " tabline
-let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_close_button = 0
 
@@ -321,7 +320,6 @@ let g:nerdtree_tabs_open_on_console_startup = 1
 let NERDTreeDirArrows=0
 hi Directory guifg=#B33804 ctermfg=red
 hi Title guifg=#E15610 ctermfg=red
-
 
 "=======================
 "   SNIPMATE OPTIONS

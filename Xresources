@@ -7,20 +7,22 @@ URxvt.scrollBar:  false
 URxvt.depth:
 
 ! font
-URxvt.letterSpace:  -1
-URxvt*font: xft:Hack:regular:size=9
+!URxvt.letterSpace:  -1
+URxvt.font: xft:Inconsolata for Powerline Plus Nerd File Types Mono Plus Font Awesome Plus Octicons Plus Pomicons:size=11
 
 ! size
-URxvt.geometry:  154x46+200+70
+URxvt.geometry: 154x46+200+70
 
 !URxvt.iconFile:  /usr/share/icons/Faenza/apps/scalable/terminal.svg
 
 ! local
 URxvt.locale: true
 
-! for neovim line bg and fg number color
-URxvt.color25: #4A4646
-URxvt.color26: #FF9200
+! for vim line bg and fg number color
+!bg
+URxvt.color25: #353535
+!fg
+URxvt.color26: #606060
 
 ! -----------------------------------------------------------------------------
 ! File: gruvbox-dark.xresources
@@ -54,7 +56,7 @@ URxvt.color13: #d3869b
 ! DarkCyan + Cyan
 URxvt.color6:  #689d6a
 URxvt.color14: #8ec07c
-! LightGrey + White
+! LightGrey + white
 URxvt.color7:  #a89984
 URxvt.color15: #ebdbb2
 

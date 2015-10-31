@@ -48,6 +48,7 @@ call plug#end()
 
 " 256 Colors
 set t_Co=256
+set t_ut=
 
 " syntax and filetype
 syntax on
@@ -88,7 +89,7 @@ set backspace=indent,eol,start
 set mouse=a
 
 " keep status line
-"set laststatus=2
+set laststatus=2
 
 "===============
 "    MAPPING
@@ -113,7 +114,7 @@ nmap <silent> <leader>xa         :xa<CR>
 nmap <silent> <leader>wa         :wa<CR>
 
 " tab and split
-nmap <silent> <silent>p          :tabprevious<CR>
+nmap <silent> <leader>p          :tabprevious<CR>
 nmap <silent> <leader>a          :tabn<CR>
 nmap <silent> <leader><right>    <C-w><C-w><right>            t
 nmap <silent> <C-n>              :tabnew<CR>
@@ -141,6 +142,7 @@ nmap <silent> <leader>ft         :NERDTreeToggle<CR>
 "=====================
 
 " set colorscheme
+let g:gruvbox_italic=1
 colorscheme gruvbox
 
 " Set lines
@@ -157,6 +159,8 @@ set shiftwidth=4    " indent level of 4 spaces
 set tabstop=4       " tab of 4 spaces
 set softtabstop=4   " backspace of 4 spaces
 
+" highlight current line
+set cursorline
 
 "==================
 "   Plug OPTIONS
@@ -217,7 +221,8 @@ let g:ycm_filetype_blacklist = {
             \}
 
 " prevents flickering from too long completion menu
-set pumheight=5
+set pumheight=10
+
 
 "=====================
 "   GRUVBOX OPTIONS
@@ -243,7 +248,7 @@ let g:load_doxygen_syntax = 1
 "======================
 
 " airline theme
-let g:airline_theme = 'badwolf'
+let g:airline_theme = 'ubaryd'
 
 " airline font
 let g:airline_powerline_fonts=1
@@ -251,16 +256,16 @@ let g:airline_powerline_fonts=1
 " airline extension
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#ctrlp#show_adjacent_modes = 1
-let g:airline#extensions#eclim#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 1
 
 " tabline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_close_button = 0
-
 let g:tmuxline_preset = 'minimal'
+
 
 "===================
 "   CTRLP OPTIONS
@@ -316,7 +321,7 @@ let g:session_autosave_periodic = '1'
 "   NERDTREE OPTIONS
 "======================
 
-let g:nerdtree_tabs_open_on_console_startup = 1
+let g:nerdtree_tabs_open_on_console_startup = 0
 let NERDTreeDirArrows=0
 hi Directory guifg=#B33804 ctermfg=red
 hi Title guifg=#E15610 ctermfg=red

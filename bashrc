@@ -11,11 +11,10 @@ alias ls='ls --color=auto'
 
 # function updater
 function _update_ps1() {
-PS1="$(python2 ~/powerline-shell.py --cwd-max-depth 3 --mode patched $? 2> /dev/null) \n$blue$right_arr$reset "
+PS1="$(python2 ~/.powerline-shell/powerline-shell.py --cwd-max-depth 3 --mode patched $? 2> /dev/null) \n$blue$right_arr$reset "
 }
 
 if [ "$TERM" != "linux" ]; then
-    PS1="$(python2 ~/powerline-shell.py --cwd-max-depth 3 --mode patched $? 2> /dev/null) \n$blue$right_arr$reset "
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 

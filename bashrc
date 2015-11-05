@@ -8,7 +8,7 @@ alias ls='ls --color=auto'
 
 # If not running interactively, do not do anything and start tmux
 [[ $- != *i* ]] && return
-#[[ -z "$TMUX" ]] && exec tmux
+[[ -z "$TMUX" ]] && exec tmux
 
 # colors
 blue='\[\e[0;34m\]' 

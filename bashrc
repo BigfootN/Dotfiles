@@ -2,21 +2,52 @@
 # ~/.bashrc
 #
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
 complete -cf sudo
 
 alias ls='ls --color=auto'
 
+# If not running interactively, do not do anything and start tmux
+[[ $- != *i* ]] && return
+#[[ -z "$TMUX" ]] && exec tmux
+
+# colors
+blue='\[\e[0;34m\]' 
+red='\[\e[0;31m\]'
+black='\[\e[0;38m\]'
+green='\[\e[0;32m\]'
+yellow='\[\e[0;33m\]'
+purple='\[\e[0;35m\]'
+reset='\[\e[0m\]'
+
+#symbols
+light_down="$(echo -e "\u250c")"
+light_up="$(echo -e "\u2514")"
+horz_line="$(echo -e "\u2500")"
+hvy_right="$(echo -e "\u257c")"
+right_arr="$(echo -e "\uf101")"
+
+# powerline shell command
+pow_shell_cmd="python2 ~/powerline-shell.py --cwd-max-depth 3 --mode patched $? 2> /dev/null"
+
+#PS1="${red}$light_down$horz_line$horz_line${blue}[${green}\h${blue}]${red}$horz_line$horz_line$horz_line$horz_line$horz_line$horz_line$horz_line$horz_line$horz_line$horz_line${blue}[${green}\w${blue}]${red}$horz_line$hvy_right\n${red}$light_up$horz_line$horz_line${blue}(${green}\$${blue})${red}$horz_line$hvy_right${reset} "
+
 # function updater
 function _update_ps1() {
-PS1="$(python2 ~/.powerline-shell/powerline-shell.py --cwd-max-depth 3 --mode patched $? 2> /dev/null) \n$blue$right_arr$reset "
+PS1="$(python2 ~/powerline-shell.py --cwd-max-depth 3 --mode patched $? 2> /dev/null) \n$blue$right_arr$reset "
 }
 
+# set envirornment variables
+export PATH=$HOME/.local/bin:${PATH}
+export SHELL=/usr/bin/bash
+export BROWSER=/usr/bin/firefox
+export EDITOR=/usr/bin/nvim
+
 if [ "$TERM" != "linux" ]; then
+    PS1="$(python2 ~/powerline-shell.py --cwd-max-depth 3 --mode patched $? 2> /dev/null) \n$blue$right_arr$reset "
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
+
+#PS1="${black}[\u] $green$horz_line$horz_line$red [\$] $red>>$reset "
 
 function extract {
 if [ -z "$1" ]; then
@@ -58,7 +89,3 @@ alias maj="yaourt -Syua --noconfirm"
 alias nett="yaourt --noconfirm -Scc && yaourt -Rcsndd \$(yaourt -Qqtd)"
 alias grooveshark="firefox http://grooveshark.com"
 alias src_local="yaourt -Qs"
-#alias tmux="tmux -2"
-
-alias cp="cp -r"
-export TERM=xterm-256color-italic

@@ -1,36 +1,25 @@
-! transparency
-! URxvt..depth:  32
-! URxvt..background:  [95]#000000
-
 ! disable scrollbar
 URxvt.scrollBar:  false
 URxvt.depth:
 
 ! font
-!URxvt.letterSpace:  -1
 URxvt.font: xft:Inconsolata for Powerline Plus Nerd File Types Mono Plus Font Awesome Plus Octicons Plus Pomicons:size=11
 
 ! size
 URxvt.geometry: 154x46+200+70
 
-!URxvt.iconFile:  /usr/share/icons/Faenza/apps/scalable/terminal.svg
-
 ! local
 URxvt.locale: true
+
+!------------
+!   Colors
+!------------
 
 ! for vim line bg and fg number color
 !bg
 URxvt.color25: #353535
 !fg
 URxvt.color26: #606060
-
-! -----------------------------------------------------------------------------
-! File: gruvbox-dark.xresources
-! Description: Retro groove colorscheme generalized
-! Author: morhetz <morhetz@gmail.com>
-! Source: https://github.com/morhetz/gruvbox-generalized
-! Last Modified: 6 Sep 2014
-! -----------------------------------------------------------------------------
 
 ! hard contrast: URxvt.background: #1d2021
 URxvt.background: #343434
@@ -59,14 +48,6 @@ URxvt.color14: #8ec07c
 ! LightGrey + white
 URxvt.color7:  #a89984
 URxvt.color15: #ebdbb2
-
-! -----------------------------------------------------------------------------
-! File: gruvbox-URxvt256.xresources
-! Description: Retro groove colorscheme generalized
-! Author: morhetz <morhetz@gmail.com>
-! Source: https://github.com/morhetz/gruvbox-generalized
-! Last Modified: 13 Dec 2013
-! -----------------------------------------------------------------------------
 
 URxvt.color24:  #076678
 URxvt.color66:  #427b58
@@ -98,3 +79,29 @@ URxvt.color245: #928374
 URxvt.color246: #a89984
 URxvt.color248: #bdae93
 URxvt.color250: #d5c4a1
+
+!----------
+!   Rofi
+!----------
+
+! keys
+rofi.key-run: Alt+r 
+rofi.key-window: Alt+w
+
+! options
+rofi.fuzzy: true
+rofi.lines: 8
+rofi.hide-scrollbar: true
+rofi.glob: true
+rofi.separator-style: none
+rofi.width: 20
+rofi.fixed-num-lines: true
+
+! colors and font
+rofi.font: Inconsolata 10
+rofi.opacity: 90
+rofi.bg: #787878
+rofi.bg-active: #FF0000
+rofi.color-enabled: true
+rofi.bc: #606060
+rofi.bw: 1

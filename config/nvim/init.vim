@@ -131,7 +131,7 @@ nmap <silent> <leader>wa         :wa<CR>
 
 " tab and split
 nmap <silent> <leader>p          :tabprevious<CR>
-nmap <silent> <leader>a          :tabn<CR>
+nmap <silent> <leader>n          :tabnext<CR>
 nmap <silent> <leader><right>    <C-w><C-w><right>            t
 nmap <silent> <C-n>              :tabnew<CR>
 nmap <silent> <C-d>              :tabclose<CR>

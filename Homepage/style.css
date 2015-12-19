@@ -1,0 +1,77 @@
+@font-face{
+    font-family: 'Snowinter';
+    src: url('Snowinter.ttf');
+}
+
+@font-face{
+    font-family: "Roboto";
+    src: url('Roboto.ttf');
+}
+
+@font-face{
+    font-family: "RobotoL";
+    src: url('Roboto-Light.ttf');
+}
+
+body{
+    background-color: #524336;
+}
+
+input[type=text]{
+    border-style: solid;
+    border-width: 1px;
+    border-color: red;
+    border-radius: 1mm;
+    margin-top: 5%;
+    background-color: #753E10;
+}
+
+table{
+    margin-top: 5%;
+    width: 95%;
+    float: center;
+    table-layout: fixed;
+    border-spacing: 90px 0px;
+}
+
+tr[name="title"]{
+    font-family: 'Snowinter';
+    font-size:300%;
+}
+
+hr{
+    color: black;
+    width: 70%;
+    float: left;
+    margin-top: 2px;
+}
+
+a{
+    font-family: 'RobotoL';
+    color: #222222;
+    text-decoration: none;
+}
+
+a:link{
+    font-family: 'RobotoL';
+    color: #222222;
+    text-decoration: none;
+}
+
+a:visited{
+    font-family: 'RobotoL';
+    color: #222222;
+    text-decoration: none;
+}
+
+a:hover{
+    font-family: 'RobotoL';
+    color: #222222;
+    text-decoration: none;
+}
+
+a:active{
+    font-family: 'RobotoL';
+    color: #222222;
+    text-decoration: none;
+}

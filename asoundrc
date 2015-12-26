@@ -1,0 +1,16 @@
+pcm.!default {
+    type plug
+        slave.pcm "asymed"
+}
+
+defaults.pcm.rate_converter "speexrate_medium"
+
+pcm.asymed {
+    type asym
+        playback.pcm {
+            @func getenv
+                vars [ ALSAPCM ]
+                default "dmix"
+        }
+    capture.pcm "dsnoop"
+}

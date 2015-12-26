@@ -332,6 +332,7 @@ call add(g:session_persist_globals, 'g:session_persist_globals')
 
 let g:session_autosave = 'yes'
 let g:session_autosave_periodic = '1'
+let g:session_autoload = 'no'
 
 "======================
 "   NERDTREE OPTIONS
@@ -354,12 +355,12 @@ imap <tab> <esc>a<Plug>snipMateNextOrTrigger
 "==================
 
 let g:tmuxline_preset={
-            \'a'    : '#S',
+            \'a'    : '#(whoami)',
             \'b'    : '#W',
-            \'c'    : '#H',
-            \'win'  : '#I #W',
-            \'cwin' : '#I #W',
+            \'c'    : '',
+            \'win'  : '#W',
+            \'cwin' : '#W',
             \'x'    : '%a',
-            \'y'    : '#W %R',
-            \'z'    : '#H'
+            \'y'    : '%R',
+            \'z'    : ''
             \}

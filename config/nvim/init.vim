@@ -89,8 +89,7 @@ set smartcase
 let g:c_syntax_for_h=1
 
 " enable plaintex syntax for *.tex files
-set cole=0
-au FileType * setl cole=0
+autocmd BufRead,BufNewFile *.tex set filetype=plaintex
 
 " autoresize splits
 autocmd VimResized * exe "normal \<c-w>="
@@ -167,6 +166,7 @@ set nu                                      " show line numbers
 " Disable cursorline for tex files
 autocmd FileType tex :NoMatchParen
 au FileType tex setlocal nocursorline
+let g:tex_flavor = "plain"
 
 " set indent space
 set autoindent      " always set autoindenting on

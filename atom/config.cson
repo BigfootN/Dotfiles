@@ -1,0 +1,81 @@
+"*":
+  "accents-ui":
+    accentColor:
+      alpha: 1
+      blue: 56
+      green: 56
+      red: 255
+    hexColor: "#ff3838"
+  "atom-material-ui":
+    fonts:
+      fontSize: "Big"
+      useRobotoInUI: true
+    panels:
+      altCmdPalette: false
+      depth: true
+      panelContrast: true
+    tabs:
+      tabSize: "Small"
+    treeView:
+      compactTreeView: true
+    ui:
+      accentColor: "Red"
+  "autocomplete-clang":
+    "std c": "c11"
+  "bracket-matcher":
+    wrapSelectionsInBrackets: false
+  core:
+    audioBeep: false
+    autoHideMenuBar: true
+    disabledPackages: [
+      "wrap-guide"
+    ]
+    themes: [
+      "atom-material-ui"
+      "monokai"
+    ]
+  editor:
+    fontFamily: "Roboto Mono"
+    fontSize: 13
+    invisibles: {}
+    showInvisibles: true
+    softWrap: true
+    tabLength: 4
+    tabType: "soft"
+  "exception-reporting":
+    userId: "d3908bab-ffae-9730-5cf7-a5ba2b7f982a"
+  "file-icons":
+    forceShow: true
+  minimap:
+    absoluteMode: true
+    displayPluginsControls: false
+    plugins:
+      codeglance: true
+    scrollAnimation: true
+  "minimap-codeglance":
+    numberOfLines: 10
+  "one-dark-ui":
+    layoutMode: "Compact"
+  "predawn-ui":
+    colourlessIcons: false
+  welcome:
+    showOnStartup: false
+  whitespace:
+    ensureSingleTrailingNewline: false
+".bibtex.text":
+  editor:
+    scrollPastEnd: true
+    showIndentGuide: true
+    softWrap: true
+".c.source":
+  editor:
+    softWrap: true
+".latex.tex.text":
+  editor:
+    scrollPastEnd: true
+    showIndentGuide: true
+".tex.text":
+  editor:
+    scrollPastEnd: true
+    showIndentGuide: true
+    softWrap: true

@@ -1,0 +1,14 @@
+.scrollbars-visible-always /deep/ ::-webkit-scrollbar{
+    width: 4px;
+    border-radius: 0px;
+}
+
+atom-text-editor.is-focused::shadow {
+  .line.cursor-line, .line-number.cursor-line-no-selection {
+    background-color: fade(gray, 8%);
+  }
+}
+
+atom-text-editor::shadow .bracket-matcher .region{
+  border-bottom: 1px solid gray;
+}

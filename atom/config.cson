@@ -34,10 +34,12 @@
       "atom-material-ui"
       "monokai"
     ]
+  docblockr: {}
   editor:
-    fontFamily: "Roboto Mono"
-    fontSize: 13
+    fontFamily: "Inconsolata for Powerline"
+    fontSize: 15
     invisibles: {}
+    showIndentGuide: true
     showInvisibles: true
     softWrap: true
     tabLength: 4
@@ -46,6 +48,13 @@
     userId: "d3908bab-ffae-9730-5cf7-a5ba2b7f982a"
   "file-icons":
     forceShow: true
+  "flex-tool-bar":
+    showConfigButton: false
+  hidpi:
+    manualResolutionScaleFactors: "\"1920x1080\": 1"
+  "linter-clang": {}
+  "linter-gcc":
+    gccDefaultCFlags: "-Wall -Wextra -Werror -std=c11 -c -fsyntax-only"
   minimap:
     absoluteMode: true
     displayPluginsControls: false
@@ -58,6 +67,10 @@
     layoutMode: "Compact"
   "predawn-ui":
     colourlessIcons: false
+  "tool-bar":
+    position: "Left"
+  "tool-bar-almighty":
+    override: true
   welcome:
     showOnStartup: false
   whitespace:

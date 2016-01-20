@@ -2,8 +2,16 @@ atom-material-ui@0.8.0
 autocomplete-clang@0.8.9
 autocomplete-cmake@0.3.1
 autocomplete-paths@1.0.2
-file-icons@1.6.13
+docblockr@0.7.3
+file-icons@1.6.14
+hidpi@0.11.0
 language-cmake@0.1.4
 language-latex@0.6.1
+latex-autocomplete@0.2.4
+linter@1.11.3
+linter-clang@3.3.0
 monokai@0.18.0
+tool-bar@0.1.11
+tool-bar-almighty@0.6.1
+tool-bar-main@0.0.8
 

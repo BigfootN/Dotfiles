@@ -256,7 +256,7 @@ Note: To enable the urlbar; search this css for:
     /* SCROLLBAR */
     scrollbar[orient="vertical"], scrollbar thumb[orient="vertical"], 
     scrollbar[orient="horizontal"], scrollbar thumb[orient="horizontal"] {
-        display: none !important; /* none = hide || block = show */
+        display: block !important; /* none = hide || block = show */
     }
 
     /*

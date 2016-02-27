@@ -3,7 +3,8 @@ pcm.!default {
         slave.pcm "asymed"
 }
 
-defaults.pcm.rate_converter "speexrate_medium"
+# improve sound quality
+defaults.pcm.rate_converter "speexrate_best"
 
 pcm.asymed {
     type asym

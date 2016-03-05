@@ -34,6 +34,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 " eyecandy
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
+Plug 'vim-airline/vim-airline-themes'
 
 " code
 Plug 'scrooloose/syntastic'
@@ -45,10 +46,7 @@ Plug 'godlygeek/tabular'
 Plug 'Yggdroot/indentLine'
 
 " snippets
-Plug 'honza/vim-snippets'
-Plug 'garbas/vim-snipmate'
-Plug 'marcweber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
+Plug 'SirVer/ultisnips'
 
 " session
 Plug 'xolox/vim-session'
@@ -158,6 +156,9 @@ nmap <silent> <leader>ft         :NERDTreeToggle<CR>
 
 " set colorscheme
 let g:gruvbox_italic=1
+let g:gruvbox_underline=1
+let g:gruvbox_contrast_dark = "hard"
+set background=dark
 colorscheme gruvbox
 
 " Set lines
@@ -174,9 +175,6 @@ set expandtab       " use spaces, not tabs
 set shiftwidth=4    " indent level of 4 spaces
 set tabstop=4       " tab of 4 spaces
 set softtabstop=4   " backspace of 4 spaces
-
-" highlight current line
-set cursorline
 
 "==================
 "   Plug OPTIONS
@@ -220,10 +218,12 @@ let g:EclimCompletionMethod='omnifunc'
 
 " ycm options
 let g:ycm_show_diagnostics_ui = 0
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_auto_trigger = 1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycm_filetype_specific_completion_to_disable = {
             \ 'gitcommit': 1,
             \ 'swap': 1
@@ -267,7 +267,7 @@ let g:airline_theme = 'ubaryd'
 " airline font
 let g:airline_powerline_fonts=1
 
-" airline extension
+" airline extensions
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 let g:airline#extensions#tagbar#enabled = 1

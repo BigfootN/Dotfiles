@@ -32,9 +32,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " eyecandy
-Plug 'bling/vim-airline'
-Plug 'edkolev/tmuxline.vim'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 
 " code
 Plug 'scrooloose/syntastic'
@@ -46,7 +44,6 @@ Plug 'godlygeek/tabular'
 Plug 'Yggdroot/indentLine'
 
 " snippets
-Plug 'SirVer/ultisnips'
 
 " session
 Plug 'xolox/vim-session'
@@ -207,20 +204,20 @@ let g:syntastic_cpp_auto_refresh_includes = 1
 let b:syntastic_cpp_includes = 1
 let g:syntastic_cpp_config_file = '.config_cpp'
 
+" integrate syntastic to lightline
+let g:syntastic_mode_map = {
+            \ 'mode': 'passive'
+            \}
 
 "============================
 "   YCM/COMPLETION OPTIONS
 "============================
 
-" java completion
-set omnifunc=syntaxcomplete#Complete
-let g:EclimCompletionMethod='omnifunc'
-
 " ycm options
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_auto_trigger = 1
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_completion = 0
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_min_num_of_chars_for_completion = 2
@@ -234,9 +231,64 @@ let g:ycm_filetype_blacklist = {
             \ 'tex' : 1,
             \ 'plaintex' : 1
             \}
+let g:ycm_python_binary_path = '/usr/bin/python2'
 
 " prevents flickering from too long completion menu
 set pumheight=10
+
+"=======================
+"   LIGHTLINE OPTIONS
+"=======================
+
+" layout and options
+let g:lightline = { 
+            \ 'colorscheme': 'gruvbox',
+            \ 'active': {
+            \   'left': [ [ 'mode'],
+            \             [ 'filename'] ],
+            \   'right':[ ['filetype'], ['syntastic', 'percent']]
+            \ },
+            \ 'separator': { 
+            \    'left': '▓▒░', 
+            \    'right': '░▒▓'  
+            \ },
+            \ 'tab':{
+            \   'active':[
+            \       'filename'
+            \   ],
+            \   'inactive':[
+            \       'filename'
+            \    ]
+            \ },
+            \ 'component_expand':{
+            \   'syntastic': 'SyntasticStatuslineFlag'
+            \ },
+            \ 'component_type':{
+            \   'syntastic': 'error'
+            \ },
+            \ 'component_visible_condition':{
+            \   'syntastic': 'showSynt'
+            \ } 
+            \}
+
+" component functions {{{
+augroup AutoSyntastic
+    autocmd!
+    autocmd BufWritePost *.c, *.cpp call s:syntastic()
+augroup END
+
+function! s:syntastic()
+    SyntasticCheck
+    call lightline#update()
+endfunction
+
+function! s:showSynt()
+    if strlen(SyntasticCheck) > 0
+        return 1
+    else return 0
+    endif
+endfunction
+" }}}
 
 "=====================
 "   GRUVBOX OPTIONS
@@ -256,32 +308,6 @@ hi LineNr ctermbg=25 ctermfg=26
 
 " Doxygen highlighting
 let g:load_doxygen_syntax = 1
-
-"======================
-"   AIRLINE OPTIONS
-"======================
-
-" airline theme
-let g:airline_theme = 'ubaryd'
-
-" airline font
-let g:airline_powerline_fonts=1
-
-" airline extensions
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#ctrlp#show_adjacent_modes = 1
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#tmuxline#enabled = 1
-
-" tabline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline#extensions#tabline#show_close_button = 0
-
-" tmux
-let airline#extensions#tmuxline#snapshot_file = "~/.tmux/tmux-airline.conf"
-let airline#extensions#tmuxline#color_template = 'normal'
 
 "===================
 "   CTRLP OPTIONS
@@ -315,9 +341,6 @@ let g:formatters_c = ['c']
 let g:formatdef_cpp = '"astyle --mode=cpp -A3 -s4 -S -xw -Y -p -k1 -c"'
 let g:formatters_cpp = ['cpp']
 
-"let g:formatdef_autopep8 = '"autopep8 --indent-size 4"'
-"let g:formatters_python = ['autopep8']
-
 "=====================
 "   SESSION OPTIONS
 "=====================
@@ -344,23 +367,13 @@ hi Directory guifg=#B33804 ctermfg=red
 hi Title guifg=#E15610 ctermfg=red
 
 "=======================
-"   SNIPMATE OPTIONS
+"   ULTISNIPS OPTIONS
 "=======================
 
-" use tab to complete snippets
-imap <tab> <esc>a<Plug>snipMateNextOrTrigger
+set runtimepath+=~/.config/
+let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snips"]
 
-"==================
-"   TMUX OPTIONS
-"==================
-
-let g:tmuxline_preset={
-            \'a'    : '#(whoami)',
-            \'b'    : '#W',
-            \'c'    : '',
-            \'win'  : '#W',
-            \'cwin' : '#W',
-            \'x'    : '%a',
-            \'y'    : '%R',
-            \'z'    : ''
-            \}
+" UltiSnips triggering
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'

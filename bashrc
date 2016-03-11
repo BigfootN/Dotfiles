@@ -6,35 +6,21 @@ complete -cf sudo
 
 alias ls='ls --color=auto'
 
-# If not running interactively, do not do anything and start tmux
+
+
+# If not running interactively, do not do anything
 [[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux
 
 # colors
-blue='\[\e[0;34m\]' 
-red='\[\e[0;31m\]'
-black='\[\e[0;38m\]'
-green='\[\e[0;32m\]'
-yellow='\[\e[0;33m\]'
-purple='\[\e[0;35m\]'
+col1='\[\e[38;5;142m\]' 
+col2='\[\e[38;5;214m\]' 
+col3='\[\e[38;5;167m\]'
+sep_col='\[\e[38;5;241m\]'
 reset='\[\e[0m\]'
 
 #symbols
-light_down="$(echo -e "\u250c")"
-light_up="$(echo -e "\u2514")"
-horz_line="$(echo -e "\u2500")"
-hvy_right="$(echo -e "\u257c")"
-right_arr="$(echo -e "\uf101")"
-
-# powerline shell command
-pow_shell_cmd="python2 ~/powerline-shell.py --cwd-max-depth 3 --mode patched $? 2> /dev/null"
-
-#PS1="${red}$light_down$horz_line$horz_line${blue}[${green}\h${blue}]${red}$horz_line$horz_line$horz_line$horz_line$horz_line$horz_line$horz_line$horz_line$horz_line$horz_line${blue}[${green}\w${blue}]${red}$horz_line$hvy_right\n${red}$light_up$horz_line$horz_line${blue}(${green}\$${blue})${red}$horz_line$hvy_right${reset} "
-
-# function updater
-function _update_ps1() {
-PS1="$(python2 ~/powerline-shell.py --cwd-max-depth 3 --mode patched $? 2> /dev/null) \n$blue$right_arr$reset "
-}
+vert_bar="$(echo -e "\u23BC")"
+dot="$(echo -e "\u22c5")"
 
 # set envirornment variables
 export PATH=$HOME/.local/bin:${PATH}
@@ -42,12 +28,8 @@ export SHELL=/usr/bin/bash
 export BROWSER=/usr/bin/firefox
 export EDITOR=/usr/bin/nvim
 
-if [ "$TERM" != "linux" ]; then
-    PS1="$(python2 ~/powerline-shell.py --cwd-max-depth 3 --mode patched $? 2> /dev/null) \n$blue$right_arr$reset "
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
-
-#PS1="${black}[\u] $green$horz_line$horz_line$red [\$] $red>>$reset "
+# PS1 customize
+PS1="${col1}(\u) ${sep_col}${vert_bar}${vert_bar} ${col2}(\w) \n ${col3}\$ ${dot}${reset} "
 
 function extract {
 if [ -z "$1" ]; then
@@ -83,9 +65,8 @@ fi
 
 alias smile="scrot -d3 -c -q100"
 alias supp="yaourt -Rcsndd --noconfirm"
-alias inst="yaourt  -Sy --noconfirm"
+alias inst="yaourt -Sy --noconfirm"
 alias src="yaourt --noconfirm"
 alias maj="yaourt -Syua --noconfirm"
 alias nett="yaourt --noconfirm -Scc && yaourt -Rcsndd \$(yaourt -Qqtd)"
-alias grooveshark="firefox http://grooveshark.com"
 alias src_local="yaourt -Qs"

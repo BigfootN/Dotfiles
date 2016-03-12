@@ -204,11 +204,6 @@ let g:syntastic_cpp_auto_refresh_includes = 1
 let b:syntastic_cpp_includes = 1
 let g:syntastic_cpp_config_file = '.config_cpp'
 
-" integrate syntastic to lightline
-let g:syntastic_mode_map = {
-            \ 'mode': 'passive'
-            \}
-
 "============================
 "   YCM/COMPLETION OPTIONS
 "============================
@@ -245,13 +240,14 @@ let g:lightline = {
             \ 'colorscheme': 'gruvbox',
             \ 'active': {
             \   'left': [ [ 'mode'],
-            \             [ 'filename'] ],
+            \             [ 'filename'], ['ctrlpmark']],
             \   'right':[ ['filetype'], ['syntastic', 'percent']]
             \ },
             \ 'separator': { 
             \    'left': '▓▒░', 
             \    'right': '░▒▓'  
             \ },
+            \ 'subseparator': { 'left': '▒', 'right': '░' },
             \ 'tab':{
             \   'active':[
             \       'filename'
@@ -261,7 +257,8 @@ let g:lightline = {
             \    ]
             \ },
             \ 'component_expand':{
-            \   'syntastic': 'SyntasticStatuslineFlag'
+            \   'syntastic': 'SyntasticStatuslineFlag',
+            \   'ctrlpmark': 'CtrlPMark'
             \ },
             \ 'component_type':{
             \   'syntastic': 'error'
@@ -271,24 +268,70 @@ let g:lightline = {
             \ } 
             \}
 
-" component functions {{{
-augroup AutoSyntastic
-    autocmd!
-    autocmd BufWritePost *.c, *.cpp call s:syntastic()
-augroup END
-
-function! s:syntastic()
-    SyntasticCheck
-    call lightline#update()
-endfunction
-
 function! s:showSynt()
     if strlen(SyntasticCheck) > 0
         return 1
     else return 0
     endif
 endfunction
-" }}}
+
+function! LightLineModified()
+    return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+    return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! LightLineFilename()
+    let fname = expand('%:t')
+    return fname == 'ControlP' ? g:lightline.ctrlp_item :
+                \ fname =~ '__Gundo\|NERD_tree' ? '' :
+                \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+                \ ('' != fname ? fname : '[No Name]') .
+                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFugitive()
+    try
+        if expand('%:t') !~? 'Tagbar\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+            let mark = ''  " edit here for cool mark
+            let _ = fugitive#head()
+            return strlen(_) ? mark._ : ''
+        endif
+    catch
+    endtry
+    return ''
+endfunction
+
+function! LightLineFileformat()
+    return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightLineFiletype()
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightLineFileencoding()
+    return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! LightLineMode()
+    let fname = expand('%:t')
+    return fname == 'ControlP' ? 'CtrlP' :
+                \ fname =~ 'NERD_tree' ? 'NERDTree' :
+                \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! CtrlPMark()
+    if expand('%:t') =~ 'ControlP'
+        call lightline#link('iR'[g:lightline.ctrlp_regex])
+        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+                    \ , g:lightline.ctrlp_next], 0)
+    else
+        return ''
+    endif
+endfunction
 
 "=====================
 "   GRUVBOX OPTIONS
@@ -319,6 +362,23 @@ let g:ctrlp_cmd = 'CtrlPCurWD'
 let g:ctrlp_working_path = 'wr'
 let g:ctrlp_match_window = 'min:1,max:18,results:30'
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.o/*,*/.cmake/*,*/.txt/*,*/.so/*,*/.c.o/*,*/build/*
+
+let g:ctrlp_status_func = {
+            \ 'main': 'CtrlPStatusFunc_1',
+            \ 'prog': 'CtrlPStatusFunc_2',
+            \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+    let g:lightline.ctrlp_regex = a:regex
+    let g:lightline.ctrlp_prev = a:prev
+    let g:lightline.ctrlp_item = a:item
+    let g:lightline.ctrlp_next = a:next
+    return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+    return lightline#statusline(0)
+endfunction
 
 "=========================
 "   DELIMITMATE OPTIONS

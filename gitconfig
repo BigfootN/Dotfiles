@@ -2,8 +2,4 @@
     default = simple
 
 [color]
-    diff = auto
-    status = auto
-    interactive = auto
-    ui = true
-    pager = true
+    ui = auto

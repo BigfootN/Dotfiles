@@ -2,7 +2,7 @@
 !   Font Rendering
 !--------------------
 
-Xft.dpi: 81
+Xft.dpi: 82
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
@@ -10,18 +10,25 @@ Xft.autohint: false
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 
+!-------------------
+!   URxvt Options
+!-------------------
+
+
 !disable scrollbar
 URxvt.scrollBar:  false
-URxvt.depth: 32
 
 ! font
-URxvt.font: xft:Inconsolata for Powerline:style=Med:pixelsize=14
+URxvt.font: xft:Inconsolata for Powerline:style=Medium:pixelsize=15
+! URxvt.font: xft:Inconsolata for Powerline:style=Medium:pixelsize=14
 
 ! size
 URxvt.geometry: 154x46+200+70
 
 ! local
 URxvt.locale: true
+
+URxvt*iso14755: false
 
 !------------
 !   Colors
@@ -34,7 +41,7 @@ URxvt.color25: #353535
 URxvt.color26: #606060
 
 ! hard contrast: URxvt.background: #1d2021
-URxvt.background: [99]#343434
+URxvt.background: #343434
 URxvt.foreground: #ebdbb2
 ! Black + DarkGrey
 URxvt.color0:  #282828
@@ -97,7 +104,7 @@ URxvt.color250: #d5c4a1
 !----------
 
 ! keys
-rofi.key-run: Alt+r 
+rofi.key-run: Alt+r
 rofi.key-window: Alt+w
 
 ! options

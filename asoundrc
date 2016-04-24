@@ -1,17 +1,23 @@
-pcm.!default {
-    type plug
-        slave.pcm "asymed"
+pcm.!default{
+    type hw;
+    card PCH;
 }
 
-# improve sound quality
-defaults.pcm.rate_converter "speexrate_best"
+ctl.!default{
+    type hw;
+    card PCH;
+}
 
-pcm.asymed {
-    type asym
-        playback.pcm {
-            @func getenv
-                vars [ ALSAPCM ]
-                default "dmix"
-        }
-    capture.pcm "dsnoop"
+ctl.equal {
+    type equal;
+}
+
+pcm.plugequal {
+    type equal;
+    slave.pcm "plug:dmix";
+}
+
+pcm.!default {
+    type plug;
+    slave.pcm plugequal;
 }

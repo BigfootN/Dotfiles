@@ -1,7 +1,7 @@
 
-" /$$    /$$ /$$$$$$ /$$      /$$        /$$$$$$                       /$$$$$$  /$$          
-"| $$   | $$|_  $$_/| $$$    /$$$       /$$__  $$                     /$$__  $$|__/          
-"| $$   | $$  | $$  | $$$$  /$$$$      | $$  \__/  /$$$$$$  /$$$$$$$ | $$  \__/ /$$  /$$$$$$ 
+" /$$    /$$ /$$$$$$ /$$      /$$        /$$$$$$                       /$$$$$$  /$$
+"| $$   | $$|_  $$_/| $$$    /$$$       /$$__  $$                     /$$__  $$|__/
+"| $$   | $$  | $$  | $$$$  /$$$$      | $$  \__/  /$$$$$$  /$$$$$$$ | $$  \__/ /$$  /$$$$$$
 "|  $$ / $$/  | $$  | $$ $$/$$ $$      | $$       /$$__  $$| $$__  $$| $$$$    | $$ /$$__  $$
 " \  $$ $$/   | $$  | $$  $$$| $$      | $$      | $$  \ $$| $$  \ $$| $$_/    | $$| $$  \ $$
 "  \  $$$/    | $$  | $$\  $ | $$      | $$    $$| $$  | $$| $$  | $$| $$      | $$| $$  | $$
@@ -44,10 +44,10 @@ Plug 'godlygeek/tabular'
 Plug 'Yggdroot/indentLine'
 
 " snippets
+Plug 'SirVer/ultisnips'
 
-" session
-Plug 'xolox/vim-session'
-Plug 'xolox/vim-misc'
+" startify
+Plug 'mhinz/vim-startify'
 
 " color syntax
 Plug 'morhetz/gruvbox'
@@ -192,7 +192,7 @@ let g:syntastic_auto_loc_list = 1
 " c syntastic options
 let g:syntastic_c_compiler = 'gcc'
 let g:syntastic_c_config_file = '.config_c'
-let g:syntastic_c_check_header = 0
+let g:syntastic_c_check_header = 1
 let g:syntastic_c_no_include_search = 0
 let g:syntastic_c_auto_refresh_includes = 1
 let b:syntastic_c_includes = 1
@@ -236,18 +236,18 @@ set pumheight=10
 "=======================
 
 " layout and options
-let g:lightline = { 
+let g:lightline = {
             \ 'colorscheme': 'gruvbox',
             \ 'active': {
             \   'left': [ [ 'mode'],
-            \             [ 'filename'], ['ctrlpmark']],
+            \             [ 'filename']],
             \   'right':[ ['filetype'], ['syntastic', 'percent']]
             \ },
-            \ 'separator': { 
-            \    'left': '▓▒░', 
-            \    'right': '░▒▓'  
+            \ 'separator': {
+            \    'left': "",
+            \    'right': ""
             \ },
-            \ 'subseparator': { 'left': '▒', 'right': '░' },
+            \ 'subseparator': { 'left': '', 'right': '' },
             \ 'tab':{
             \   'active':[
             \       'filename'
@@ -258,14 +258,13 @@ let g:lightline = {
             \ },
             \ 'component_expand':{
             \   'syntastic': 'SyntasticStatuslineFlag',
-            \   'ctrlpmark': 'CtrlPMark'
             \ },
             \ 'component_type':{
             \   'syntastic': 'error'
             \ },
             \ 'component_visible_condition':{
             \   'syntastic': 'showSynt'
-            \ } 
+            \ }
             \}
 
 function! s:showSynt()
@@ -275,14 +274,19 @@ function! s:showSynt()
     endif
 endfunction
 
+" file {{{
+
+" is modified
 function! LightLineModified()
     return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
+" is read only
 function! LightLineReadonly()
     return &ft !~? 'help' && &readonly ? 'RO' : ''
 endfunction
 
+" file name
 function! LightLineFilename()
     let fname = expand('%:t')
     return fname == 'ControlP' ? g:lightline.ctrlp_item :
@@ -292,30 +296,22 @@ function! LightLineFilename()
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
-function! LightLineFugitive()
-    try
-        if expand('%:t') !~? 'Tagbar\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-            let mark = ''  " edit here for cool mark
-            let _ = fugitive#head()
-            return strlen(_) ? mark._ : ''
-        endif
-    catch
-    endtry
-    return ''
-endfunction
-
+" file formate
 function! LightLineFileformat()
     return winwidth(0) > 70 ? &fileformat : ''
 endfunction
 
+" file type
 function! LightLineFiletype()
     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 endfunction
 
+" file encoding
 function! LightLineFileencoding()
     return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 
+" file mode
 function! LightLineMode()
     let fname = expand('%:t')
     return fname == 'ControlP' ? 'CtrlP' :
@@ -323,6 +319,9 @@ function! LightLineMode()
                 \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
+" }}}
+
+" ctrlp {{{
 function! CtrlPMark()
     if expand('%:t') =~ 'ControlP'
         call lightline#link('iR'[g:lightline.ctrlp_regex])
@@ -332,6 +331,8 @@ function! CtrlPMark()
         return ''
     endif
 endfunction
+
+" }}}
 
 "=====================
 "   GRUVBOX OPTIONS
@@ -345,9 +346,9 @@ let g:gruvbox_contrast_dark = 'soft'
 set background=dark
 hi LineNr ctermbg=25 ctermfg=26
 
-"==========================
-"   DOXYGEN HIGHLIGHTING
-"==========================
+"==================================
+"   DOXYGEN HIGHLIGHTING/OPTIONS
+"==================================
 
 " Doxygen highlighting
 let g:load_doxygen_syntax = 1
@@ -401,22 +402,6 @@ let g:formatters_c = ['c']
 let g:formatdef_cpp = '"astyle --mode=cpp -A3 -s4 -S -xw -Y -p -k1 -c"'
 let g:formatters_cpp = ['cpp']
 
-"=====================
-"   SESSION OPTIONS
-"=====================
-
-set sessionoptions-=help
-set sessionoptions-=blank
-
-let g:session_persist_globals = ['&sessionoptions']
-call add(g:session_persist_globals, 'g:session_autosave')
-call add(g:session_persist_globals, 'g:session_default_to_last')
-call add(g:session_persist_globals, 'g:session_persist_globals')
-
-let g:session_autosave = 'yes'
-let g:session_autosave_periodic = '1'
-let g:session_autoload = 'no'
-
 "======================
 "   NERDTREE OPTIONS
 "======================
@@ -437,3 +422,26 @@ let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snips"]
 let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
+"======================
+"   STARTIFY OPTIONS
+"======================
+
+let g:startify_list_order = ['sessions', 'bookmarks']
+let g:startify_list_order = [
+            \ ['Projets'],
+            \ 'bookmarks',
+            \ ['Sessions'],
+            \ 'sessions'
+            \]
+let g:startify_bookmarks = ['~/Documents/MNote', '~/Documents/AmLib']
+let g:startify_session_persistence = 0
+let g:startify_session_delete_buffers = 1
+let g:startify_custom_header = [
+            \'███████╗████████╗ █████╗ ██████╗ ████████╗',
+            \'██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝',
+            \'███████╗   ██║   ███████║██████╔╝   ██║  ',
+            \'╚════██║   ██║   ██╔══██║██╔══██╗   ██║ ',
+            \'███████║   ██║   ██║  ██║██║  ██║   ██║',
+            \'╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝'
+            \]

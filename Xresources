@@ -9,6 +9,7 @@ Xft.rgba: rgb
 Xft.autohint: false
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
+!xterm*termName: xterm-256color
 
 !-------------------
 !   URxvt Options
@@ -19,8 +20,7 @@ Xft.lcdfilter: lcddefault
 URxvt.scrollBar:  false
 
 ! font
-URxvt.font: xft:Inconsolata for Powerline:style=Medium:pixelsize=15
-! URxvt.font: xft:Inconsolata for Powerline:style=Medium:pixelsize=14
+URxvt.font: xft:Iosevka:style=Regular:pixelsize=13:antialias=true, xft:Symbola
 
 ! size
 URxvt.geometry: 154x46+200+70

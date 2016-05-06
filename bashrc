@@ -12,8 +12,8 @@ alias ls='ls --color=auto'
 [[ $- != *i* ]] && return
 
 # colors
-col1='\[\e[38;5;142m\]' 
-col2='\[\e[38;5;214m\]' 
+col1='\[\e[38;5;142m\]'
+col2='\[\e[38;5;214m\]'
 col3='\[\e[38;5;167m\]'
 sep_col='\[\e[38;5;241m\]'
 reset='\[\e[0m\]'
@@ -64,9 +64,9 @@ fi
 }
 
 alias smile="scrot -d3 -c -q100"
-alias supp="yaourt -Rcsndd --noconfirm"
-alias inst="yaourt -Sy --noconfirm"
-alias src="yaourt --noconfirm"
-alias maj="yaourt -Syua --noconfirm"
-alias nett="yaourt --noconfirm -Scc && yaourt -Rcsndd \$(yaourt -Qqtd)"
-alias src_local="yaourt -Qs"
+alias supp="pacaur -Rcsndd --noconfirm"
+alias inst="pacaur -Sy --noconfirm --noedit"
+alias src="pacaur -Ss --noconfirm"
+alias maj="pacaur -Syua --noconfirm --noedit"
+alias nett="pacaur --noconfirm -Scc && sudo pacaur -Rcsndd \$(pacaur -Qqtd)"
+alias src_local="pacaur -Qs"

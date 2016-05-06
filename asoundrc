@@ -21,3 +21,5 @@ pcm.!default {
     type plug;
     slave.pcm plugequal;
 }
+
+defaults.pcm.rate_converter "speexrate_medium"

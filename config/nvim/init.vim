@@ -1,447 +1,222 @@
+"
+"   /$$    /$$ /$$                      /$$$$$$                       /$$$$$$  /$$
+"  | $$   | $$|__/                     /$$__  $$                     /$$__  $$|__/
+"  | $$   | $$ /$$ /$$$$$$/$$$$       | $$  \__/  /$$$$$$  /$$$$$$$ | $$  \__/ /$$  /$$$$$$
+"  |  $$ / $$/| $$| $$_  $$_  $$      | $$       /$$__  $$| $$__  $$| $$$$    | $$ /$$__  $$
+"   \  $$ $$/ | $$| $$ \ $$ \ $$      | $$      | $$  \ $$| $$  \ $$| $$_/    | $$| $$  \ $$
+"    \  $$$/  | $$| $$ | $$ | $$      | $$    $$| $$  | $$| $$  | $$| $$      | $$| $$  | $$
+"     \  $/   | $$| $$ | $$ | $$      |  $$$$$$/|  $$$$$$/| $$  | $$| $$      | $$|  $$$$$$$
+"      \_/    |__/|__/ |__/ |__/       \______/  \______/ |__/  |__/|__/      |__/ \____  $$
+"                                                                                  /$$  \ $$
+"                                                                                 |  $$$$$$/
+"                                                                                  \______/
 
-" /$$    /$$ /$$$$$$ /$$      /$$        /$$$$$$                       /$$$$$$  /$$
-"| $$   | $$|_  $$_/| $$$    /$$$       /$$__  $$                     /$$__  $$|__/
-"| $$   | $$  | $$  | $$$$  /$$$$      | $$  \__/  /$$$$$$  /$$$$$$$ | $$  \__/ /$$  /$$$$$$
-"|  $$ / $$/  | $$  | $$ $$/$$ $$      | $$       /$$__  $$| $$__  $$| $$$$    | $$ /$$__  $$
-" \  $$ $$/   | $$  | $$  $$$| $$      | $$      | $$  \ $$| $$  \ $$| $$_/    | $$| $$  \ $$
-"  \  $$$/    | $$  | $$\  $ | $$      | $$    $$| $$  | $$| $$  | $$| $$      | $$| $$  | $$
-"   \  $/    /$$$$$$| $$ \/  | $$      |  $$$$$$/|  $$$$$$/| $$  | $$| $$      | $$|  $$$$$$$
-"    \_/    |______/|__/     |__/       \______/  \______/ |__/  |__/|__/      |__/ \____  $$
-"                                                                                   /$$  \ $$
-"                                                                                  |  $$$$$$/
-"                                                                                   \______/
 
-" improved
-filetype off
+" ************* plugins *************
 
-" automatic installation
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall | source ~/.nvimrc
-endif
+call plug#begin('~/.local/share/nvim/plugged')
 
-" plugins
-call plug#begin('~/.config/nvim/plugged')
+" -- syntax theme
+Plug 'morhetz/gruvbox'
 
-" file browser
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'tpope/vim-surround'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'ctrlpvim/ctrlp.vim'
+" -- vim airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-" eyecandy
-Plug 'itchyny/lightline.vim'
+" -- improve syntax color
+Plug 'sheerun/vim-polyglot'
 
-" code
-Plug 'scrooloose/syntastic'
-Plug 'Valloric/YouCompleteMe'
-Plug 'DoxygenToolkit.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'Chiel92/vim-autoformat'
-Plug 'godlygeek/tabular'
-Plug 'Yggdroot/indentLine'
+" -- snippets
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 
-" snippets
-Plug 'SirVer/ultisnips'
-
-" startify
+" -- start page
 Plug 'mhinz/vim-startify'
 
-" color syntax
-Plug 'morhetz/gruvbox'
+" -- code check
+Plug 'scrooloose/syntastic'
+
+" -- format
+Plug 'Chiel92/vim-autoformat'
+
+" -- code completion
+Plug 'Valloric/YouCompleteMe'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
+
+" -- change projet root automatically
+Plug 'airblade/vim-rooter'
+
+" -- complete brackets, parentheses, ...
+Plug 'jiangmiao/auto-pairs'
+
+" -- nerdtree
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 
 call plug#end()
 
-"================================
-"   VIM/MISCELLANEOUS SETTINGS
-"================================
+" ************* editor configuration *************
 
-" syntax and filetype
+filetype plugin on
+filetype indent on
 syntax on
-filetype plugin indent on
-set modeline
-
-" disable preview
-set completeopt-=preview
-
-" split settings
+set tabstop=4
+set shiftwidth=4
+set smarttab
 set splitright
-set splitbelow
+set nohlsearch
+set autoread
+set t_Co=16
+set scrolloff=8
 
-" remove menubar and toolbar
-set guioptions-=m
-set guioptions-=T
-set guioptions-=e
+au BufNewFile,BufRead *.h setlocal ft=c
+" ************* eye-candy configuration *************
 
-" Increasive search
-set incsearch
-set ignorecase
-set smartcase
+" show line numbers
+set nu
+highlight LineNr ctermfg=26
+highlight LineNr ctermbg=25
 
-" enable c syntax for *.h files
-let g:c_syntax_for_h=1
-
-" enable plaintex syntax for *.tex files
-autocmd BufRead,BufNewFile *.tex set filetype=plaintex
-
-" autoresize splits
-autocmd VimResized * exe "normal \<c-w>="
-
-" keep cursor centered
-"set scrolloff=100
-
-" set backspace
-set backspace=indent,eol,start
-
-" activate mouse
-set mouse=a
-
-" keep status line
-set laststatus=2
-
-"===============
-"    MAPPING
-"===============
-
-" mapping timeout
-set timeoutlen=500
-
-" map leader
-let mapleader=","
-
-" white spaces
-noremap <silent> <F5> :%s/\s\+$//<CR>
-
-" write and quit
-nmap <silent> <leader>q          :q<CR>
-nmap <silent> <leader>w          :w<CR>
-nmap <silent> <leader>s          :so ~/.config/nvim/init.vim<CR>
-
-nmap <silent> <leader>x          :x<CR>
-nmap <silent> <leader>xa         :xa<CR>
-nmap <silent> <leader>wa         :wa<CR>
-
-" tab and split
-nmap <silent> <leader>p          :tabprevious<CR>
-nmap <silent> <leader>n          :tabnext<CR>
-nmap <silent> <leader><right>    <C-w><C-w><right>            t
-nmap <silent> <C-n>              :tabnew<CR>
-nmap <silent> <C-d>              :tabclose<CR>
-nmap <silent> <leader>tv         :tabnew ~/.vimrc<CR>
-
-" updating
-nmap <silent> <leader>u          :PlugUpdate
-nmap <silent> <leader>c          :PlugClean
-
-" Surrounding
-nmap <silent> <leader>b          ysiwb                        " wrap current word with brackets
-
-" auto indent with F7
-noremap <F7> :Autoformat<CR>
-
-" auto format on save
-au BufWrite * :Autoformat
-
-" nerdtree
-nmap <silent> <leader>ft         :NERDTreeToggle<CR>
-
-"=====================
-"    LOOK AND FEEL
-"=====================
-
-" set colorscheme
-let g:gruvbox_italic=1
-let g:gruvbox_underline=1
-let g:gruvbox_contrast_dark = "hard"
+" colorscheme
 set background=dark
 colorscheme gruvbox
 
-" Set lines
-set nu                                      " show line numbers
+" ************* Keymaps *************
 
-" Disable cursorline for tex files
-autocmd FileType tex :NoMatchParen
-au FileType tex setlocal nocursorline
-let g:tex_flavor = "plain"
+let mapleader = ","
 
-" set indent space
-set autoindent      " always set autoindenting on
-set expandtab       " use spaces, not tabs
-set shiftwidth=4    " indent level of 4 spaces
-set tabstop=4       " tab of 4 spaces
-set softtabstop=4   " backspace of 4 spaces
+nnoremap <leader>cv :tabnew ~/.config/nvim/init.vim<CR>
+nnoremap <leader>f :NERDTreeFocus<CR>
+nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>p :tabprevious<CR>
+nnoremap <leader>n :tabnext<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q!<CR>
 
-"==================
-"   Plug OPTIONS
-"==================
 
-let g:plug_window = 'vertical topleft new'
+" line numbers relative/absolute
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
 
-"=======================
-"   SYNTASTIC OPTIONS
-"=======================
+" ************* JavaComplete configuration *************
 
-" syntastic options
-" let g:EclimFileTypeValidate = 0 // disable syntastic checks
-let g:syntastic_check_on_open = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-" c syntastic options
-let g:syntastic_c_compiler = 'gcc'
-let g:syntastic_c_config_file = '.config_c'
-let g:syntastic_c_check_header = 1
-let g:syntastic_c_no_include_search = 0
-let g:syntastic_c_auto_refresh_includes = 1
-let b:syntastic_c_includes = 1
+" ************* Autoformat configuration *************
 
-" c++ syntastic options
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_auto_refresh_includes = 1
-let b:syntastic_cpp_includes = 1
-let g:syntastic_cpp_config_file = '.config_cpp'
+let blacklist = ['xml']
+autocmd BufWritePre * if index(blacklist, &ft) < 0 | :Autoformat
 
-"============================
-"   YCM/COMPLETION OPTIONS
-"============================
+" ************* Airline configuration *************
 
-" ycm options
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_auto_trigger = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme = "gruvbox"
+
+" symbols
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+" extensions
+let g:airline_extensions = ['tabline']
+let g:airline#extensions#default#section_truncate_width = {}
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+
+" left sections
+let g:airline_section_a = airline#section#create(['mode'])
+let g:airline_section_b = airline#section#create(['%t'])
+let g:airline_section_c = airline#section#create([])
+
+" center
+let g:airline_section_getter = ''
+
+" right sections
+let g:airline_section_x = ''
+let g:airline_section_y = airline#section#create(['filetype'])
+let g:airline_section_z = airline#section#create(['%3.3l'])
+let g:airline_section_error = airline#section#create(['syntastic'])
+let g:airline_section_warning = airline#section#create([''])
+
+" tabline options
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#buffer_nr_show = 0
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_tab_nr = 1
+
+" ************* YouCompleteMe configuration *************
+
 let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_show_diagnostics_ui = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycm_filetype_specific_completion_to_disable = {
-            \ 'gitcommit': 1,
-            \ 'swap': 1
-            \ }
 
-" disable for tex files
-let g:ycm_filetype_blacklist = {
-            \ 'tex' : 1,
-            \ 'plaintex' : 1
-            \}
-let g:ycm_python_binary_path = '/usr/bin/python2'
-
-" prevents flickering from too long completion menu
-set pumheight=10
-
-"=======================
-"   LIGHTLINE OPTIONS
-"=======================
-
-" layout and options
-let g:lightline = {
-            \ 'colorscheme': 'gruvbox',
-            \ 'active': {
-            \   'left': [ [ 'mode'],
-            \             [ 'filename']],
-            \   'right':[ ['filetype'], ['syntastic', 'percent']]
-            \ },
-            \ 'separator': {
-            \    'left': "",
-            \    'right': ""
-            \ },
-            \ 'subseparator': { 'left': '', 'right': '' },
-            \ 'tab':{
-            \   'active':[
-            \       'filename'
-            \   ],
-            \   'inactive':[
-            \       'filename'
-            \    ]
-            \ },
-            \ 'component_expand':{
-            \   'syntastic': 'SyntasticStatuslineFlag',
-            \ },
-            \ 'component_type':{
-            \   'syntastic': 'error'
-            \ },
-            \ 'component_visible_condition':{
-            \   'syntastic': 'showSynt'
-            \ }
-            \}
-
-function! s:showSynt()
-    if strlen(SyntasticCheck) > 0
-        return 1
-    else return 0
-    endif
-endfunction
-
-" file {{{
-
-" is modified
-function! LightLineModified()
-    return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-" is read only
-function! LightLineReadonly()
-    return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-
-" file name
-function! LightLineFilename()
-    let fname = expand('%:t')
-    return fname == 'ControlP' ? g:lightline.ctrlp_item :
-                \ fname =~ '__Gundo\|NERD_tree' ? '' :
-                \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-                \ ('' != fname ? fname : '[No Name]') .
-                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
-
-" file formate
-function! LightLineFileformat()
-    return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-" file type
-function! LightLineFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-
-" file encoding
-function! LightLineFileencoding()
-    return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-" file mode
-function! LightLineMode()
-    let fname = expand('%:t')
-    return fname == 'ControlP' ? 'CtrlP' :
-                \ fname =~ 'NERD_tree' ? 'NERDTree' :
-                \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-" }}}
-
-" ctrlp {{{
-function! CtrlPMark()
-    if expand('%:t') =~ 'ControlP'
-        call lightline#link('iR'[g:lightline.ctrlp_regex])
-        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-                    \ , g:lightline.ctrlp_next], 0)
-    else
-        return ''
-    endif
-endfunction
-
-" }}}
-
-"=====================
-"   GRUVBOX OPTIONS
-"=====================
-
-let g:gruvbox_bold = 0
-let g:gruvbox_italic = 1
-let g:gruvbox_underline = 1
-let g:gruvbox_termcolors = 256
-let g:gruvbox_contrast_dark = 'soft'
-set background=dark
-hi LineNr ctermbg=25 ctermfg=26
-
-"==================================
-"   DOXYGEN HIGHLIGHTING/OPTIONS
-"==================================
-
-" Doxygen highlighting
-let g:load_doxygen_syntax = 1
-
-"===================
-"   CTRLP OPTIONS
-"===================
-
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_switch_buffer = 'ETVH'
-let g:ctrlp_cmd = 'CtrlPCurWD'
-let g:ctrlp_working_path = 'wr'
-let g:ctrlp_match_window = 'min:1,max:18,results:30'
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.o/*,*/.cmake/*,*/.txt/*,*/.so/*,*/.c.o/*,*/build/*
-
-let g:ctrlp_status_func = {
-            \ 'main': 'CtrlPStatusFunc_1',
-            \ 'prog': 'CtrlPStatusFunc_2',
-            \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-    let g:lightline.ctrlp_regex = a:regex
-    let g:lightline.ctrlp_prev = a:prev
-    let g:lightline.ctrlp_item = a:item
-    let g:lightline.ctrlp_next = a:next
-    return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str)
-    return lightline#statusline(0)
-endfunction
-
-"=========================
-"   DELIMITMATE OPTIONS
-"=========================
-
-let delimitMate_expand_cr = 2
-let delimitMate_expand_space = 1
-let delimitMate_balance_matchpairs=1
-
-"========================
-"   AUTOFORMAT OPTIONS
-"========================
-
-let g:formatdef_java = '"astyle --mode=java -A2 --indent=spaces=4 --attach-classes -K -S"'
-let g:formatters_java = ['java']
-
-let g:formatdef_c = '"astyle --mode=c -A3 -s4 -S -xw -Y -p -k1 -c"'
-let g:formatters_c = ['c']
-
-let g:formatdef_cpp = '"astyle --mode=cpp -A3 -s4 -S -xw -Y -p -k1 -c"'
-let g:formatters_cpp = ['cpp']
-
-"======================
-"   NERDTREE OPTIONS
-"======================
-
-let g:nerdtree_tabs_open_on_console_startup = 0
-let NERDTreeDirArrows=0
-hi Directory guifg=#B33804 ctermfg=red
-hi Title guifg=#E15610 ctermfg=red
-
-"=======================
-"   ULTISNIPS OPTIONS
-"=======================
-
-set runtimepath+=~/.config/
-let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snips"]
+" ************* Ultisnips configuration *************
 
 " UltiSnips triggering
 let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
-"======================
-"   STARTIFY OPTIONS
-"======================
+" ************* Startify configuration *************
 
-let g:startify_list_order = ['sessions', 'bookmarks']
-let g:startify_list_order = [
-            \ ['Projets'],
-            \ 'bookmarks',
-            \ ['Sessions'],
-            \ 'sessions'
-            \]
-let g:startify_bookmarks = ['~/Documents/MNote', '~/Documents/AmLib']
-let g:startify_session_persistence = 0
-let g:startify_session_delete_buffers = 1
 let g:startify_custom_header = [
-            \'███████╗████████╗ █████╗ ██████╗ ████████╗',
-            \'██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝',
-            \'███████╗   ██║   ███████║██████╔╝   ██║  ',
-            \'╚════██║   ██║   ██╔══██║██╔══██╗   ██║ ',
-            \'███████║   ██║   ██║  ██║██║  ██║   ██║',
-            \'╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝'
-            \]
+			\"   _   _                   _            ",
+			\"  | \\ | |                 (_)           ",
+			\"  |  \\| | ___  _____   ___ _ __ ___   ",
+			\"  | . ` |/ _ \\/ _ \\ \\ / / | '_ ` _ \\ ",
+			\"  | |\\  |  __/ (_) \\ V /| | | | | | | ",
+			\"  \\_| \\_/\\___|\\___/ \\_/ |_|_| |_| |_| ",
+			\]
+
+let g:startify_list_order = [
+			\ ['  ---------  FICHIERS  ---------'],
+			\ 'files',
+			\ ['  ---------  SESSIONS  ---------'],
+			\ 'sessions',
+			\ ['  ---------  PROJETS  ---------'],
+			\ 'bookmarks',
+			\ ]
+
+let g:startify_enable_special = 0
+let g:startify_files_number = 5
+
+" projets
+let g:startify_bookmarks = [
+			\ '~/Documents/Prog/mdata/'
+			\ ]
+
+" ************* Syntastic configuration *************
+
+" basic settings
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" disabled checkers
+let g:syntastic_enable_latex_checker = 0
+let g:syntastic_enable_tex_checker = 0
+let g:syntastic_tex_checkers = []
+let g:syntastic_enable_xml_checker = 0
+
+" checker ---- C
+let g:syntastic_c_checkers = ["clang_tidy"]
+
+let g:syntastic_cpp_checkers = ["clang_check"]
+
+" ************* NERDTree configuration *************
+
+autocmd VimEnter *
+			\   if !argc()
+			\ |   Startify
+			\ |   execute 'NERDTreeTabsOpen'
+			\ |   wincmd w
+			\ | endif
+
+let g:nerdtree_tabs_open_on_console_startup = 1
+let g:nerdtree_tabs_synchronize_view = 0

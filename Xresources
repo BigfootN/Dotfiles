@@ -66,8 +66,7 @@ URxvt*color15: #D5CFD4
 !  Font Setting
 !----------------
 
-!URxvt*font: xft:Iosevka:style=Regular:pixelsize=21,xft:MesloLGMDZ Nerd Font:style=RegularForPowerline
-URxvt*font: xft:Iosevka:style=Regular:pixelsize=21
+URxvt*font: xft:Iosevka:style=Regular:size=13,xft:DejaVuSans Mono Nerd Font:pixelsize=15
 URxvt*boldFont:
 
 !------------------

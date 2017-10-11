@@ -1,30 +1,106 @@
-.scrollbars-visible-always /deep/ ::-webkit-scrollbar{
-    width: 4px;
-    border-radius: 0px;
+// ---------------
+// -- VARIABLES --
+// ---------------
+
+// user interface
+@ui-font-family: "Fira Sans Book";
+@ui-font-size: 18px;
+
+// tab panel
+@tab-panel-height: 70px;
+@tab-font-size: 20px;
+@tab-icon-size: 18px;
+
+// editor
+@editor-font-size: 20px;
+@editor-font-family: "Iosevka";
+
+// status bar
+@status-bar-font-size: 17px;
+@status-bar-height: 35px;
+
+// ----------
+// -- CODE --
+// ----------
+
+atom-text-editor {
+	font-family: @editor-font-family;
+	font-size: @editor-font-size;
 }
 
-atom-text-editor.is-focused::shadow {
-  .line.cursor-line, .line-number.cursor-line-no-selection {
-    background-color: fade(gray, 8%);
-  }
+atom-text-editor[mini],
+select {
+	font-size: @editor-font-size - 1 !important;
+	font-family: @editor-font-family !important;
 }
 
-atom-text-editor::shadow .bracket-matcher .region{
-  border-bottom: 1px solid gray;
+.config-menu {
+	font-family: @ui-font-family;
+	font-size: @ui-font-size - 1 !important;
 }
 
-.status-bar-left{
-    font-size: 12px;
+.setting-title {
+	font-family: @ui-font-family;
+	font-size: @ui-font-size + 2 !important;
 }
 
-a.current-path{
-    font-size: 13px;
+.setting-description {
+	font-family: @ui-font-family;
+	font-size: @ui-font-size;
 }
 
-.font-size-regular .tab-bar .tab{
-    font-size: 12px;
+.package-name {
+	font-family: @ui-font-family;
+	font-size: @ui-font-size + 3;
 }
 
-.font-size-regular .tree-view .list-item{
-    font-size: 12px;
+.package-description {
+	font-family: @ui-font-family;
+	font-size: @ui-font-size - 2;
+}
+
+status-bar {
+	font-family: @ui-font-family;
+	font-size: @status-bar-font-size;
+	line-height: @status-bar-height !important;
+	height: @status-bar-height !important;
+	max-height: @status-bar-height !important;
+	vertical-align: middle !important;
+}
+
+.tab-bar {
+	height: @tab-panel-height !important;
+	max-height: @tab-panel-height !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	display: block;
+	white-space: nowrap;
+
+	.tab {
+		font-family: @ui-font-family;
+		font-size: @tab-font-size;
+		height: inherit !important;
+		max-height: inherit !important;
+		display: inline-block;
+		max-width: none;
+
+		.title,
+		.title::before {
+			height: inherit;
+			max-height: inherit !important;
+			line-height: @tab-panel-height !important;
+			vertical-align: middle !important;
+			margin-top: 0 !important;
+			margin-bottom: 0 !important;
+		}
+
+		.title {
+			padding-right: 30px !important;
+			padding-top: 0 !important;
+		}
+
+		.icon:before {
+			font-size: @tab-icon-size !important;
+		}
+	}
 }

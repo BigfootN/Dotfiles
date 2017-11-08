@@ -2,105 +2,110 @@
 // -- VARIABLES --
 // ---------------
 
-// user interface
+// ui-font
 @ui-font-family: "Fira Sans Book";
-@ui-font-size: 18px;
-
-// tab panel
-@tab-panel-height: 70px;
-@tab-font-size: 20px;
-@tab-icon-size: 18px;
+@ui-font-size: 20px;
 
 // editor
-@editor-font-size: 20px;
 @editor-font-family: "Iosevka";
+@editor-font-size: 20px;
+
+// tab panel
+@tab-panel-height: 50px;
+@tab-panel-font-size: 18px;
+
+// tab close icon
+@tab-close-icon: "\F00D";
+@tab-close-icon-color: #7e7e7e;
+@tab-close-icon-size: 15px;
+
+// tree view
+@tree-view-font-size: 17px;
+
+// settings view
+@settings-view-font-size: 15px;
+
+// config menu
+@config-menu-font-size: 15px;
 
 // status bar
-@status-bar-font-size: 17px;
-@status-bar-height: 35px;
+@status-bar-font-size: 14px;
 
 // ----------
 // -- CODE --
 // ----------
+
+atom-workspace {
+	font-family: @ui-font-family !important;
+}
 
 atom-text-editor {
 	font-family: @editor-font-family;
 	font-size: @editor-font-size;
 }
 
-atom-text-editor[mini],
-select {
-	font-size: @editor-font-size - 1 !important;
-	font-family: @editor-font-family !important;
+status-bar {
+	font-size: @status-bar-font-size !important;
+}
+
+.settings-view {
+	font-size: @settings-view-font-size;
 }
 
 .config-menu {
-	font-family: @ui-font-family;
-	font-size: @ui-font-size - 1 !important;
+	font-size: @config-menu-font-size;
 }
 
-.setting-title {
-	font-family: @ui-font-family;
-	font-size: @ui-font-size + 2 !important;
-}
-
-.setting-description {
-	font-family: @ui-font-family;
-	font-size: @ui-font-size;
-}
-
-.package-name {
-	font-family: @ui-font-family;
-	font-size: @ui-font-size + 3;
-}
-
-.package-description {
-	font-family: @ui-font-family;
-	font-size: @ui-font-size - 2;
-}
-
-status-bar {
-	font-family: @ui-font-family;
-	font-size: @status-bar-font-size;
-	line-height: @status-bar-height !important;
-	height: @status-bar-height !important;
-	max-height: @status-bar-height !important;
-	vertical-align: middle !important;
+.tree-view {
+	font-size: @tree-view-font-size;
 }
 
 .tab-bar {
 	height: @tab-panel-height !important;
 	max-height: @tab-panel-height !important;
-	margin-top: 0 !important;
-	margin-bottom: 0 !important;
-	display: block;
-	white-space: nowrap;
+	display: block !important;
+	white-space: nowrap !important;
 
 	.tab {
-		font-family: @ui-font-family;
-		font-size: @tab-font-size;
-		height: inherit !important;
-		max-height: inherit !important;
-		display: inline-block;
-		max-width: none;
-
-		.title,
-		.title::before {
-			height: inherit;
-			max-height: inherit !important;
-			line-height: @tab-panel-height !important;
-			vertical-align: middle !important;
-			margin-top: 0 !important;
-			margin-bottom: 0 !important;
-		}
+		font-size: @tab-panel-font-size !important;
+		max-width: none !important;
+		display: inline-block !important;
+		height: @tab-panel-height !important;
+		max-height: @tab-panel-height !important;
+		line-height: @tab-panel-height !important;
 
 		.title {
+			line-height: @tab-panel-height !important;
+			height: @tab-panel-height !important;
+			max-height: @tab-panel-height !important;
+			vertical-align: middle !important;
 			padding-right: 30px !important;
-			padding-top: 0 !important;
+			padding-left: 30px !important;
+			margin-bottom: 0px !important;
+			margin-top: 0px !important;
 		}
 
-		.icon:before {
-			font-size: @tab-icon-size !important;
+		.title.icon::before {
+			margin-right: 13px !important;
 		}
+
+		.close-icon::before {
+			font-family: "Iosevka" !important;
+			content: @tab-close-icon !important;
+			font-size: @tab-close-icon-size;
+			color: @tab-close-icon-color;
+		}
+
+		.close-icon:hover {
+			background-color: transparent;
+			color: @tab-close-icon-color;
+		}
+	}
+
+	.tab.modified:not(:hover) .close-icon {
+		vertical-align: middle !important;
+		margin-top: 0px !important;
+		margin-bottom: 0px !important;
+		content: "" !important;
 	}
 }

@@ -8,12 +8,6 @@ then
 	xrdb ~/.Xresources
 fi
 
-#------
-# ALIAS
-#------
-
-alias astyle="astyle --options=~/.config/astyle/astylerc"
-
 # ————————
 # SETTINGS
 # ————————
@@ -28,7 +22,7 @@ xset r rate 180 100
 export LANG=fr_FR.UTF-8
 
 # editor
-export EDITOR='nvim'
+export EDITOR='atom'
 
 # npm
 PATH="$HOME/.node_modules/bin/:$PATH"
@@ -52,13 +46,19 @@ antigen bundle extract
 # done
 antigen apply
 
+# —————
+# ALIAS
+# —————
+
+alias astyle="astyle --options=~/.config/astyle/astylerc"
+alias pacaur="pacaur --noconfirm --noconfirm"
+alias mirrupg="sudo reflector --country 'France' --latest 200 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+alias vpn_connect="sudo expressvpn connect smart"
+alias vpn_disconnect="sudo expressvpn disconnect"
+
 # ——————
 # PROMPT
 # ——————
-
-PROMPT_ARROW=$(echo -e "\uF061")
-
-#PS1='%F{red}%~ %f$PROMPT_ARROW '
 
 function powerline_precmd() {
 	PS1="$(~/.config/powerline-shell/powerline-shell.py $? --shell zsh 2> /dev/null)"

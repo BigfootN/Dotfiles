@@ -1,94 +1,57 @@
 "*":
-  "accents-ui":
-    accentColor:
-      alpha: 1
-      blue: 56
-      green: 56
-      red: 255
-    hexColor: "#ff3838"
-  "atom-material-ui":
-    fonts:
-      fontSize: "Big"
-      useRobotoInUI: true
-    panels:
-      altCmdPalette: false
-      depth: true
-      panelContrast: true
-    tabs:
-      tabSize: "Small"
-    treeView:
-      compactTreeView: true
-    ui:
-      accentColor: "Red"
-  "autocomplete-clang":
-    "std c": "c11"
-  "bracket-matcher":
-    wrapSelectionsInBrackets: false
+  "atom-autocomplete-php":
+    binComposer: "/usr/bin/composer"
+  "atom-beautify":
+    coffeescript:
+      beautify_on_save: true
+      default_beautifier: "Coffee Formatter"
+    executables:
+      "php-cs-fixer":
+        path: "/usr/bin/php-cs-fixer"
+      phpcbf:
+        path: "/usr/bin/phpcbf"
+    php:
+      beautify_on_save: true
+      default_beautifier: "PHPCBF"
+      standard: "Squiz"
+  "autocomplete-paths":
+    scopes: [
+      {
+        scopes: [
+          "source.js"
+        ]
+        prefixes: [
+          "source\\s+[\"]"
+        ]
+        extensions: [
+          "[\\s\\S]*"
+          "conf"
+        ]
+        relative: false
+      }
+    ]
   core:
-    audioBeep: false
     autoHideMenuBar: true
     disabledPackages: [
-      "wrap-guide"
+      "welcome"
     ]
     themes: [
-      "atom-material-ui"
-      "monokai"
+      "one-dark-ui"
+      "gruvbox-plus-syntax"
     ]
-  docblockr: {}
   editor:
-    fontFamily: "Inconsolata for Powerline"
-    fontSize: 15
-    invisibles: {}
-    showIndentGuide: true
-    showInvisibles: true
+    preferredLineLength: 200
+    scrollPastEnd: true
+    scrollSensitivity: 200
     softWrap: true
+    softWrapAtPreferredLineLength: true
     tabLength: 4
-    tabType: "soft"
+    tabType: "hard"
   "exception-reporting":
-    userId: "d3908bab-ffae-9730-5cf7-a5ba2b7f982a"
-  "file-icons":
-    forceShow: true
-  "flex-tool-bar":
-    showConfigButton: false
-  hidpi:
-    manualResolutionScaleFactors: "\"1920x1080\": 1"
-  "linter-clang": {}
-  "linter-gcc":
-    gccDefaultCFlags: "-Wall -Wextra -Werror -std=c11 -c -fsyntax-only"
-  minimap:
-    absoluteMode: true
-    displayPluginsControls: false
-    plugins:
-      codeglance: true
-    scrollAnimation: true
-  "minimap-codeglance":
-    numberOfLines: 10
-  "one-dark-ui":
-    layoutMode: "Compact"
-  "predawn-ui":
-    colourlessIcons: false
-  "tool-bar":
-    position: "Left"
-  "tool-bar-almighty":
-    override: true
-  welcome:
-    showOnStartup: false
-  whitespace:
-    ensureSingleTrailingNewline: false
-".bibtex.text":
-  editor:
-    scrollPastEnd: true
-    showIndentGuide: true
-    softWrap: true
-".c.source":
-  editor:
-    softWrap: true
-".latex.tex.text":
-  editor:
-    scrollPastEnd: true
-    showIndentGuide: true
-".tex.text":
-  editor:
-    scrollPastEnd: true
-    showIndentGuide: true
-    softWrap: true
+    userId: "23f21902-97fe-4818-9144-311f78ce8906"
+  linter:
+    lintPreviewTabs: false
+  "linter-ui-default":
+    panelRepresents: "Entire Project"
+    showPanel: true
+    showTooltip: false

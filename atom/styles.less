@@ -6,18 +6,24 @@
 @ui-font-family: "Fira Sans Book";
 @ui-font-size: 20px;
 
+// settings control
+@settings-ctrl-font-size: 18px;
+
 // editor
 @editor-font-family: "Iosevka";
 @editor-font-size: 20px;
+@editor-bg-color: #282828;
 
 // tab panel
-@tab-panel-height: 50px;
+@tab-panel-height: 70px;
 @tab-panel-font-size: 18px;
 
+// tab icon
+@tab-icon-size: 19px;
+
 // tab close icon
-@tab-close-icon: "\F00D";
-@tab-close-icon-color: #7e7e7e;
-@tab-close-icon-size: 15px;
+@tab-close-icon: "\00D7";
+@tab-close-icon-size: 20px;
 
 // tree view
 @tree-view-font-size: 17px;
@@ -26,10 +32,12 @@
 @settings-view-font-size: 15px;
 
 // config menu
-@config-menu-font-size: 15px;
+@config-menu-font-size: 17px;
 
 // status bar
-@status-bar-font-size: 14px;
+@status-bar-font-size: 18px;
+@status-bar-height: 32px;
+@status-bar-font-family: @editor-font-family;
 
 // ----------
 // -- CODE --
@@ -40,24 +48,49 @@ atom-workspace {
 }
 
 atom-text-editor {
+	text-rendering: optimizeLegibility;
 	font-family: @editor-font-family;
 	font-size: @editor-font-size;
 }
 
 status-bar {
-	font-size: @status-bar-font-size !important;
+	font-family: @status-bar-font-family;
+	font-size: @status-bar-font-size;
+	height: @status-bar-height;
+	line-height: @status-bar-height;
+	vertical-align: middle;
+}
+
+atom-text-editor[mini], .form-control {
+	font-family: @editor-font-size !important;
+	font-size: @settings-ctrl-font-size !important;
 }
 
 .settings-view {
-	font-size: @settings-view-font-size;
+	font-family: @ui-font-family !important;
+	font-size: @settings-view-font-size !important;
 }
 
 .config-menu {
 	font-size: @config-menu-font-size;
 }
 
+.scroll-view {
+	background-color: @editor-bg-color !important;
+}
+
 .tree-view {
 	font-size: @tree-view-font-size;
+}
+
+.command-palette {
+	font-family: @editor-font-family;
+	font-size: @editor-font-size;
+}
+
+.btn {
+	font-family: @ui-font-family !important;
+	font-size: 16px !important;
 }
 
 .tab-bar {
@@ -75,37 +108,27 @@ status-bar {
 		line-height: @tab-panel-height !important;
 
 		.title {
-			line-height: @tab-panel-height !important;
-			height: @tab-panel-height !important;
-			max-height: @tab-panel-height !important;
 			vertical-align: middle !important;
 			padding-right: 30px !important;
-			padding-left: 30px !important;
+			padding-left: 5px !important;
 			margin-bottom: 0px !important;
 			margin-top: 0px !important;
+			padding-top: 0px !important;
 		}
 
 		.title.icon::before {
-			margin-right: 13px !important;
+			margin-right: 20px !important;
+			font-size: @tab-icon-size;
+		}
+
+		.close-icon {
+			line-height: inherit !important;
+			vertical-align: middle !important;
 		}
 
 		.close-icon::before {
-			font-family: "Iosevka" !important;
 			content: @tab-close-icon !important;
-			font-size: @tab-close-icon-size;
-			color: @tab-close-icon-color;
+			font-size: @tab-close-icon-size !important;
 		}
-
-		.close-icon:hover {
-			background-color: transparent;
-			color: @tab-close-icon-color;
-		}
-	}
-
-	.tab.modified:not(:hover) .close-icon {
-		vertical-align: middle !important;
-		margin-top: 0px !important;
-		margin-bottom: 0px !important;
-		content: "" !important;
 	}
 }

@@ -9,7 +9,9 @@ ATOM_INSTALL_FOLDER_PATH = "~/.atom"
 ATOM_FILE_NAMES = ["config.cson", "styles.less"]
 
 # atom packages
-ATOM_PKGS = ["beautifier", "linter-flake8"]
+ATOM_PKGS = [
+    "beautifier", "linter-flake8", "linter-clang", "autocomplete-clang"
+]
 
 # Xresources file paths
 XRESOURCES_GIT_FILE_PATH = os.path.realpath(__file__)

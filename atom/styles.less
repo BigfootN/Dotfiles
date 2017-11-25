@@ -15,7 +15,7 @@
 @editor-bg-color: #282828;
 
 // tab panel
-@tab-panel-height: 70px;
+@tab-panel-height: 50px;
 @tab-panel-font-size: 18px;
 
 // tab icon
@@ -23,7 +23,8 @@
 
 // tab close icon
 @tab-close-icon: "\00D7";
-@tab-close-icon-size: 20px;
+@tab-close-icon-size: 22px;
+@tab-close-icon-color: #595959;
 
 // tree view
 @tree-view-font-size: 17px;
@@ -36,7 +37,7 @@
 
 // status bar
 @status-bar-font-size: 18px;
-@status-bar-height: 32px;
+@status-bar-height: 34px;
 @status-bar-font-family: @editor-font-family;
 
 // ----------
@@ -54,11 +55,11 @@ atom-text-editor {
 }
 
 status-bar {
-	font-family: @status-bar-font-family;
-	font-size: @status-bar-font-size;
-	height: @status-bar-height;
-	line-height: @status-bar-height;
-	vertical-align: middle;
+	font-family: @status-bar-font-family !important;
+	font-size: @status-bar-font-size !important;
+	height: @status-bar-height !important;
+	line-height: @status-bar-height !important;
+	vertical-align: middle !important;
 }
 
 atom-text-editor[mini], .form-control {
@@ -85,7 +86,7 @@ atom-text-editor[mini], .form-control {
 
 .command-palette {
 	font-family: @editor-font-family;
-	font-size: @editor-font-size;
+	font-size: @editor-font-size - 4;
 }
 
 .btn {
@@ -122,13 +123,14 @@ atom-text-editor[mini], .form-control {
 		}
 
 		.close-icon {
-			line-height: inherit !important;
-			vertical-align: middle !important;
+			background-color: rgba(0, 0, 0, 0) !important;
+			color: @tab-close-icon-color;
 		}
 
 		.close-icon::before {
 			content: @tab-close-icon !important;
 			font-size: @tab-close-icon-size !important;
+			color: @tab-close-icon-color;
 		}
 	}
 }

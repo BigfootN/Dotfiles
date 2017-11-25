@@ -14,6 +14,17 @@
       beautify_on_save: true
       default_beautifier: "PHPCBF"
       standard: "Squiz"
+    python:
+      beautify_on_save: true
+      default_beautifier: "yapf"
+      formater: "yapf"
+      max_line_length: 100
+  "atom-material-ui":
+    colors:
+      abaseColor: "#98971a"
+    tabs: {}
+    ui:
+      panelContrast: true
   "autocomplete-paths":
     scopes: [
       {
@@ -30,28 +41,55 @@
         relative: false
       }
     ]
+  "autocomplete-plus":
+    maxVisibleSuggestions: 5
+  "autocomplete-python": {}
   core:
     autoHideMenuBar: true
     disabledPackages: [
       "welcome"
+      "wrap-guide"
     ]
     themes: [
       "one-dark-ui"
       "gruvbox-plus-syntax"
     ]
   editor:
-    preferredLineLength: 200
+    invisibles: {}
+    preferredLineLength: 100
     scrollPastEnd: true
     scrollSensitivity: 200
+    showInvisibles: true
     softWrap: true
     softWrapAtPreferredLineLength: true
     tabLength: 4
     tabType: "hard"
   "exception-reporting":
     userId: "23f21902-97fe-4818-9144-311f78ce8906"
+  "file-icons": {}
+  "gruvbox-plus-syntax": {}
   linter:
     lintPreviewTabs: false
+  "linter-flake8":
+    executablePath: "/usr/bin/flake8"
+    maxLineLength: 100
   "linter-ui-default":
-    panelRepresents: "Entire Project"
     showPanel: true
-    showTooltip: false
+  welcome:
+    showOnStartup: false
+  whitespace:
+    ensureSingleTrailingNewline: false
+".coffee.source":
+  editor:
+    tabLength: 2
+    tabType: "soft"
+  whitespace:
+    ensureSingleTrailingNewline: false
+".python.source":
+  editor:
+    autoIndentOnPaste: true
+    showIndentGuide: false
+    showInvisibles: true
+    tabType: "soft"
+  whitespace:
+    ensureSingleTrailingNewline: true

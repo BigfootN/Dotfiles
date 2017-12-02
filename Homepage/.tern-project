@@ -1,0 +1,12 @@
+{
+  "ecmaVersion": 7,
+  "libs": [
+    "browser"
+  ],
+  "loadEagerly": [
+    "script.js"
+  ],
+  "plugins": {
+    "node-express": {}
+  }
+}

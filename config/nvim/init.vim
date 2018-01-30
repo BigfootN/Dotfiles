@@ -42,7 +42,6 @@ Plug 'Chiel92/vim-autoformat'
 " -- code completion
 Plug 'Valloric/YouCompleteMe'
 Plug 'artur-shaik/vim-javacomplete2'
-Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 
 " -- change projet root automatically
 Plug 'airblade/vim-rooter'
@@ -52,7 +51,15 @@ Plug 'jiangmiao/auto-pairs'
 
 " -- nerdtree
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
+
+" -- latex
+Plug 'vim-latex/vim-latex'
+
+" -- tagbar
+Plug 'majutsushi/tagbar'
+
+" -- ansible
+" Plug 'pearofducks/ansible-vim'
 
 call plug#end()
 
@@ -71,6 +78,17 @@ set t_Co=16
 set scrolloff=8
 
 au BufNewFile,BufRead *.h setlocal ft=c
+
+" python indent
+autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4
+autocmd FileType ansible let b:autoformat_autoindent=0
+autocmd FileType ansible let b:autoformat_retab=0
+autocmd FileType ansible let b:autoformat_remove_trailing_spaces=0
+autocmd FileType ansible let b:did_indent=0
+
+" popup height
+set pumheight=10
+
 " ************* eye-candy configuration *************
 
 " show line numbers
@@ -81,6 +99,9 @@ highlight LineNr ctermbg=25
 " colorscheme
 set background=dark
 colorscheme gruvbox
+
+" veritcal split character
+set fillchars+=vert:\┃
 
 " ************* Keymaps *************
 
@@ -93,6 +114,7 @@ nnoremap <leader>p :tabprevious<CR>
 nnoremap <leader>n :tabnext<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q!<CR>
+nnoremap <leader>d :YcmCompleter GoToDefinition<CR>
 
 
 " line numbers relative/absolute
@@ -154,6 +176,8 @@ let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_max_num_candidates = 10
+let g:ycm_max_num_identifier_candidates = 10
 
 " ************* Ultisnips configuration *************
 
@@ -205,9 +229,13 @@ let g:syntastic_tex_checkers = []
 let g:syntastic_enable_xml_checker = 0
 
 " checker ---- C
-let g:syntastic_c_checkers = ["clang_tidy"]
+let g:syntastic_c_checkers = ["clang_check"]
 
+" checker ---- Cpp
 let g:syntastic_cpp_checkers = ["clang_check"]
+
+" clang_check ---- config file
+let g:syntastic_clang_check_config_file = ".clang_complete"
 
 " ************* NERDTree configuration *************
 
@@ -220,3 +248,22 @@ autocmd VimEnter *
 
 let g:nerdtree_tabs_open_on_console_startup = 1
 let g:nerdtree_tabs_synchronize_view = 0
+
+
+" ************* Autoformat configuration *************
+
+" disable vim autoformat
+autocmd FileType vim,tex let b:autoformat_autoindent = 0
+
+" C language
+let g:formatdef_uncrustify_cpp = '"uncrustify -q -c ~/.config/uncrustify/uncrustify.cfg -l CPP"'
+let g:formatters_cpp = ['uncrustify_cpp']
+
+" Cpp language
+let g:formatdef_uncrustify_c = '"uncrustify -q -c ~/.config/uncrustify/uncrustify.cfg -l C"'
+let g:formatters_c = ['uncrustify_c']
+
+
+" ************* Ansible configuration *************
+
+" let g:ansible_unindent_after_newline = 1

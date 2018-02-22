@@ -1,16 +1,15 @@
+" *******************************************
 "
-"   /$$    /$$ /$$                      /$$$$$$                       /$$$$$$  /$$
-"  | $$   | $$|__/                     /$$__  $$                     /$$__  $$|__/
-"  | $$   | $$ /$$ /$$$$$$/$$$$       | $$  \__/  /$$$$$$  /$$$$$$$ | $$  \__/ /$$  /$$$$$$
-"  |  $$ / $$/| $$| $$_  $$_  $$      | $$       /$$__  $$| $$__  $$| $$$$    | $$ /$$__  $$
-"   \  $$ $$/ | $$| $$ \ $$ \ $$      | $$      | $$  \ $$| $$  \ $$| $$_/    | $$| $$  \ $$
-"    \  $$$/  | $$| $$ | $$ | $$      | $$    $$| $$  | $$| $$  | $$| $$      | $$| $$  | $$
-"     \  $/   | $$| $$ | $$ | $$      |  $$$$$$/|  $$$$$$/| $$  | $$| $$      | $$|  $$$$$$$
-"      \_/    |__/|__/ |__/ |__/       \______/  \______/ |__/  |__/|__/      |__/ \____  $$
-"                                                                                  /$$  \ $$
-"                                                                                 |  $$$$$$/
-"                                                                                  \______/
-
+"  ██▒   █▓ ██▓ ███▄ ▄███▓ ██▀███   ▄████▄
+" ▓██░   █▒▓██▒▓██▒▀█▀ ██▒▓██ ▒ ██▒▒██▀ ▀█
+"  ▓██  █▒░▒██▒▓██    ▓██░▓██ ░▄█ ▒▒▓█    ▄
+"   ▒██ █░░░██░▒██    ▒██ ▒██▀▀█▄  ▒▓▓▄ ▄██▒
+"    ▒▀█░  ░██░▒██▒   ░██▒░██▓ ▒██▒▒ ▓███▀ ░
+"    ░ ▐░  ░▓  ░ ▒░   ░  ░░ ▒▓ ░▒▓░░ ░▒ ▒  ░
+"    ░ ░░   ▒ ░░  ░      ░  ░▒ ░ ▒░  ░  ▒
+"      ░░   ▒ ░░      ░     ░░   ░ ░
+"
+" *******************************************
 
 " ************* plugins *************
 
@@ -51,6 +50,7 @@ Plug 'jiangmiao/auto-pairs'
 
 " -- nerdtree
 Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 
 " -- latex
 Plug 'vim-latex/vim-latex'
@@ -58,8 +58,8 @@ Plug 'vim-latex/vim-latex'
 " -- tagbar
 Plug 'majutsushi/tagbar'
 
-" -- ansible
-" Plug 'pearofducks/ansible-vim'
+" -- comment
+Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 
@@ -81,10 +81,15 @@ au BufNewFile,BufRead *.h setlocal ft=c
 
 " python indent
 autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4
-autocmd FileType ansible let b:autoformat_autoindent=0
-autocmd FileType ansible let b:autoformat_retab=0
-autocmd FileType ansible let b:autoformat_remove_trailing_spaces=0
-autocmd FileType ansible let b:did_indent=0
+
+" disable ansible, sshconfig indent
+autocmd FileType yaml,sshconfig,dockerfile let b:autoformat_autoindent=0
+autocmd FileType yaml,sshconfig,dockerfile let b:autoformat_retab=0
+autocmd FileType yaml,sshconfig,dockerfile let b:autoformat_remove_trailing_spaces=0
+autocmd FileType yaml,sshconfig,dockerfile let b:did_indent=0
+
+" disable vim autoformat
+autocmd FileType vim,tex let b:autoformat_autoindent = 0
 
 " popup height
 set pumheight=10
@@ -114,12 +119,16 @@ nnoremap <leader>p :tabprevious<CR>
 nnoremap <leader>n :tabnext<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q!<CR>
+nnoremap <leader>ct :wa<CR> <bar> :tabclose<CR>
+
+" YouCompleteMe maps
 nnoremap <leader>d :YcmCompleter GoToDefinition<CR>
 
 
 " line numbers relative/absolute
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
+" autocmd InsertEnter * :set number relativenumber
+" autocmd InsertLeave * :set number relativenumber
+set number relativenumber
 
 " ************* JavaComplete configuration *************
 
@@ -246,24 +255,22 @@ autocmd VimEnter *
 			\ |   wincmd w
 			\ | endif
 
-let g:nerdtree_tabs_open_on_console_startup = 1
-let g:nerdtree_tabs_synchronize_view = 0
 
+" -- nerdtree tabs config
+let g:nerdtree_tabs_open_on_console_startup = 1
+let g:nerdtree_tabs_open_on_new_tab = 1
+let g:nerdtree_tabs_startup_cd = 1
 
 " ************* Autoformat configuration *************
 
-" disable vim autoformat
-autocmd FileType vim,tex let b:autoformat_autoindent = 0
-
-" C language
+" Cpp language
 let g:formatdef_uncrustify_cpp = '"uncrustify -q -c ~/.config/uncrustify/uncrustify.cfg -l CPP"'
 let g:formatters_cpp = ['uncrustify_cpp']
 
-" Cpp language
+" C language
 let g:formatdef_uncrustify_c = '"uncrustify -q -c ~/.config/uncrustify/uncrustify.cfg -l C"'
 let g:formatters_c = ['uncrustify_c']
 
+" ************* Gruvbox configuration *************
 
-" ************* Ansible configuration *************
-
-" let g:ansible_unindent_after_newline = 1
+let g:gruvbox_number_column = 'bg1'

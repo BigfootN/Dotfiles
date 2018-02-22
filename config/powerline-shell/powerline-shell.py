@@ -14,6 +14,7 @@ def warn(msg):
 
 
 if py3:
+
     def unicode(x):
         return x
 
@@ -73,13 +74,15 @@ class Powerline:
         return self.color('48', code)
 
     def append(self, content, fg, bg, separator=None, separator_fg=None):
-        self.segments.append((content, fg, bg,
-            separator if separator is not None else self.separator,
-            separator_fg if separator_fg is not None else bg))
+        self.segments.append((content, fg, bg, separator
+                              if separator is not None else self.separator,
+                              separator_fg
+                              if separator_fg is not None else bg))
 
     def draw(self):
-        text = (''.join(self.draw_segment(i) for i in range(len(self.segments)))
-                + self.reset) + ' '
+        text = (
+            ''.join(self.draw_segment(i)
+                    for i in range(len(self.segments))) + self.reset) + ' '
         if py3:
             return text
         else:
@@ -87,15 +90,13 @@ class Powerline:
 
     def draw_segment(self, idx):
         segment = self.segments[idx]
-        next_segment = self.segments[idx + 1] if idx < len(self.segments)-1 else None
+        next_segment = self.segments[
+            idx + 1] if idx < len(self.segments) - 1 else None
 
-        return ''.join((
-            self.fgcolor(segment[1]),
-            self.bgcolor(segment[2]),
-            segment[0],
-            self.bgcolor(next_segment[2]) if next_segment else self.reset,
-            self.fgcolor(segment[4]),
-            segment[3]))
+        return ''.join(
+            (self.fgcolor(segment[1]), self.bgcolor(segment[2]), segment[0],
+             self.bgcolor(next_segment[2]) if next_segment else self.reset,
+             self.fgcolor(segment[4]), segment[3]))
 
 
 class RepoStats:
@@ -148,6 +149,7 @@ class RepoStats:
             if self[_key]:
                 s = u" {}{} ".format(self.n_or_empty(_key), self.symbols[_key])
                 powerline.append(s, fg, bg)
+
         add('ahead', color.GIT_AHEAD_FG, color.GIT_AHEAD_BG)
         add('behind', color.GIT_BEHIND_FG, color.GIT_BEHIND_BG)
         add('staged', color.GIT_STAGED_FG, color.GIT_STAGED_BG)
@@ -170,8 +172,8 @@ def get_valid_cwd():
         cwd = os.getenv('PWD') or os.getcwd()
     except:
         warn("Your current directory is invalid. If you open a ticket at " +
-            "https://github.com/milkbikis/powerline-shell/issues/new " +
-            "we would love to help fix the issue.")
+             "https://github.com/milkbikis/powerline-shell/issues/new " +
+             "we would love to help fix the issue.")
         sys.stdout.write("> ")
         sys.exit(1)
 
@@ -181,31 +183,57 @@ def get_valid_cwd():
         parts.pop()
         up = os.sep.join(parts)
     if cwd != up:
-        warn("Your current directory is invalid. Lowest valid directory: "
-            + up)
+        warn(
+            "Your current directory is invalid. Lowest valid directory: " + up)
     return cwd
 
 
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument('--cwd-mode', action='store',
-            help='How to display the current directory', default='fancy',
-            choices=['fancy', 'plain', 'dironly'])
-    arg_parser.add_argument('--cwd-only', action='store_true',
-            help='Deprecated. Use --cwd-mode=dironly')
-    arg_parser.add_argument('--cwd-max-depth', action='store', type=int,
-            default=5, help='Maximum number of directories to show in path')
-    arg_parser.add_argument('--cwd-max-dir-size', action='store', type=int,
-            help='Maximum number of letters displayed for each directory in the path')
-    arg_parser.add_argument('--colorize-hostname', action='store_true',
-            help='Colorize the hostname based on a hash of itself.')
-    arg_parser.add_argument('--mode', action='store', default='patched',
-            help='The characters used to make separators between segments',
-            choices=['patched', 'compatible', 'flat'])
-    arg_parser.add_argument('--shell', action='store', default='bash',
-            help='Set this to your shell type', choices=['bash', 'zsh', 'bare'])
-    arg_parser.add_argument('prev_error', nargs='?', type=int, default=0,
-            help='Error code returned by the last command')
+    arg_parser.add_argument(
+        '--cwd-mode',
+        action='store',
+        help='How to display the current directory',
+        default='fancy',
+        choices=['fancy', 'plain', 'dironly'])
+    arg_parser.add_argument(
+        '--cwd-only',
+        action='store_true',
+        help='Deprecated. Use --cwd-mode=dironly')
+    arg_parser.add_argument(
+        '--cwd-max-depth',
+        action='store',
+        type=int,
+        default=5,
+        help='Maximum number of directories to show in path')
+    arg_parser.add_argument(
+        '--cwd-max-dir-size',
+        action='store',
+        type=int,
+        help=
+        'Maximum number of letters displayed for each directory in the path')
+    arg_parser.add_argument(
+        '--colorize-hostname',
+        action='store_true',
+        help='Colorize the hostname based on a hash of itself.')
+    arg_parser.add_argument(
+        '--mode',
+        action='store',
+        default='patched',
+        help='The characters used to make separators between segments',
+        choices=['patched', 'compatible', 'flat'])
+    arg_parser.add_argument(
+        '--shell',
+        action='store',
+        default='bash',
+        help='Set this to your shell type',
+        choices=['bash', 'zsh', 'bare'])
+    arg_parser.add_argument(
+        'prev_error',
+        nargs='?',
+        type=int,
+        default=0,
+        help='Error code returned by the last command')
     args = arg_parser.parse_args()
 
     powerline = Powerline(args, get_valid_cwd())
@@ -239,7 +267,7 @@ class DefaultColor:
     READONLY_BG = 124
     READONLY_FG = 254
 
-    SSH_BG = 166 # medium orange
+    SSH_BG = 166  # medium orange
     SSH_FG = 254
 
     REPO_CLEAN_BG = 148  # a light green color
@@ -274,13 +302,13 @@ class DefaultColor:
     VIRTUAL_ENV_BG = 35  # a mid-tone green
     VIRTUAL_ENV_FG = 00
 
+
 class Color(DefaultColor):
     """
     This subclass is required when the user chooses to use 'default' theme.
     Because the segments require a 'Color' class for every theme.
     """
     pass
-
 
 
 def add_username_segment(powerline):
@@ -303,10 +331,12 @@ def add_username_segment(powerline):
 add_username_segment(powerline)
 import os
 
+
 def add_ssh_segment(powerline):
 
     if os.getenv('SSH_CLIENT'):
-        powerline.append(' %s ' % powerline.network, Color.SSH_FG, Color.SSH_BG)
+        powerline.append(' %s ' % powerline.network, Color.SSH_FG,
+                         Color.SSH_BG)
 
 
 add_ssh_segment(powerline)
@@ -353,12 +383,21 @@ def get_fg_bg(name, is_last_dir):
     """Returns the foreground and background color to use for the given name.
     """
     if requires_special_home_display(name):
-        return (Color.HOME_FG, Color.HOME_BG,)
+        return (
+            Color.HOME_FG,
+            Color.HOME_BG,
+        )
 
     if is_last_dir:
-        return (Color.CWD_FG, Color.PATH_BG,)
+        return (
+            Color.CWD_FG,
+            Color.PATH_BG,
+        )
     else:
-        return (Color.PATH_FG, Color.PATH_BG,)
+        return (
+            Color.PATH_FG,
+            Color.PATH_BG,
+        )
 
 
 def add_cwd_segment(powerline):
@@ -368,7 +407,7 @@ def add_cwd_segment(powerline):
     cwd = replace_home_dir(cwd)
 
     if powerline.args.cwd_mode == 'plain':
-        powerline.append(' %s ' % (cwd,), Color.CWD_FG, Color.PATH_BG)
+        powerline.append(' %s ' % (cwd, ), Color.CWD_FG, Color.PATH_BG)
         return
 
     names = split_path_into_names(cwd)
@@ -409,11 +448,13 @@ def add_cwd_segment(powerline):
 add_cwd_segment(powerline)
 import os
 
+
 def add_read_only_segment(powerline):
     cwd = powerline.cwd or os.getenv('PWD')
 
     if not os.access(cwd, os.W_OK):
-        powerline.append(' %s ' % powerline.lock, Color.READONLY_FG, Color.READONLY_BG)
+        powerline.append(' %s ' % powerline.lock, Color.READONLY_FG,
+                         Color.READONLY_BG)
 
 
 add_read_only_segment(powerline)
@@ -421,11 +462,13 @@ import re
 import subprocess
 import os
 
+
 def get_PATH():
     """Normally gets the PATH from the OS. This function exists to enable
     easily mocking the PATH in tests.
     """
     return os.getenv("PATH")
+
 
 def git_subprocess_env():
     return {
@@ -442,14 +485,19 @@ def git_subprocess_env():
 
 
 def parse_git_branch_info(status):
-    info = re.search('^## (?P<local>\S+?)''(\.{3}(?P<remote>\S+?)( \[(ahead (?P<ahead>\d+)(, )?)?(behind (?P<behind>\d+))?\])?)?$', status[0])
+    info = re.search(
+        '^## (?P<local>\S+?)'
+        '(\.{3}(?P<remote>\S+?)( \[(ahead (?P<ahead>\d+)(, )?)?(behind (?P<behind>\d+))?\])?)?$',
+        status[0])
     return info.groupdict() if info else None
 
 
 def _get_git_detached_branch():
-    p = subprocess.Popen(['git', 'describe', '--tags', '--always'],
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                         env=git_subprocess_env())
+    p = subprocess.Popen(
+        ['git', 'describe', '--tags', '--always'],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        env=git_subprocess_env())
     detached_ref = p.communicate()[0].decode("utf-8").rstrip('\n')
     if p.returncode == 0:
         branch = u'{} {}'.format(RepoStats.symbols['detached'], detached_ref)
@@ -477,9 +525,11 @@ def parse_git_stats(status):
 
 def add_git_segment(powerline):
     try:
-        p = subprocess.Popen(['git', 'status', '--porcelain', '-b'],
-                             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                             env=git_subprocess_env())
+        p = subprocess.Popen(
+            ['git', 'status', '--porcelain', '-b'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=git_subprocess_env())
     except OSError:
         # Popen will throw an OSError if git is not found
         return
@@ -513,6 +563,7 @@ add_git_segment(powerline)
 import os
 import subprocess
 
+
 def get_hg_status():
     has_modified_files = False
     has_untracked_files = False
@@ -532,13 +583,15 @@ def get_hg_status():
             has_modified_files = True
     return has_modified_files, has_untracked_files, has_missing_files
 
+
 def add_hg_segment(powerline):
     branch = os.popen('hg branch 2> /dev/null').read().rstrip()
     if len(branch) == 0:
         return False
     bg = Color.REPO_CLEAN_BG
     fg = Color.REPO_CLEAN_FG
-    has_modified_files, has_untracked_files, has_missing_files = get_hg_status()
+    has_modified_files, has_untracked_files, has_missing_files = get_hg_status(
+    )
     if has_modified_files or has_untracked_files or has_missing_files:
         bg = Color.REPO_DIRTY_BG
         fg = Color.REPO_DIRTY_FG
@@ -556,21 +609,24 @@ import subprocess
 
 
 def _add_svn_segment(powerline):
-    is_svn = subprocess.Popen(['svn', 'status'],
-                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    is_svn = subprocess.Popen(
+        ['svn', 'status'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     is_svn_output = is_svn.communicate()[1].decode("utf-8").strip()
     if len(is_svn_output) != 0:
         return
 
     #"svn status | grep -c "^[ACDIMRX\\!\\~]"
-    p1 = subprocess.Popen(['svn', 'status'], stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE)
-    p2 = subprocess.Popen(['grep', '-c', '^[ACDIMR\\!\\~]'],
-            stdin=p1.stdout, stdout=subprocess.PIPE)
+    p1 = subprocess.Popen(
+        ['svn', 'status'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p2 = subprocess.Popen(
+        ['grep', '-c', '^[ACDIMR\\!\\~]'],
+        stdin=p1.stdout,
+        stdout=subprocess.PIPE)
     output = p2.communicate()[0].decode("utf-8").strip()
     if len(output) > 0 and int(output) > 0:
         changes = output.strip()
-        powerline.append(' %s ' % changes, Color.SVN_CHANGES_FG, Color.SVN_CHANGES_BG)
+        powerline.append(' %s ' % changes, Color.SVN_CHANGES_FG,
+                         Color.SVN_CHANGES_BG)
 
 
 def add_svn_segment(powerline):
@@ -595,26 +651,34 @@ add_svn_segment(powerline)
 import os
 import subprocess
 
+
 def get_fossil_status():
     has_modified_files = False
     has_untracked_files = False
     has_missing_files = False
     output = os.popen('fossil changes 2>/dev/null').read().strip()
-    has_untracked_files = True if os.popen("fossil extras 2>/dev/null").read().strip() else False
+    has_untracked_files = True if os.popen(
+        "fossil extras 2>/dev/null").read().strip() else False
     has_missing_files = 'MISSING' in output
     has_modified_files = 'EDITED' in output
 
     return has_modified_files, has_untracked_files, has_missing_files
 
+
 def _add_fossil_segment(powerline):
     subprocess.Popen(['fossil'], stdout=subprocess.PIPE).communicate()[0]
-    branch = ''.join([i.replace('*','').strip() for i in os.popen("fossil branch 2> /dev/null").read().strip().split("\n") if i.startswith('*')])
+    branch = ''.join([
+        i.replace('*', '').strip() for i in os.popen(
+            "fossil branch 2> /dev/null").read().strip().split("\n")
+        if i.startswith('*')
+    ])
     if len(branch) == 0:
         return
 
     bg = Color.REPO_CLEAN_BG
     fg = Color.REPO_CLEAN_FG
-    has_modified_files, has_untracked_files, has_missing_files = get_fossil_status()
+    has_modified_files, has_untracked_files, has_missing_files = get_fossil_status(
+    )
     if has_modified_files or has_untracked_files or has_missing_files:
         bg = Color.REPO_DIRTY_BG
         fg = Color.REPO_DIRTY_FG
@@ -625,6 +689,7 @@ def _add_fossil_segment(powerline):
             extra += '!'
         branch += (' ' + extra if extra != '' else '')
     powerline.append(' %s ' % branch, fg, bg)
+
 
 def add_fossil_segment(powerline):
     """Wraps _add_fossil_segment in exception handling."""
@@ -645,6 +710,8 @@ def add_fossil_segment(powerline):
 
 
 add_fossil_segment(powerline)
+
+
 def add_root_segment(powerline):
     root_indicators = {
         'bash': ' \\$ ',

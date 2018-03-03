@@ -1,25 +1,16 @@
-pcm.!default{
-    type hw;
-    card PCH;
-}
-
-ctl.!default{
-    type hw;
-    card PCH;
-}
-
-ctl.equal {
-    type equal;
-}
-
-pcm.plugequal {
-    type equal;
-    slave.pcm "plug:dmix";
-}
-
 pcm.!default {
-    type plug;
-    slave.pcm plugequal;
+  type hw
+  card PCH
 }
 
-defaults.pcm.rate_converter "speexrate_medium"
+ctl.!default {
+  type hw
+  card PCH
+}
+
+pcm.dsp {
+    type plug
+    slave.pcm "dmix"
+}
+
+defaults.pcm.rate_converter "speexrate_best"

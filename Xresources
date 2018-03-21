@@ -10,7 +10,7 @@ URxvt*internalBorder: 20
 URxvt*iso14755_52: false
 URxvt*iso14755: false
 
-URxvt.letterSpace: -1
+! URxvt.letterSpace: -1
 
 !----------------
 !  Xft Settings
@@ -30,7 +30,8 @@ Xft.lcdfilter:  lcddefault
 
 ! background and foreground
 URxvt*background: #262626
-URxvt*foreground: #7B7468
+! URxvt*foreground: #7B7468
+URxvt*foreground: #BBBBBB
 
 ! Black + DarkGrey
 URxvt*color0: #151D1D
@@ -68,8 +69,7 @@ URxvt*color15: #D5CFD4
 !  Font Setting
 !----------------
 
-URxvt*font: xft:Iosevka:style=Regular:pixelsize=23,xft:Dejavu Sans Mono:pixelsize=22
-!URxvt*font: xft:Hack:style=Regular:pixelsize=23,xft:Dejavu Sans Mono:pixelsize=22
+URxvt*font: xft:Iosevka Term Compressed:style=Regular:pixelsize=27,xft:Dejavu Sans Mono:pixelsize=22
 URxvt*boldFont:
 
 !------------------

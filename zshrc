@@ -105,10 +105,12 @@ antigen apply
 # —————
 
 alias astyle="astyle --options=~/.config/astyle/astylerc"
-#alias pacaur="pacaur --noconfirm"
 alias mirrupg="sudo reflector --country 'France' --latest 200 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
 alias vpn_connect="sudo expressvpn connect smart"
 alias vpn_disconnect="sudo expressvpn disconnect"
+alias sysupg="yay -Syuu --mflags --answeredit None --afterclean --nosudoloops"
+alias sysinstall="yay -Sy"
+alias sysrm="yay -Rcsn"
 
 # ——————
 # PROMPT

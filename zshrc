@@ -11,6 +11,11 @@
 #
 # ——————————————————————————————————————————————
 
+
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+	source /etc/profile.d/vte.sh
+fi
+
 # ————
 # INIT
 # ————
@@ -100,6 +105,17 @@ antigen bundle extract
 # done
 antigen apply
 
+# ————————————————
+# HELPER FUNCTIONS
+# ————————————————
+
+# cmake build init
+cmake_build_prepare() {
+	mkdir -p build/{debug,release}
+	cmake -G "Unix Makefiles" -DBUILD_TYPE=Debug build/debug .
+	cmake -G "Unix Makefiles" -DBUILD_TYPE=Release build/release .
+}
+
 # —————
 # ALIAS
 # —————
@@ -108,9 +124,11 @@ alias astyle="astyle --options=~/.config/astyle/astylerc"
 alias mirrupg="sudo reflector --country 'France' --latest 200 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
 alias vpn_connect="sudo expressvpn connect smart"
 alias vpn_disconnect="sudo expressvpn disconnect"
-alias sysupg="yay -Syuu --mflags --answeredit None --afterclean --nosudoloops"
+alias sysupg="mirrupg && yay -Syu --noconfirm"
 alias sysinstall="yay -Sy"
 alias sysrm="yay -Rcsn"
+alias syspkgsrc="yay -Qs"
+alias cmakeinit="cmake_build_prepare"
 
 # ——————
 # PROMPT

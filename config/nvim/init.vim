@@ -53,13 +53,20 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 
 " -- latex
-Plug 'vim-latex/vim-latex'
+Plug 'lervag/vimtex'
 
 " -- tagbar
 Plug 'majutsushi/tagbar'
 
 " -- comment
 Plug 'scrooloose/nerdcommenter'
+
+" -- icons
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" -- surround
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -83,13 +90,10 @@ au BufNewFile,BufRead *.h setlocal ft=c
 autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4
 
 " disable ansible, sshconfig indent
-autocmd FileType yaml,sshconfig,dockerfile let b:autoformat_autoindent=0
-autocmd FileType yaml,sshconfig,dockerfile let b:autoformat_retab=0
-autocmd FileType yaml,sshconfig,dockerfile let b:autoformat_remove_trailing_spaces=0
-autocmd FileType yaml,sshconfig,dockerfile let b:did_indent=0
-
-" disable vim autoformat
-autocmd FileType vim,tex let b:autoformat_autoindent = 0
+autocmd FileType conf,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_autoindent=0
+autocmd FileType conf,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_retab=0
+autocmd FileType conf,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_remove_trailing_spaces=0
+autocmd FileType conf,tex,vim,yaml,sshconfig,dockerfile,make let b:did_indent=0
 
 " popup height
 set pumheight=10
@@ -126,8 +130,6 @@ nnoremap <leader>d :YcmCompleter GoToDefinition<CR>
 
 
 " line numbers relative/absolute
-" autocmd InsertEnter * :set number relativenumber
-" autocmd InsertLeave * :set number relativenumber
 set number relativenumber
 
 " ************* JavaComplete configuration *************
@@ -238,13 +240,14 @@ let g:syntastic_tex_checkers = []
 let g:syntastic_enable_xml_checker = 0
 
 " checker ---- C
-let g:syntastic_c_checkers = ["clang_check"]
+let g:syntastic_c_checkers = ["clang_tidy"]
 
 " checker ---- Cpp
-let g:syntastic_cpp_checkers = ["clang_check"]
+let g:syntastic_cpp_checkers = ["clang_tidy"]
 
 " clang_check ---- config file
-let g:syntastic_clang_check_config_file = ".clang_complete"
+let g:syntastic_c_clang_tidy_post_args = ""
+let g:syntastic_cpp_clang_tidy_post_args = ""
 
 " ************* NERDTree configuration *************
 
@@ -261,6 +264,9 @@ let g:nerdtree_tabs_open_on_console_startup = 1
 let g:nerdtree_tabs_open_on_new_tab = 1
 let g:nerdtree_tabs_startup_cd = 1
 
+" -- ignore files
+let NERDTreeIgnore = ['^build$']
+
 " ************* Autoformat configuration *************
 
 " Cpp language
@@ -274,3 +280,14 @@ let g:formatters_c = ['uncrustify_c']
 " ************* Gruvbox configuration *************
 
 let g:gruvbox_number_column = 'bg1'
+
+" ************* Vim Devicons configuration ************* 
+
+"augroup nerdtreedisablecursorline
+	"autocmd!
+	"autocmd FileType nerdtree setlocal nocursorline
+"augroup end
+
+let g:NERDTreeLimitedSyntax = 1
+
+set guifont=Iosevka\ Nerd\ Font\ Mono\ 11

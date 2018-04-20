@@ -1,136 +1,169 @@
-// ---------------
-// -- VARIABLES --
-// ---------------
+/*********************
+	SETTINGS VIEW
+*********************/
 
-// ui-font
-@ui-font-family: "Fira Sans Book";
-@ui-font-size: 20px;
-
-// settings control
-@settings-ctrl-font-size: 18px;
-
-// editor
-@editor-font-family: "Iosevka";
-@editor-font-size: 20px;
-@editor-bg-color: #282828;
-
-// tab panel
-@tab-panel-height: 50px;
-@tab-panel-font-size: 18px;
-
-// tab icon
-@tab-icon-size: 19px;
-
-// tab close icon
-@tab-close-icon: "\00D7";
-@tab-close-icon-size: 22px;
-@tab-close-icon-color: #595959;
-
-// tree view
-@tree-view-font-size: 17px;
-
-// settings view
-@settings-view-font-size: 15px;
-
-// config menu
-@config-menu-font-size: 17px;
-
-// status bar
-@status-bar-font-size: 18px;
-@status-bar-height: 34px;
-@status-bar-font-family: @editor-font-family;
-
-// ----------
-// -- CODE --
-// ----------
-
-atom-workspace {
-	font-family: @ui-font-family !important;
-}
-
-atom-text-editor {
-	text-rendering: optimizeLegibility;
-	font-family: @editor-font-family;
-	font-size: @editor-font-size;
-}
-
-status-bar {
-	font-family: @status-bar-font-family !important;
-	font-size: @status-bar-font-size !important;
-	height: @status-bar-height !important;
-	line-height: @status-bar-height !important;
-	vertical-align: middle !important;
-}
-
-atom-text-editor[mini], .form-control {
-	font-family: @editor-font-size !important;
-	font-size: @settings-ctrl-font-size !important;
-}
-
-.settings-view {
-	font-family: @ui-font-family !important;
-	font-size: @settings-view-font-size !important;
-}
-
+/* MENU FONT */
 .config-menu {
-	font-size: @config-menu-font-size;
+	font-family: "Oswald";
+	font-size: 18px;
 }
 
-.scroll-view {
-	background-color: @editor-bg-color !important;
+/* SIZE OF MENU */
+.settings-view .config-menu {
+	min-width: 250px;
 }
 
-.tree-view {
-	font-size: @tree-view-font-size;
+/* FONT OF DESCRIPTION TITLES */
+.settings-view .checkbox .setting-title {
+	font-family: "Fira Sans Book";
+	font-size: 18px;
+}
+
+/* FONT OF SCROLL MENU */
+.settings-view select.form-control {
+	font-family: "Roboto";
+	font-size: 18px;
+}
+
+/* FONT OF INPUT/TEXT OPTIONS */
+atom-text-editor[mini] {
+	font-family: "Fira Sans Book";
+	font-size: 18px;
 }
 
 .command-palette {
-	font-family: @editor-font-family;
-	font-size: @editor-font-size - 4;
+	font-size: 17px;
+	font-family: "Fira Sans Book";
 }
 
-.btn {
-	font-family: @ui-font-family !important;
-	font-size: 16px !important;
+.overlay.select-list ol.list-group li.two-lines, atom-panel.modal.select-list ol.list-group li.two-lines, .overlay .select-list ol.list-group li.two-lines, atom-panel.modal .select-list ol.list-group li.two-lines {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 
+kbd.key-binding {
+	font-family: "Fira Sans Book";
+	font-weight: bold;
+	font-size: 14px;
+	margin-left: 30px;
+}
+
+/*****************
+	TREE VIEW
+*****************/
+
+/* FONT */
+.amu-panel-contrast .tree-view {
+	font-family: "Fira Sans Book";
+	font-size: 16.5px;
+}
+
+/************
+	EDITOR
+*************/
+
+// .editor {
+// 	background-color: #282828;
+// }
+
+/*******************
+	GUTTER VIEW
+*******************/
+
+atom-text-editor .gutter {
+	background-color: #282828;
+}
+
+/***************
+	TAB VIEW
+****************/
+
+/* FONT AND OTHER SETTINGS */
 .tab-bar {
-	height: @tab-panel-height !important;
-	max-height: @tab-panel-height !important;
-	display: block !important;
-	white-space: nowrap !important;
+	font-family: "Fira Sans Book";
+	font-size: 18px;
+	min-width: 10px;
+	height: 4rem;
+	max-height: 4rem;
+	display: inline-block;
+}
 
-	.tab {
-		font-size: @tab-panel-font-size !important;
-		max-width: none !important;
-		display: inline-block !important;
-		height: @tab-panel-height !important;
-		max-height: @tab-panel-height !important;
-		line-height: @tab-panel-height !important;
+.tab-bar .tab {
+	max-width: 2000px;
+	height: 4rem;
+}
 
-		.title {
-			vertical-align: middle !important;
-			padding-right: 30px !important;
-			padding-left: 5px !important;
-			margin-bottom: 0px !important;
-			margin-top: 0px !important;
-			padding-top: 0px !important;
+.tab-bar .tab .title {
+	margin-right: 28px;
+	line-height: 4rem;
+}
+
+.tab-bar .tab .close-icon {
+	line-height: 4rem;
+	margin: auto;
+}
+
+.tab-bar .tab .close-icon::before {
+	font-size: 16px;
+	font-style: italic;
+}
+
+.tab-bar .tab.modified:not(:hover) .close-icon {
+	margin: auto;
+}
+
+.tab-bar .tab.modified:not(:hover) .close-icon::before {
+	margin: auto;
+}
+
+.tab-bar .tab .title.icon::before {
+	font-size: 0.9em;
+}
+
+.settings-view .setting-description {
+	font-size: 16px;
+	font-family: "Fira Sans Book";
+}
+
+/*****************
+	STATUS BAR
+******************/
+
+/* FONT AND OTHER SETTINGS */
+.status-bar {
+	min-height: 30px;
+	font-size: 18px;
+	font-family: "Fira Sans Book";
+	min-height: 40px;
+	display: block;
+	height: auto;
+	align-content: left;
+
+	 .inline-block {
+	 	color: #d5c4a1;
+
+		* {
+			color:inherit;
 		}
+	}
 
-		.title.icon::before {
-			margin-right: 20px !important;
-			font-size: @tab-icon-size;
-		}
+	.status-bar-left {
+		margin-left: 0px;
+		align-self: center;
+	}
+}
 
-		.close-icon {
-			background-color: rgba(0, 0, 0, 0) !important;
-			color: @tab-close-icon-color;
-		}
+/* DISABLE COMPONENTS */
+autocomplete-paths-status-bar {
+	display: none;
+}
 
-		.close-icon::before {
-			content: @tab-close-icon !important;
-			font-size: @tab-close-icon-size !important;
-			color: @tab-close-icon-color;
-		}
+.status-bar{
+	.current-path,
+	.encoding-status
+	 {
+		display: none;
 	}
 }

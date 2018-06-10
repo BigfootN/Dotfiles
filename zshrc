@@ -102,6 +102,12 @@ antigen bundle archlinux
 antigen bundle mvn
 antigen bundle extract
 
+# external plugins
+antigen bundle https://github.com/zsh-users/zsh-autosuggestions
+
+# themes
+antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
+
 # done
 antigen apply
 
@@ -129,24 +135,3 @@ alias sysinstall="yay -Sy"
 alias sysrm="yay -Rcsn"
 alias syspkgsrc="yay -Qs"
 alias cmakeinit="cmake_build_prepare"
-
-# ——————
-# PROMPT
-# ——————
-
-function powerline_precmd() {
-	PS1="$(powerline-shell --shell zsh $?)"
-}
-
-function install_powerline_precmd() {
-	for s in "${precmd_functions[@]}"; do
-		if [ "$s" = "powerline_precmd" ]; then
-			return
-		fi
-	done
-	precmd_functions+=(powerline_precmd)
-}
-
-if [ "$TERM" != "linux" ]; then
-	install_powerline_precmd
-fi

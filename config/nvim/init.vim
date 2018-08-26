@@ -68,6 +68,9 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " -- surround
 Plug 'tpope/vim-surround'
 
+" -- fold
+Plug 'konfekt/fastfold'
+
 call plug#end()
 
 " ************* editor configuration *************
@@ -83,6 +86,8 @@ set nohlsearch
 set autoread
 set t_Co=16
 set scrolloff=8
+
+set termguicolors
 
 au BufNewFile,BufRead *.h setlocal ft=c
 
@@ -127,7 +132,6 @@ nnoremap <leader>ct :wa<CR> <bar> :tabclose<CR>
 
 " YouCompleteMe maps
 nnoremap <leader>d :YcmCompleter GoToDefinition<CR>
-
 
 " line numbers relative/absolute
 set number relativenumber
@@ -180,6 +184,18 @@ let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
+
+" ************* VimTex configuration *************
+
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+  endif
+let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+
+" ************* VimTex configuration *************
+
+let g:tex_fold_enabled = 1
+let g:fastfold_fold_command_suffixes = ['x']
 
 " ************* YouCompleteMe configuration *************
 

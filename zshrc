@@ -36,7 +36,7 @@ xset r rate 150 170
 # POLYBAR VARIABLES
 # —————————————————
 
-POLYBAR_HEIGHT_PERC=3
+POLYBAR_HEIGHT_PERC=2.5
 POLYBAR_WIDTH_PERC=98.0
 POLYBAR_OFFSET_Y_PERC=1
 POLYBAR_OFFSET_X=0
@@ -66,6 +66,11 @@ function offsets() {
 # calculate dimensions
 dimensions
 offsets
+
+# module font awesome labels
+export POLYBAR_CPU_LABEL="%{F#689d6a}$(echo -e '\uf2db')%{F-}  %percentage%"
+export POLYBAR_NETWORK_LABEL="%{F#458588}$(echo -e '\uf012')%{F-}  %essid%"
+export POLYBAR_DATE_LABEL="%{F#98971a}$(echo -e '\uf017')%{F-}  %time%"
 
 # ————————
 # SETTINGS
@@ -122,12 +127,18 @@ cmake_build_prepare() {
 	cmake -G "Unix Makefiles" -DBUILD_TYPE=Release build/release .
 }
 
+# ————————————————
+# HELPER FUNCTIONS
+# ————————————————
+
+export SPACESHIP_CHAR_SYMBOL="➜  "
+
 # —————
 # ALIAS
 # —————
 
 alias astyle="astyle --options=~/.config/astyle/astylerc"
-alias mirrupg="sudo reflector --country 'France' --latest 200 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+alias mirrupg="sudo reflector --country 'France' --latest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
 alias vpn_connect="sudo expressvpn connect smart"
 alias vpn_disconnect="sudo expressvpn disconnect"
 alias sysupg="mirrupg && yay -Syu --noconfirm"

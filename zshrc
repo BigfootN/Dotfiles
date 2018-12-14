@@ -76,6 +76,7 @@ export POLYBAR_DATE_LABEL="%{F#98971a}$(echo -e '\uf017')%{F-}  %time%"
 # SETTINGS
 # ————————
 
+
 # antigen plugin path
 ADOTDIR="$HOME/.antigen"
 
@@ -127,22 +128,23 @@ cmake_build_prepare() {
 	cmake -G "Unix Makefiles" -DBUILD_TYPE=Release build/release .
 }
 
-# ————————————————
-# HELPER FUNCTIONS
-# ————————————————
+# —————————————
+# ZSH VARIABLES
+# —————————————
 
-export SPACESHIP_CHAR_SYMBOL="➜  "
+export SPACESHIP_CHAR_SYMBOL="➜ "
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
 
 # —————
 # ALIAS
 # —————
 
 alias astyle="astyle --options=~/.config/astyle/astylerc"
-alias mirrupg="sudo reflector --country 'France' --latest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+alias mirrupg="sudo reflector --country France --sort rate --age 12 --protocol https --save /etc/pacman.d/mirrorlist"
 alias vpn_connect="sudo expressvpn connect smart"
 alias vpn_disconnect="sudo expressvpn disconnect"
-alias sysupg="mirrupg && yay -Syu --noconfirm"
-alias sysinstall="yay -Sy"
+alias sysupg="mirrupg && yay -Syu --noconfirm --answerclean All --answerdiff None --answeredit None"
+alias sysinstall="yay -Sy --noconfirm --answerclean All --answerdiff None --answeredit None"
 alias sysrm="yay -Rcsn"
 alias syspkgsrc="yay -Qs"
 alias cmakeinit="cmake_build_prepare"

@@ -20,12 +20,6 @@ fi
 # INIT
 # ————
 
-# load Xresources
-if [ -f ~/.Xresources ]
-then
-	xrdb ~/.Xresources
-fi
-
 # zsh modules
 zmodload zsh/mathfunc
 
@@ -81,7 +75,7 @@ export POLYBAR_DATE_LABEL="%{F#98971a}$(echo -e '\uf017')%{F-}  %time%"
 ADOTDIR="$HOME/.antigen"
 
 # keyboard speed
-xset r rate 180 100
+#xset r rate 180 100
 
 # language environment
 export LANG=fr_FR.UTF-8

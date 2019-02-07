@@ -1,5 +1,6 @@
 " *******************************************
 "
+"
 "  ██▒   █▓ ██▓ ███▄ ▄███▓ ██▀███   ▄████▄
 " ▓██░   █▒▓██▒▓██▒▀█▀ ██▒▓██ ▒ ██▒▒██▀ ▀█
 "  ▓██  █▒░▒██▒▓██    ▓██░▓██ ░▄█ ▒▒▓█    ▄
@@ -25,15 +26,11 @@ Plug 'vim-airline/vim-airline-themes'
 " -- improve syntax color
 Plug 'sheerun/vim-polyglot'
 
-" -- snippets
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
-
 " -- start page
 Plug 'mhinz/vim-startify'
 
 " -- code check
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 
 " -- format
 Plug 'Chiel92/vim-autoformat'
@@ -41,6 +38,13 @@ Plug 'Chiel92/vim-autoformat'
 " -- code completion
 Plug 'Valloric/YouCompleteMe'
 Plug 'artur-shaik/vim-javacomplete2'
+
+" -- snippets
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+
+" -- indent guides
+Plug 'nathanaelkane/vim-indent-guides'
 
 " -- change projet root automatically
 Plug 'airblade/vim-rooter'
@@ -63,13 +67,15 @@ Plug 'scrooloose/nerdcommenter'
 
 " -- icons
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " -- surround
 Plug 'tpope/vim-surround'
 
 " -- fold
 Plug 'konfekt/fastfold'
+
+" -- ctrlp
+Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
 
@@ -86,8 +92,13 @@ set nohlsearch
 set autoread
 set t_Co=16
 set scrolloff=8
+set completeopt=menuone
 
+" support true colors
 set termguicolors
+
+" leave buffer with modifications
+set hidden
 
 au BufNewFile,BufRead *.h setlocal ft=c
 
@@ -121,20 +132,29 @@ set fillchars+=vert:\┃
 
 let mapleader = ","
 
-nnoremap <leader>cv :tabnew ~/.config/nvim/init.vim<CR>
+nnoremap <leader>vc :e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>f :NERDTreeFocus<CR>
-nnoremap <leader>t :tabnew<CR>
-nnoremap <leader>p :tabprevious<CR>
-nnoremap <leader>n :tabnext<CR>
+nnoremap <leader>tnw :tabnew<CR>
+nnoremap <leader>tp :tabprevious<CR>
+nnoremap <leader>tn :tabnext<CR>
+nnoremap <leader>tc :wa <bar> :tabclose<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q!<CR>
-nnoremap <leader>ct :wa<CR> <bar> :tabclose<CR>
 
 " YouCompleteMe maps
-nnoremap <leader>d :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>yd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>yt :YcmCompleter GetType<CR>
 
 " line numbers relative/absolute
 set number relativenumber
+
+" plugin managing map
+nnoremap <leader>pu :PlugUpdate<CR>
+nnoremap <leader>pc :PlugClean<CR>
+
+" CtrlP mappings
+nnoremap <leader>cpb :CtrlPBuffer<CR>
+nnoremap <leader>cpf :CtrlP<CR>
 
 " ************* JavaComplete configuration *************
 
@@ -145,20 +165,40 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 let blacklist = ['xml']
 autocmd BufWritePre * if index(blacklist, &ft) < 0 | :Autoformat
 
+" python
+let g:formatter_yapf_style = 'google'
+
+" ************* CtrlP configuration *************
+
+" ignore spaces when searching
+let g:ctrlp_abbrev = {
+			\ 'abbrevs': [
+			\ {
+			\ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
+			\ 'expanded': '',
+			\ 'mode': 'fprz',
+			\ },
+			\ ]
+			\ }
+
+" root markers / root directory
+let g:ctrlp_root_markers = ['compile_commands.json', '.ycm_extra_config.py', 'src/', 'lib/']
+
 " ************* Airline configuration *************
 
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 let g:airline_theme = "gruvbox"
 
 " symbols
 if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
+let g:airline_symbols.space = "\ua0"
 
 " extensions
 let g:airline_extensions = ['tabline']
 let g:airline#extensions#default#section_truncate_width = {}
-let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 
 " left sections
@@ -173,7 +213,7 @@ let g:airline_section_getter = ''
 let g:airline_section_x = ''
 let g:airline_section_y = airline#section#create(['filetype'])
 let g:airline_section_z = airline#section#create(['%3.3l'])
-let g:airline_section_error = airline#section#create(['syntastic'])
+let g:airline_section_error = airline#section#create(['ale'])
 let g:airline_section_warning = airline#section#create([''])
 
 " tabline options
@@ -199,9 +239,9 @@ let g:fastfold_fold_command_suffixes = ['x']
 
 " ************* YouCompleteMe configuration *************
 
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_show_diagnostics_ui = 0
+let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_show_diagnostics_ui = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_max_num_candidates = 10
 let g:ycm_max_num_identifier_candidates = 10
@@ -241,29 +281,29 @@ let g:startify_bookmarks = [
 			\ '~/Documents/Prog/mdata/'
 			\ ]
 
-" ************* Syntastic configuration *************
+" ************* ale configuration *************
 
-" basic settings
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" global settings
+let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1 
+let g:ale_completion_enabled = 0
+let g:ale_linters = {
+	\ 'c': ['clangd'],
+	\ 'cpp': ['clangcheck']
+	\}
 
-" disabled checkers
-let g:syntastic_enable_latex_checker = 0
-let g:syntastic_enable_tex_checker = 0
-let g:syntastic_tex_checkers = []
-let g:syntastic_enable_xml_checker = 0
+" loclist/window settings
+let g:ale_open_list = 1
+let g:ale_list_window_size = 8
+augroup CloseLoclistWindowGroup
+    autocmd!
+    autocmd QuitPre * if empty(&buftype) | lclose | endif
+augroup END
 
-" checker ---- C
-let g:syntastic_c_checkers = ["clang_tidy"]
-
-" checker ---- Cpp
-let g:syntastic_cpp_checkers = ["clang_tidy"]
-
-" clang_check ---- config file
-let g:syntastic_c_clang_tidy_post_args = ""
-let g:syntastic_cpp_clang_tidy_post_args = ""
+" c linter settings
+let g:ale_c_parse_compile_commands = 1
+let g:ale_c_build_dir_names = ['build', 'build/debug', 'build/release']
 
 " ************* NERDTree configuration *************
 
@@ -296,14 +336,17 @@ let g:formatters_c = ['uncrustify_c']
 " ************* Gruvbox configuration *************
 
 let g:gruvbox_number_column = 'bg1'
+let g:gruvbox_contrast_dark = 'hard'
 
 " ************* Vim Devicons configuration ************* 
-
-"augroup nerdtreedisablecursorline
-	"autocmd!
-	"autocmd FileType nerdtree setlocal nocursorline
-"augroup end
 
 let g:NERDTreeLimitedSyntax = 1
 
 set guifont=Iosevka\ Nerd\ Font\ Mono\ 11
+
+" ************* CtrlP configuration ************* 
+
+let g:ctrlp_custom_ignore = {
+	\ 'dir' : '\v.(build|debug).$',
+	\ 'file' : '\v.(build|debug).|.\.o$',
+	\ }

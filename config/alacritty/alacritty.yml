@@ -5,6 +5,7 @@
 # environment variables. Some entries may override variables
 # set by alacritty it self.
 env:
+  WINIT_HIDPI_FACTOR: 1.3
   # TERM env customization.
   TERM: xterm-256color
 
@@ -21,11 +22,11 @@ window:
   # (change requires restart)
   padding:
     x: 50
-    y: 30
+    y: 20
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  decorations: true
+  decorations: full
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 4
@@ -35,15 +36,15 @@ draw_bold_text_with_bright_colors: true
 
 font:
   normal:
-    family: "Iosevka Term" # should be "Menlo" or something on macOS.
+    family: "Iosevka Term"
 
   bold:
-    family: "Iosevka Term" # should be "Menlo" or something on macOS.
+    family: "Iosevka Term"
 
   italic:
     family: monospace
 
-  size: 14.5
+  size: 14
 
   offset:
     x: 0
@@ -53,16 +54,8 @@ font:
     x: 0
     y: 1
 
-  scale_with_dpi: true
-
-  use_thin_strokes: true
-
 # Should display the render timer
 render_timer: false
-
-# Use custom cursor colors. If true, display the cursor in the cursor.foreground
-# and cursor.background colors, otherwise invert the colors of the cursor.
-custom_cursor_colors: false
 
 colors:
   # Default colors
@@ -108,20 +101,20 @@ mouse:
   triple_click: { threshold: 300 }
 
   # Faux Scrollback
-  faux_scrollback_lines: 1
+  faux_scrolling_lines: 1
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
 dynamic_title: true
 
-hide_cursor_when_typing: false
+mouse.hide_when_typing: false
 
 # - Beam
-cursor_style: Block
+cursor.rstyle: Block
 
 # Whether the cursor should be a hollow block on window focus loss
-unfocused_hollow_cursor: true
+cursor.unfocused_hollow: true
 
 # Live config reload (changes require restart)
 live_config_reload: true

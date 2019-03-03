@@ -94,9 +94,6 @@ export npm_config_prefix=~/.node/modules
 # source antigen
 source ~/.antigen/antigen.zsh
 
-# use oh-my-zsh
-antigen use oh-my-zsh
-
 # plugins
 antigen bundle archlinux
 antigen bundle mvn
@@ -126,8 +123,59 @@ cmake_build_prepare() {
 # ZSH VARIABLES
 # —————————————
 
-export SPACESHIP_CHAR_SYMBOL="➜ "
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
+
+# ——————————————————
+# SPACESHIP SETTINGS
+# ——————————————————
+
+# prompt order
+export SPACESHIP_PROMPT_ORDER=(
+time          # Time stamps section
+user          # Username section
+host          # Hostname section
+dir           # Current directory section
+git           # Git section (git_branch + git_status)
+hg            # Mercurial section (hg_branch  + hg_status)
+package       # Package version
+node          # Node.js section
+ruby          # Ruby section
+elixir        # Elixir section
+xcode         # Xcode section
+swift         # Swift section
+golang        # Go section
+php           # PHP section
+rust          # Rust section
+haskell       # Haskell Stack section
+julia         # Julia section
+docker        # Docker section
+aws           # Amazon Web Services section
+venv          # virtualenv section
+conda         # conda virtualenv section
+pyenv         # Pyenv section
+dotnet        # .NET section
+ember         # Ember.js section
+kubecontext   # Kubectl context section
+terraform     # Terraform workspace section
+exec_time     # Execution time
+line_sep      # Line break
+battery       # Battery level and status
+vi_mode       # Vi-mode indicator
+jobs          # Background jobs indicator
+exit_code     # Exit code section
+char          # Prompt character
+)
+
+# user
+export SPACESHIP_USER_SUFFIX=""
+export SPACESHIP_USER_SHOW=always
+
+# char
+export SPACESHIP_CHAR_SYMBOL="➜ "
+
+# host
+export SPACESHIP_HOST_PREFIX="$(printf '\u0040')"
+export SPACESHIP_HOST_SHOW="always"
 
 # —————
 # ALIAS
@@ -139,6 +187,6 @@ alias vpn_connect="sudo expressvpn connect smart"
 alias vpn_disconnect="sudo expressvpn disconnect"
 alias sysupg="mirrupg && yay -Syu --noconfirm --answerclean All --answerdiff None --answeredit None"
 alias sysinstall="yay -Sy --noconfirm --answerclean All --answerdiff None --answeredit None"
-alias sysrm="yay -Rcsn"
+alias sysrm="yay -Rcsn --noconfirm"
 alias syspkgsrc="yay -Qs"
 alias cmakeinit="cmake_build_prepare"

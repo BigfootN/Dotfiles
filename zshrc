@@ -94,13 +94,14 @@ export npm_config_prefix=~/.node/modules
 # source antigen
 source ~/.antigen/antigen.zsh
 
-# plugins
-antigen bundle archlinux
-antigen bundle mvn
-antigen bundle extract
+# oh-my-zsh
+antigen use oh-my-zsh
 
-# external plugins
-antigen bundle https://github.com/zsh-users/zsh-autosuggestions
+# plugins
+antigen bundle git
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle extract
 
 # themes
 antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
@@ -189,4 +190,5 @@ alias sysupg="mirrupg && yay -Syu --noconfirm --answerclean All --answerdiff Non
 alias sysinstall="yay -Sy --noconfirm --answerclean All --answerdiff None --answeredit None"
 alias sysrm="yay -Rcsn --noconfirm"
 alias syspkgsrc="yay -Qs"
+alias sysclean="yay -Scc && sysrm $(yay -Qtdq)"
 alias cmakeinit="cmake_build_prepare"

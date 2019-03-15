@@ -133,7 +133,6 @@ set fillchars+=vert:\┃
 let mapleader = ","
 
 nnoremap <leader>vc :e ~/.config/nvim/init.vim<CR>
-nnoremap <leader>f :NERDTreeFocus<CR>
 nnoremap <leader>tnw :tabnew<CR>
 nnoremap <leader>tp :tabprevious<CR>
 nnoremap <leader>tn :tabnext<CR>
@@ -155,6 +154,10 @@ nnoremap <leader>pc :PlugClean<CR>
 " CtrlP mappings
 nnoremap <leader>cpb :CtrlPBuffer<CR>
 nnoremap <leader>cpf :CtrlP<CR>
+
+" NerdTree mappings
+nnoremap <leader>nt :NERDTreeToggle<CR> 
+nnoremap <leader>nf :NERDTreeFocus<CR>
 
 " ************* JavaComplete configuration *************
 

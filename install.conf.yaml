@@ -1,0 +1,35 @@
+# --------
+# defaults
+# --------
+- defaults:
+    link:
+        create: true
+        relink: true
+
+# -----
+# clean
+# -----
+- clean: ['~']
+
+# ----
+# link
+# ----
+- link:
+    ~/.config/uncrustify/uncrustify.cfg: ./config/uncrustify/uncrustify.cfg
+    ~/.config/nvim/init.vim: ./config/nvim/init.vim
+    ~/.config/alacritty/alacritty.yml: ./config/alacritty/alacritty.yml
+    ~/.homepage: ./.homepage
+    ~/.zshrc: ./zshrc
+    ~/.config/polybar/config: ./config/polybar/config
+
+# --------
+# packages
+# --------
+- yaourt:
+    - neovim-git
+    - python-neovim-git
+    - alacritty-git
+    - polybar
+    - bspwm
+    - nerd-fonts-complete
+    - spotify

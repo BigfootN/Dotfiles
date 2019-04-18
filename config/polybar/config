@@ -1,101 +1,53 @@
-;==============================================================
-;
-; ██▓███   ▒█████   ██▓   ▓██   ██▓ ▄▄▄▄    ▄▄▄       ██▀███
-; ▓██░  ██▒▒██▒  ██▒▓██▒    ▒██  ██▒▓█████▄ ▒████▄    ▓██ ▒ ██▒
-; ▓██░ ██▓▒▒██░  ██▒▒██░     ▒██ ██░▒██▒ ▄██▒██  ▀█▄  ▓██ ░▄█ ▒
-; ▒██▄█▓▒ ▒▒██   ██░▒██░     ░ ▐██▓░▒██░█▀  ░██▄▄▄▄██ ▒██▀▀█▄
-; ▒██▒ ░  ░░ ████▓▒░░██████▒ ░ ██▒▓░░▓█  ▀█▓ ▓█   ▓██▒░██▓ ▒██▒
-; ▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▒░▓  ░  ██▒▒▒ ░▒▓███▀▒ ▒▒   ▓▒█░░ ▒▓ ░▒▓░
-; ░▒ ░       ░ ▒ ▒░ ░ ░ ▒  ░▓██ ░▒░ ▒░▒   ░   ▒   ▒▒ ░  ░▒ ░ ▒░
-; ░░       ░ ░ ░ ▒    ░ ░   ▒ ▒ ░░   ░    ░   ░   ▒     ░░   ░
-;
-;==============================================================
-
-
-[colors]
-background = #282828
-white = #ffffff
-
-[modules]
-margin_right = 1%
-margin_left = 1%
-padding = 3%
-
-left = date
-center = mpd
-right = memory cpu
-
-[bar]
-font_normal = "Iosevka Nerd Font:size=14;2"
-font_material = "Material Icons:size=14;2"
-
-width = ${env:POLYBAR_WIDTH}
-height = ${env:POLYBAR_HEIGHT}
-offset_x = ${env:POLYBAR_OFFSET_X}
-offset_y = ${env:POLYBAR_OFFSET_Y}
-
 [bar/main]
-width = ${bar.width}
-height = ${bar.height}
-offset-x = ${bar.offset_x}
-offset-y = ${bar.offset_y}
-radius = 0
-padding = ${modules.padding}
-module-margin-left = ${modules.margin_left}
-module-margin-right = ${modules.margin_right}
-
-font-0 = ${bar.font_normal}
-font-1 = ${bar.font_material}
-
-fixed-center = true
 bottom = false
+fixed-center = true
 
-background = ${colors.background}
-foreground = ${colors.white}
+; geometry
+height = ${env:POLYBAR_HEIGHT}
 
-modules-left = ${modules.left}
-modules-center = ${modules.center}
-modules-right = ${modules.right}
+; colors
+background = #1d2021
+foreground = #ffffff
 
-[module/date]
-type = internal/date
-interval = 0.6
-time = %H:%M:%S
+; font
+font-0 = "Iosevka Term:size=13;0"
+font-1 = "Iosevka Term:size=22;3"
 
-label = %time%
+; padding
+padding = 4
 
-format-background = ${colors.background}
-format-foreground = ${colors.white}
-
-[module/mpd]
-type = internal/mpd
-
-host = 127.0.0.1
-port = 6600
-
-interval = 1
-
-format-online = <label-song>
-format-offile = <label-offline>
-format-playing = ${self.format-online}
-format-paused = ${self.format-online}
-format-stopped = ${self.format-online}
-
-label-song = %{F#cc241d}%{F-} %artist% - %title%
-label-offline = %{F#cc241d}%{F-}
+; modules
+modules-right = cpu wireless-network date
+modules-center = music
+module-margin = 2
 
 [module/cpu]
 type = internal/cpu
+label = ${env:POLYBAR_CPU_LABEL}
+
+[module/wireless-network]
+type = internal/network
+interface = wlp5s0
 interval = 1
 
-format = <label>
+label-connected = ${env:POLYBAR_NETWORK_LABEL}
 
-label = %{F#98971a}%{F-} %percentage%%
+[module/date]
+type = internal/date
+time = %H:%M
 
-[module/memory]
-type = internal/memory
+label = ${env:POLYBAR_DATE_LABEL}
+
+[module/music]
+type = custom/script
+
+tail = true
+; fixed-center = true
+
+; format = test
+format-prefix = "${env:POLYBAR_MUSIC_LABEL}"
+format-prefix-font = 2
+
+exec-if = musicctrl --listplayers
+exec = musicctrl --playerfirst --print "%a - %t"
 interval = 1
-
-format = <label>
-
-label = %{F#d79921}%{F-} %percentage_used%%

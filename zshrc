@@ -31,57 +31,42 @@ xset r rate 150 170
 # —————————————————
 
 POLYBAR_HEIGHT_PERC=2.5
-POLYBAR_WIDTH_PERC=98.0
-POLYBAR_OFFSET_Y_PERC=1
-POLYBAR_OFFSET_X=0
-POLYBAR_OFFSET_Y=0
-POLYBAR_WIDTH=0
 POLYBAR_HEIGHT=0
 
-function dimensions() {
+function set_bar_height() {
 	screen_dims=$(xrandr | grep '*' | awk '{print $1;}')
-	screen_width=$(echo $screen_dims | cut -d 'x' -f 1)
 	screen_height=$(echo $screen_dims | cut -d 'x' -f 2)
 
-	export POLYBAR_WIDTH=$((($screen_width*$POLYBAR_WIDTH_PERC)/100))
 	export POLYBAR_HEIGHT=$((($screen_height*$POLYBAR_HEIGHT_PERC)/100))
 }
 
-function offsets() {
-	screen_dims=$(xrandr | grep '*' | awk '{print $1;}')
-	screen_width=$(echo $screen_dims | cut -d 'x' -f 1)
-	screen_height=$(echo $screen_dims | cut -d 'x' -f 2)
-
-	offset_perc=$(((100-$POLYBAR_WIDTH_PERC)/2))
-	export POLYBAR_OFFSET_X=$((($offset_perc*$screen_width)/100))
-	export POLYBAR_OFFSET_Y=$((($POLYBAR_OFFSET_Y_PERC*$screen_height)/100))
-}
-
-# calculate dimensions
-dimensions
-offsets
+# set bar height
+set_bar_height
 
 # module font awesome labels
-export POLYBAR_CPU_LABEL="%{F#689d6a}$(echo -e '\uf2db')%{F-}  %percentage%"
-export POLYBAR_NETWORK_LABEL="%{F#458588}$(echo -e '\uf012')%{F-}  %essid%"
-export POLYBAR_DATE_LABEL="%{F#98971a}$(echo -e '\uf017')%{F-}  %time%"
+export POLYBAR_CPU_LABEL="%{F#689d6a}$(echo -e '\uf2db')%{F-} %percentage%"
+export POLYBAR_NETWORK_LABEL="%{F#458588}$(echo -e '\uf012')%{F-} %essid%"
+export POLYBAR_DATE_LABEL="%{F#98971a}$(echo -e '\uf017')%{F-} %time%"
+export POLYBAR_MUSIC_LABEL="%{F#d9481b}$(echo -e '\uf025')%{F-} "
 
 # ————————
 # SETTINGS
 # ————————
 
-
 # antigen plugin path
 ADOTDIR="$HOME/.antigen"
 
 # keyboard speed
-#xset r rate 180 100
+xset r rate 180 100
 
 # language environment
 export LANG=fr_FR.UTF-8
 
 # editor
-export EDITOR='nano'
+export EDITOR=/usr/bin/nvim
+
+# config path
+export XDG_CONFIG_HOME=$HOME/.config
 
 # npm
 PATH="$HOME/.node_modules/bin/:$PATH"
@@ -182,13 +167,23 @@ export SPACESHIP_HOST_SHOW="always"
 # ALIAS
 # —————
 
+# named directories
+export dev=~/Documents/Dev
+
+# utils
 alias astyle="astyle --options=~/.config/astyle/astylerc"
 alias mirrupg="sudo reflector --country France --sort rate --age 12 --protocol https --save /etc/pacman.d/mirrorlist"
+
+# vpn
 alias vpn_connect="sudo expressvpn connect smart"
 alias vpn_disconnect="sudo expressvpn disconnect"
-alias sysupg="mirrupg && yay -Syu --noconfirm --answerclean All --answerdiff None --answeredit None"
-alias sysinstall="yay -Sy --noconfirm --answerclean All --answerdiff None --answeredit None"
+
+# package mgmt
+alias sysupg="mirrupg && yay -Syu --noconfirm"
+alias sysinstall="yay -Sy --noconfirm"
 alias sysrm="yay -Rcsn --noconfirm"
 alias syspkgsrc="yay -Qs"
 alias sysclean="yay -Scc && sysrm $(yay -Qtdq)"
+
+# cmake/prog
 alias cmakeinit="cmake_build_prepare"

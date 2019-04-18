@@ -43,10 +43,7 @@ Plug 'artur-shaik/vim-javacomplete2'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 
-" -- indent guides
-Plug 'nathanaelkane/vim-indent-guides'
-
-" -- change projet root automatically
+" -- change project root automatically
 Plug 'airblade/vim-rooter'
 
 " -- complete brackets, parentheses, ...
@@ -54,13 +51,9 @@ Plug 'jiangmiao/auto-pairs'
 
 " -- nerdtree
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
 
 " -- latex
 Plug 'lervag/vimtex'
-
-" -- tagbar
-Plug 'majutsushi/tagbar'
 
 " -- comment
 Plug 'scrooloose/nerdcommenter'
@@ -111,8 +104,14 @@ autocmd FileType conf,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_re
 autocmd FileType conf,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_remove_trailing_spaces=0
 autocmd FileType conf,tex,vim,yaml,sshconfig,dockerfile,make let b:did_indent=0
 
+" yaml tab size
+autocmd FileType yaml setlocal expandtab shiftwidth=4 tabstop=4
+
 " popup height
 set pumheight=10
+
+" indentation guide
+set list lcs=tab:\|\ 
 
 " ************* eye-candy configuration *************
 
@@ -126,7 +125,7 @@ set background=dark
 colorscheme gruvbox
 
 " veritcal split character
-set fillchars+=vert:\┃
+" set fillchars+=vert:\┃
 
 " ************* Keymaps *************
 
@@ -159,18 +158,6 @@ nnoremap <leader>cpf :CtrlP<CR>
 nnoremap <leader>nt :NERDTreeToggle<CR> 
 nnoremap <leader>nf :NERDTreeFocus<CR>
 
-" ************* JavaComplete configuration *************
-
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-" ************* Autoformat configuration *************
-
-let blacklist = ['xml']
-autocmd BufWritePre * if index(blacklist, &ft) < 0 | :Autoformat
-
-" python
-let g:formatter_yapf_style = 'google'
-
 " ************* CtrlP configuration *************
 
 " ignore spaces when searching
@@ -186,6 +173,12 @@ let g:ctrlp_abbrev = {
 
 " root markers / root directory
 let g:ctrlp_root_markers = ['compile_commands.json', '.ycm_extra_config.py', 'src/', 'lib/']
+
+" ignore build or debug
+let g:ctrlp_custom_ignore = {
+	\ 'dir' : '\v.(build|debug).$',
+	\ 'file' : '\v.(build|debug).|.\.o$',
+	\ }
 
 " ************* Airline configuration *************
 
@@ -234,9 +227,6 @@ if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
   endif
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
-
-" ************* VimTex configuration *************
-
 let g:tex_fold_enabled = 1
 let g:fastfold_fold_command_suffixes = ['x']
 
@@ -313,15 +303,9 @@ let g:ale_c_build_dir_names = ['build', 'build/debug', 'build/release']
 autocmd VimEnter *
 			\   if !argc()
 			\ |   Startify
-			\ |   execute 'NERDTreeTabsOpen'
+			\ |   NERDTree
 			\ |   wincmd w
 			\ | endif
-
-
-" -- nerdtree tabs config
-let g:nerdtree_tabs_open_on_console_startup = 1
-let g:nerdtree_tabs_open_on_new_tab = 1
-let g:nerdtree_tabs_startup_cd = 1
 
 " -- ignore files
 let NERDTreeIgnore = ['^build$']
@@ -336,6 +320,12 @@ let g:formatters_cpp = ['uncrustify_cpp']
 let g:formatdef_uncrustify_c = '"uncrustify -q -c ~/.config/uncrustify/uncrustify.cfg -l C"'
 let g:formatters_c = ['uncrustify_c']
 
+let blacklist = ['xml']
+autocmd BufWritePre * if index(blacklist, &ft) < 0 | :Autoformat
+
+" python
+let g:formatter_yapf_style = 'google'
+
 " ************* Gruvbox configuration *************
 
 let g:gruvbox_number_column = 'bg1'
@@ -347,9 +337,3 @@ let g:NERDTreeLimitedSyntax = 1
 
 set guifont=Iosevka\ Nerd\ Font\ Mono\ 11
 
-" ************* CtrlP configuration ************* 
-
-let g:ctrlp_custom_ignore = {
-	\ 'dir' : '\v.(build|debug).$',
-	\ 'file' : '\v.(build|debug).|.\.o$',
-	\ }

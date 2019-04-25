@@ -10,44 +10,114 @@ background = #1d2021
 foreground = #ffffff
 
 ; font
-font-0 = "Iosevka Term:size=13;0"
-font-1 = "Iosevka Term:size=22;3"
+font-0 = "Iosevka Term:weight=bold:size=13;0"
+font-1 = "Iosevka Term:size=25;3"
+font-2 = "Iosevka Term:size=28;3"
 
 ; padding
-padding = 4
+padding = 2
 
 ; modules
-modules-right = cpu wireless-network date
+modules-right = memory cpu wireless-network date time
 modules-center = music
-module-margin = 2
+module-margin = 1
+
+; line
+line-size = 3
+
+; language
+locale = fr_FR.UTF-8
+
+[section/base-font]
+format-prefix-font = 2
 
 [module/cpu]
 type = internal/cpu
-label = ${env:POLYBAR_CPU_LABEL}
+
+format = <label>
+format-prefix = %{O0}
+format-prefix-foreground = #689d6a
+format-underline = #689d6a
+
+label = %{O0} %percentage%%
+inherit = section/base-font
 
 [module/wireless-network]
 type = internal/network
 interface = wlp5s0
 interval = 1
+inherit = section/base-font
 
-label-connected = ${env:POLYBAR_NETWORK_LABEL}
+; format
+format-connected = <label-connected>
+format-connected-prefix-font = 3
+format-connected-prefix =  %{O0}
+format-connected-prefix-foreground = #fe8019
+format-connected-underline = #fe8019
+
+; label
+label-connected = %{O-10}%essid%
 
 [module/date]
 type = internal/date
 time = %H:%M
+interval = 1
 
-label = ${env:POLYBAR_DATE_LABEL}
+; format
+format = <label>
+format-prefix =  %{O0}
+format-prefix-foreground = #98971a
+format-underline = #98971a
+
+; label
+label = %{O-10}%time%
+
+; inheritance
+inherit = section/base-font
+
+[module/time]
+type = internal/date
+date = %a %d/%m
+interval = 1
+inherit = section/base-font
+
+; format
+format = <label>
+format-prefix =  %{O0}
+format-prefix-foreground = #cc241d
+format-underline = #cc241d
+
+; label
+label = %{O-10}%date%
+
+[module/memory]
+type = internal/memory
+inherit = section/base-font
+
+; format
+format = <label>
+format-prefix =  %{O0}
+format-prefix-foreground = #928374
+format-underline = #928374
+
+; label
+label = %{O-10}%percentage_used%%
 
 [module/music]
 type = custom/script
-
 tail = true
-; fixed-center = true
+inherit = section/base-font
 
-; format = test
-format-prefix = "${env:POLYBAR_MUSIC_LABEL}"
-format-prefix-font = 2
+; format
+format = <label>
+format-prefix =  %{O0}
+format-prefix-foreground = #076678
+format-underline = #076678
 
+; label
+label = %output:0:100%
+
+; exec
 exec-if = musicctrl --listplayers
 exec = musicctrl --playerfirst --print "%a - %t"
-interval = 1
+interval = 0.5

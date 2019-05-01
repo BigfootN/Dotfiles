@@ -1,31 +1,27 @@
-# launch urxvt
-super + e
-    urxvt
+#-------
+# FOCUS
+#-------
 
-# where to make the next window appear
-super + {Left,Down,Up,Right}
-    bspc window -p {left,down,up,right}
+# desktop
+ctrl + alt + {Right,Left}
+	bspc desktop -f {next,prev}
 
-# focus another window
-ctrl + {Left,Down,Up,Right}
-    bspc window -f {left,down,up,right}
-
-# launch vim
-super + v
-    gvim
-
-# launch firefox
-super + f
-    firefox
+# window
+super + {Right,Left,Down,Up}
+	bspc node -f {east,west,south,north}
 
 # close window
 alt + F4
-    bspc window -c
+	bspc node -c
 
-# change workspace
-ctrl + alt + {Left,Right}
-    bspc desktop -f {prev,next}
+#-------
+# OTHER
+#-------
 
-# logout
-ctrl + alt + s
-    bash .config/bspwm/logout
+# rofi
+alt + F2
+	rofi -modi "drun" -drun-display-format \{name\} -show drun
+
+# terminal
+ctrl + alt + t
+	alactritty

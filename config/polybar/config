@@ -2,8 +2,13 @@
 bottom = false
 fixed-center = true
 
+; offset
+offset-x = 2%
+offset-y = 10
+
 ; geometry
-height = ${env:POLYBAR_HEIGHT}
+height = 2.8%
+width = 96%
 
 ; colors
 background = #1d2021
@@ -12,14 +17,15 @@ foreground = #ffffff
 ; font
 font-0 = "Iosevka Term:weight=bold:size=13;0"
 font-1 = "Iosevka Term:size=25;3"
-font-2 = "Iosevka Term:size=28;3"
+font-2 = "Iosevka Term:size=28;5"
 
 ; padding
 padding = 2
 
 ; modules
-modules-right = memory cpu wireless-network date time
+modules-right = upgrades memory cpu wireless-network date time
 modules-center = music
+modules-left = bspwm
 module-margin = 1
 
 ; line
@@ -28,8 +34,46 @@ line-size = 3
 ; language
 locale = fr_FR.UTF-8
 
+; border
+border-size = 4
+border-color = #935401
+
+[global/wm]
+margin-bottom = 7
+
 [section/base-font]
 format-prefix-font = 2
+
+[module/bspwm]
+type = internal/bspwm
+
+format = <label-state>
+format-offset = -20
+
+label-focused = %icon%
+label-empty = %icon%
+label-occupied = %icon%
+label-focused-padding = 2
+label-empty-padding = 2
+label-occupied-padding = 2
+label-focused-font = 3
+label-empty-font = 3
+label-occupied-font = 3
+
+label-focused-underline = #ea3520
+label-focused-background = #db6060
+
+pin-workspaces = true
+inline-mode = false
+enable-scroll = false
+reverse-scroll = false
+
+ws-icon-0 = code;
+ws-icon-1 = terminal;
+ws-icon-2 = firefox;
+ws-icon-3 = music;
+
+inherit = section/base-font
 
 [module/cpu]
 type = internal/cpu
@@ -120,4 +164,24 @@ label = %output:0:100%
 ; exec
 exec-if = musicctrl --listplayers
 exec = musicctrl --playerfirst --print "%a - %t"
-interval = 0.5
+interval = 1
+
+[module/upgrades]
+type = custom/script
+tail = true
+inherit = section/base-font
+
+; format
+format = <label>
+format-prefix =  %{O0}
+format-prefix-foreground = #d79921
+format-underline = #d79921
+
+; label
+label = %{O-10}%output%
+
+; exec
+exec = yay -Quy | wc -l
+interval = 10
+
+; vim: filetype=dosini

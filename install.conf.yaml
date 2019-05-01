@@ -21,6 +21,8 @@
     ~/.homepage: ./.homepage
     ~/.zshrc: ./zshrc
     ~/.config/polybar/config: ./config/polybar/config
+    ~/.config/sxhkd/sxhkdrc: ./config/sxhkd/sxhkdrc
+    ~/.config/bspwm/bspwmrc: ./config/bspwm/bspwmrc
 
 # --------
 # packages
@@ -33,3 +35,5 @@
     - bspwm
     - nerd-fonts-complete
     - spotify
+    - mpd
+    - mpc

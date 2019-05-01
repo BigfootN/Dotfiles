@@ -20,7 +20,7 @@ alt + F4
 
 # rofi
 alt + F2
-	rofi -modi "drun" -drun-display-format \{name\} -show drun
+	rofi -modi "run" -drun-display-format \{name\} -show run
 
 # terminal
 ctrl + alt + t

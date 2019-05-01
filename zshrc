@@ -20,34 +20,8 @@ fi
 # INIT
 # ————
 
-# zsh modules
-zmodload zsh/mathfunc
-
 # cursor speed
 xset r rate 150 170
-
-# —————————————————
-# POLYBAR VARIABLES
-# —————————————————
-
-POLYBAR_HEIGHT_PERC=2.5
-POLYBAR_HEIGHT=0
-
-function set_bar_height() {
-	screen_dims=$(xrandr | grep '*' | awk '{print $1;}')
-	screen_height=$(echo $screen_dims | cut -d 'x' -f 2)
-
-	export POLYBAR_HEIGHT=$((($screen_height*$POLYBAR_HEIGHT_PERC)/100))
-}
-
-# set bar height
-set_bar_height
-
-# module font awesome labels
-export POLYBAR_CPU_LABEL="%{F#689d6a}$(echo -e '\uf2db')%{F-} %percentage%"
-export POLYBAR_NETWORK_LABEL="%{F#458588}$(echo -e '\uf012')%{F-} %essid%"
-export POLYBAR_DATE_LABEL="%{F#98971a}$(echo -e '\uf017')%{F-} %time%"
-export POLYBAR_MUSIC_LABEL="%{F#d9481b}$(echo -e '\uf025')%{F-} "
 
 # ————————
 # SETTINGS

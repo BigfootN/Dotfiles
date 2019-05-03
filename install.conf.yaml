@@ -23,6 +23,7 @@
     ~/.config/polybar/config: ./config/polybar/config
     ~/.config/sxhkd/sxhkdrc: ./config/sxhkd/sxhkdrc
     ~/.config/bspwm/bspwmrc: ./config/bspwm/bspwmrc
+    ~/.config/gtk-3.0/settings.ini: ./config/gtk-3.0/settings.ini
 
 # --------
 # packages

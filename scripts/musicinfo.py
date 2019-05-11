@@ -61,6 +61,7 @@ def init_arguments():
             'mpd',
             'mpris'],
         nargs=1,
+        default='mpris',
         help="The prefered player type (if the player with the specified type is not found the other will be chosen). If none were specified the first active player will be chosen")
     parser.add_argument(
         '--mpdhost',
@@ -125,9 +126,8 @@ def get_active_mpris_player():
     for mpris_service in active_mpris_services:
         player_name = mpris_service.split('.')[-1]
         player = MprisMediaPlayer(player_name)
-        if player.status() == PlayerStatus.PLAYING:
-            ret = player
-            break
+        ret = player
+        break
     return ret
 
 

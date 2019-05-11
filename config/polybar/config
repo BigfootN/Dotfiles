@@ -38,6 +38,9 @@ locale = fr_FR.UTF-8
 border-size = 4
 border-color = #935401
 
+; fullscreen fix
+wm-restack = bspwm
+
 [global/wm]
 margin-bottom = 7
 
@@ -72,6 +75,7 @@ ws-icon-0 = code;
 ws-icon-1 = terminal;
 ws-icon-2 = firefox;
 ws-icon-3 = music;
+ws-icon-4 = dl;
 
 inherit = section/base-font
 
@@ -162,8 +166,8 @@ format-underline = #076678
 label = %output:0:100%
 
 ; exec
-exec-if = musicctrl --listplayers
-exec = musicctrl --playerfirst --print "%a - %t"
+exec-if = ~/.scripts/musicinfo.py song "%a %b"
+exec = ~/.scripts/musicinfo.py song "%a %b"
 interval = 1
 
 [module/upgrades]

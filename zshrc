@@ -43,7 +43,7 @@ export EDITOR=/usr/bin/nvim
 export XDG_CONFIG_HOME=$HOME/.config
 
 # npm
-PATH="$HOME/.node_modules/bin/:$PATH"
+PATH="$HOME/.node_modules/bin/:$HOME/.scripts:$PATH"
 export npm_config_prefix=~/.node/modules
 
 # ———————

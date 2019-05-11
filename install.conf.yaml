@@ -24,6 +24,7 @@
     ~/.config/sxhkd/sxhkdrc: ./config/sxhkd/sxhkdrc
     ~/.config/bspwm/bspwmrc: ./config/bspwm/bspwmrc
     ~/.config/gtk-3.0/settings.ini: ./config/gtk-3.0/settings.ini
+    ~/.scripts/musicinfo.py: ./scripts/musicinfo.py
 
 # --------
 # packages

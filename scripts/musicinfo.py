@@ -126,8 +126,9 @@ def get_active_mpris_player():
     for mpris_service in active_mpris_services:
         player_name = mpris_service.split('.')[-1]
         player = MprisMediaPlayer(player_name)
-        ret = player
-        break
+        if (player.status() != PlayerStatus.STOPPED):
+            ret = player
+            break
     return ret
 
 
@@ -135,7 +136,8 @@ def get_active_player(player_type, mpd_host, mpd_port):
     ret = None
     if player_type == "mpd":
         ret = MpdPlayer(mpd_host, mpd_port)
-        if not ret.connect():
+        mpd_active = ret.connect()
+        if (not mpd_active) or (ret.status() == PlayerStatus.STOPPED):
             ret = get_active_mpris_player()
     else:
         ret = get_active_mpris_player()
@@ -212,19 +214,27 @@ class Song:
         self._artist = value
 
 
-class MpdPlayer:
-    def __init__(self, host, port):
-        self._host = host
-        self._port = port
-        self._client = MPDClient()
-        self._client.timeout = 10
-        self._client.idletimeout = None
+class Player:
+    def __init__(self):
         self._map_commands = {PlayerCommand.NEXT: self._next,
                               PlayerCommand.PAUSE: self._pause,
                               PlayerCommand.STOP: self._stop,
                               PlayerCommand.PREV: self._prev,
                               PlayerCommand.PLAY_PAUSE: self._play_pause,
                               PlayerCommand.PLAY: self._play}
+
+    def send_command(self, player_command):
+        command = self._map_commands[player_command]
+        command()
+
+
+class MpdPlayer(Player):
+    def __init__(self, host, port):
+        Player.__init__(self)
+        self._host = host
+        self._port = port
+        self._client = MPDClient()
+        self._client.timeout = 10
 
     def connect(self):
         ret = False
@@ -235,18 +245,14 @@ class MpdPlayer:
             pass
         return ret
 
-    def call_command(self, command):
-        command = self._map_commands[command]
-        command()
-
-    def status(self, command):
+    def status(self):
         self._client.command_list_ok_begin()
         self._client.status()
-        status = self._client.command_list_end()[0]["status"]
-        if not status == "play":
-            self._play()
-        else:
-            self._pause()
+        status = self._client.command_list_end()[0]["state"]
+        ret = {'play': PlayerStatus.PLAYING,
+               'stop': PlayerStatus.STOPPED,
+               'pause': PlayerStatus.PAUSED}[status]
+        return ret
 
     def is_up(self):
         ret = False
@@ -295,8 +301,12 @@ class MpdPlayer:
 
     def _play_pause(self):
         self._client.command_list_ok_begin()
-        self._client.stop()
-        self._client.command_list_end()
+        self._client.status()
+        status = self._client.command_list_end()[0]["status"]
+        if not status == "play":
+            self._play()
+        else:
+            self._pause()
 
 
 class DBusConnection:
@@ -316,8 +326,9 @@ class DBusConnection:
         return ret(self._interface.dbus_interface, property_name)
 
 
-class MprisMediaPlayer:
+class MprisMediaPlayer(Player):
     def __init__(self, name):
+        Player.__init__(self)
         self._media_player = DBusConnection(
             "/org/mpris/MediaPlayer2",
             "org.mpris.MediaPlayer2." + name,
@@ -334,16 +345,6 @@ class MprisMediaPlayer:
             "/org/mpris/MediaPlayer2",
             "org.mpris.MediaPlayer2." + name,
             "org.mpris.MediaPlayer2.PlayLists")
-        self._map_commands = {PlayerCommand.NEXT: self._next,
-                              PlayerCommand.PAUSE: self._pause,
-                              PlayerCommand.STOP: self._stop,
-                              PlayerCommand.PREV: self._prev,
-                              PlayerCommand.PLAY_PAUSE: self._play_pause,
-                              PlayerCommand.PLAY: self._play}
-
-    def call_command(self, player_command):
-        command = self._map_commands[player_command]
-        command()
 
     def current_song(self):
         ret = Song()
@@ -354,14 +355,10 @@ class MprisMediaPlayer:
         return ret
 
     def status(self):
-        ret = PlayerStatus.UNKNOWN
         status = self._media_player_player.get_property("PlaybackStatus")
-        if status == "Playing":
-            ret = PlayerStatus.PLAYING
-        elif status == "Stopped":
-            ret = PlayerStatus.STOPPED
-        elif status == "Paused":
-            ret = PlayerStatus.PAUSED
+        ret = {'Playing': PlayerStatus.PLAYING,
+               'Stopped': PlayerStatus.STOPPED,
+               'Paused': PlayerStatus.PAUSED}[status]
         return ret
 
     def _play(self):

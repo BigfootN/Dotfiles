@@ -167,7 +167,7 @@ label = %output:0:100%
 
 ; exec
 exec-if = ~/.scripts/musicinfo.py song "%a %b"
-exec = ~/.scripts/musicinfo.py song "%a %b"
+exec = ~/.scripts/musicinfo.py song "%a  %b"
 interval = 1
 
 [module/upgrades]

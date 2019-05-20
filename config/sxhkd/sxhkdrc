@@ -1,6 +1,6 @@
-#-------
-# FOCUS
-#-------
+#-----------
+#   FOCUS
+#-----------
 
 # desktop
 ctrl + alt + {Right,Left}
@@ -14,9 +14,9 @@ super + {Right,Left,Down,Up}
 alt + F4
 	bspc node -c
 
-#-------
-# OTHER
-#-------
+#-----------
+#   OTHER
+#-----------
 
 # rofi
 alt + F2
@@ -25,3 +25,19 @@ alt + F2
 # terminal
 ctrl + alt + t
 	alactritty
+
+# logoff
+super + e
+	bspc quit
+
+#-------------
+#   WINDOWS
+#-------------
+
+# shift windows
+ctrl + shift + {Right,Left,Down,Up}
+	bspc node -s {east,west,south,north} --follow
+
+# send window to desktop
+ctrl + shift + alt + {Right,Left}
+	bspc node -d {next,prev} --follow

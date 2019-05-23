@@ -16,6 +16,9 @@ sxhkd &
 # compton
 compton --backend=xr_glx_hybrid &
 
+# cursor
+xsetroot -cursor_name left_ptr
+
 #------------
 #   CONFIG
 #------------
@@ -32,14 +35,14 @@ bspc config border_width 3
 bspc config window_gap 20
 
 # desktop padding
-bspc config top_padding 50
+bspc config top_padding 30
 bspc config bottom_padding 10
-bspc config right_padding 29
-bspc config left_padding 29
+bspc config right_padding 15
+bspc config left_padding 15
 
 #-----------
 #   RULES
 #-----------
 
-bspc rule -a spotify:spotify desktop=music
+bspc rule -a Spotify desktop=music
 bspc rule -a Alacritty:ncmpcpp desktop=music

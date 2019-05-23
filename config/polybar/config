@@ -2,13 +2,9 @@
 bottom = false
 fixed-center = true
 
-; offset
-offset-x = 2%
-offset-y = 10
-
 ; geometry
 height = 2.8%
-width = 96%
+width = 100%
 
 ; colors
 background = #1d2021
@@ -35,14 +31,13 @@ line-size = 3
 locale = fr_FR.UTF-8
 
 ; border
-border-size = 4
-border-color = #935401
+border-size = 0
 
 ; fullscreen fix
 wm-restack = bspwm
 
 [global/wm]
-margin-bottom = 7
+margin-bottom = -8
 
 [section/base-font]
 format-prefix-font = 2
@@ -185,7 +180,7 @@ format-underline = #d79921
 label = %{O-10}%output%
 
 ; exec
-exec = yay -Quy | wc -l
+exec = checkupdates | wc -l
 interval = 10
 
 ; vim: filetype=dosini

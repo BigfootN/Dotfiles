@@ -1,0 +1,42 @@
+---
+Language: Cpp
+Standard: Cpp11
+BasedOnStyle:  LLVM
+AccessModifierOffset: 2
+IndentWidth: 4
+AlignEscapedNewlines: Left
+AlignTrailingComments: true 
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortFunctionsOnASingleLine: None
+AlwaysBreakAfterReturnType: None
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterClass: true
+    SplitEmptyFunction: false
+    SplitEmptyRecord: false
+    SplitEmptyNamespace: false
+BreakInheritanceList: AfterColon
+BreakBeforeTernaryOperators: false
+BreakConstructorInitializers: AfterColon
+ColumnLimit: 80
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+FixNamespaceComments: false
+IncludeBlocks: Merge
+IndentCaseLabels: true
+KeepEmptyLinesAtTheStartOfBlocks: false
+NamespaceIndentation: All
+PenaltyReturnTypeOnItsOwnLine: 100000
+PointerAlignment: Right
+SortIncludes: false
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: false
+SpaceBeforeInheritanceColon: false
+SpaceBeforeRangeBasedForLoopColon: false
+SpacesInContainerLiterals: false
+TabWidth: 4
+UseTab: ForContinuationAndIndentation
+...
+# vim: set filetype=yaml:set foldmethod=manual:

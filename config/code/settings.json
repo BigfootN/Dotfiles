@@ -1,0 +1,44 @@
+{
+    // -------------------------
+    // ---- Editor Settings ----    
+    // -------------------------
+ 
+    /* Color and syntax theme */
+    "workbench.colorTheme": "One Dark Pro",
+    
+    /* Font Settings */
+    "editor.fontFamily": "Iosevka, Iosevka, Iosevka",
+    "editor.fontSize": 16,
+    "editor.fontLigatures": true,
+
+    /* Breadcrums */
+    "breadcrumbs.enabled": false,
+    "breadcrumbs.filePath": "off",
+    "breadcrumbs.symbolPath": "off",
+    "window.zoomLevel": 0.8,
+
+    /* Better for code */
+    "editor.smoothScrolling": false,
+    
+    /* Enable the menu with Alt */
+    "window.menuBarVisibility": "toggle",
+    "editor.parameterHints.enabled": false,
+
+    // // ----------------
+    // // ---- Colors ----    
+    // // ----------------
+    
+    "workbench.colorCustomizations": {
+        "[One Dark Pro]": {
+            /* gutter and line numbers */
+            "editorLineNumber.activeForeground": "#E06C7560",
+            "editorGutter.background": "#2c323a",
+
+            /* word and selection highlighting */
+            "editor.selectionBackground": "#2d3139",
+            "editor.wordHighlightBorder": "#fff0",
+            "editor.selectionHighlightBorder": "#fff0",
+            "editor.wordHighlightStrongBorder": "#fff0",
+        }
+    }
+}

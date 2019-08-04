@@ -1,7 +1,7 @@
 ---
 Language: Cpp
 Standard: Cpp11
-BasedOnStyle:  LLVM
+BasedOnStyle: LLVM
 AccessModifierOffset: 2
 IndentWidth: 4
 AlignEscapedNewlines: Left

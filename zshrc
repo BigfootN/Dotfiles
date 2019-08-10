@@ -37,7 +37,7 @@ xset r rate 180 100
 export LANG=fr_FR.UTF-8
 
 # editor
-export EDITOR=/usr/bin/nvim
+export EDITOR=/usr/bin/code
 
 # config path
 export XDG_CONFIG_HOME=$HOME/.config

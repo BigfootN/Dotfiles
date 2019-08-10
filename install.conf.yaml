@@ -24,7 +24,7 @@
     ~/.config/gtk-3.0/settings.ini: ./config/gtk-3.0/settings.ini
     ~/.scripts/musicinfo.py: ./scripts/musicinfo.py
     ~/.config/compton/compton.conf: ./config/compton/compton.conf
-    ~/.config/code/settings.json: ./config/Code - OSS/settings.json
+    ~/.config/Code - OSS/settings.json: ./config/code/settings.json
 
 # --------
 # packages

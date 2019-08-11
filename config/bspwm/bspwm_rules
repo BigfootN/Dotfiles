@@ -1,0 +1,18 @@
+#!/bin/sh
+
+id=$1
+title=$(xtitle "$id")
+
+case "$title" in
+	Spotify|spotify|ncmpcpp)
+		echo "desktop=music follow=on"
+		;;
+	Transmission|transmission|transmission-gtk|Transmission-gtk)
+		echo "desktop=dl follow=on"
+		;;
+	alacritty)
+		echo "desktop=terminal follow=on"
+		;;
+	*)
+		;;
+esac

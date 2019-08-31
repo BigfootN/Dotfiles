@@ -127,15 +127,14 @@ char          # Prompt character
 )
 
 # user
-export SPACESHIP_USER_SUFFIX=""
-export SPACESHIP_USER_SHOW=always
+export SPACESHIP_USER_SHOW=true
 
 # char
 export SPACESHIP_CHAR_SYMBOL="➜ "
 
 # host
 export SPACESHIP_HOST_PREFIX="$(printf '\u0040')"
-export SPACESHIP_HOST_SHOW="always"
+export SPACESHIP_HOST_SHOW=true
 
 # —————
 # ALIAS

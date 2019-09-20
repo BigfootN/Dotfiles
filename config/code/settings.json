@@ -1,33 +1,26 @@
 {
-    // -------------------------
-    // ---- Editor Settings ----    
-    // -------------------------
- 
-    /* Color and syntax theme */
-    "workbench.colorTheme": "One Dark Pro",
+    /* Editor Settings*/
+    "editor.fontFamily": "Iosevka",
+    "editor.fontSize": 17.5,
     
-    /* Font Settings */
-    "editor.fontFamily": "Iosevka, Iosevka, Iosevka",
-    "editor.fontSize": 16,
-    "editor.fontLigatures": true,
-
     /* Breadcrums */
     "breadcrumbs.enabled": false,
     "breadcrumbs.filePath": "off",
     "breadcrumbs.symbolPath": "off",
     "window.zoomLevel": 0.8,
-
+    
     /* Better for code */
     "editor.smoothScrolling": false,
     
     /* Enable the menu with Alt */
     "window.menuBarVisibility": "toggle",
-    "editor.parameterHints.enabled": false,
 
     // // ----------------
     // // ---- Colors ----    
     // // ----------------
-    
+
+    /* workbench */
+    "workbench.colorTheme": "One Dark Pro",
     "workbench.colorCustomizations": {
         "[One Dark Pro]": {
             /* gutter and line numbers */
@@ -39,6 +32,40 @@
             "editor.wordHighlightBorder": "#fff0",
             "editor.selectionHighlightBorder": "#fff0",
             "editor.wordHighlightStrongBorder": "#fff0",
+
+            /* tabs */
+            "tab.activeBorder": "#69250a"
         }
+    },
+
+    // ---------------------------
+    // ---- Language Settings ----    
+    // ---------------------------
+    
+    /* files */
+    "files.associations": {
+        "sxhkdrc": "sxhkdrc"
+    },
+
+    /* C/C++ */
+    "C_Cpp.updateChannel": "Insiders",
+    "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+    "[c]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": false
+    },
+
+    // ---------------------------
+    // ---- Explorer Settings ----    
+    // ---------------------------
+    /* Files to hide */
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "build": true,
+        ".vscode": true
     }
 }

@@ -5,7 +5,8 @@ BasedOnStyle: LLVM
 AccessModifierOffset: 2
 IndentWidth: 4
 AlignEscapedNewlines: Left
-AlignTrailingComments: true 
+AlignTrailingComments: true
+AllowAllArgumentsOnNextLine: false
 AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortFunctionsOnASingleLine: None
 AlwaysBreakAfterReturnType: None
@@ -38,5 +39,3 @@ SpaceBeforeRangeBasedForLoopColon: false
 SpacesInContainerLiterals: false
 TabWidth: 4
 UseTab: ForContinuationAndIndentation
-...
-# vim: set filetype=yaml:set foldmethod=manual:

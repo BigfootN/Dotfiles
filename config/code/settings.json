@@ -2,6 +2,7 @@
     /* Editor Settings*/
     "editor.fontFamily": "Iosevka",
     "editor.fontSize": 17.5,
+    "editor.renderWhitespace": "all",
     
     /* Breadcrums */
     "breadcrumbs.enabled": false,
@@ -20,18 +21,17 @@
     // // ----------------
 
     /* workbench */
-    "workbench.colorTheme": "One Dark Pro",
+    "workbench.colorTheme": "Gruvbox Dark Medium",
     "workbench.colorCustomizations": {
-        "[One Dark Pro]": {
+        "[Gruvbox Dark Medium]": {
             /* gutter and line numbers */
-            "editorLineNumber.activeForeground": "#E06C7560",
-            "editorGutter.background": "#2c323a",
+            "editorLineNumber.activeForeground": "#69250a",
+            "editorGutter.background": "#1d2021",
 
-            /* word and selection highlighting */
-            "editor.selectionBackground": "#2d3139",
-            "editor.wordHighlightBorder": "#fff0",
-            "editor.selectionHighlightBorder": "#fff0",
-            "editor.wordHighlightStrongBorder": "#fff0",
+            /* status bar */
+            "statusBar.background": "#3c3836",
+            "statusBar.border": "#282828",
+            "statusBar.foreground": "#928374",
 
             /* tabs */
             "tab.activeBorder": "#69250a"
@@ -44,7 +44,8 @@
     
     /* files */
     "files.associations": {
-        "sxhkdrc": "sxhkdrc"
+        "sxhkdrc": "sxhkdrc",
+        "*.h": "c"
     },
 
     /* C/C++ */
@@ -54,6 +55,9 @@
         "editor.formatOnSave": true,
         "editor.formatOnType": false
     },
+
+    /* Latex */
+    "latex-workshop.latex.autoBuild.run":"never",
 
     // ---------------------------
     // ---- Explorer Settings ----    
@@ -67,5 +71,5 @@
         "**/.DS_Store": true,
         "build": true,
         ".vscode": true
-    }
+    },
 }

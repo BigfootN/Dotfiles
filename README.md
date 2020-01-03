@@ -30,9 +30,9 @@ The `json` config must have the following code/syntax:
 {
     "path_to_git_file": "path_to_local_file",
     "git_dir": {
-        ...,
+        "...": "...",
         "sub_dir": {
-            ...
+            "...": "..."
         }
     }
 }

@@ -86,6 +86,9 @@ bindsym Mod4+Down focus down
 # rofi
 bindsym Mod1+F2 exec --no-startup-id rofi -modi "run" -drun-display-format \{name\} -show run
 
+# screenshot
+bindsym Mod4+p exec --no-startup-id scrot ~/Images/Shots/shot.png
+
 # volume
 bindsym XF86AudioLowerVolume exec --no-startup-id "/bin/zsh ~/.config/i3/volume.sh down"
 bindsym XF86AudioRaiseVolume exec --no-startup-id "/bin/zsh ~/.config/i3/volume.sh up"

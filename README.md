@@ -37,3 +37,5 @@ The `json` config must have the following code/syntax:
     }
 }
 ```
+
+Each `sub_dir` is relative to the parent directory.

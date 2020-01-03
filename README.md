@@ -23,3 +23,15 @@ Where:
 - **config_file**: a `json` file telling where the config files should be saved/deployed
 
 #### config json file
+
+The `json` config must have the following code/syntax:
+
+    {
+        "path_to_git_file": "path_to_local_file",
+        "git_dir": {
+            ...,
+            "sub_dir": {
+                ...
+            }
+        }
+    }

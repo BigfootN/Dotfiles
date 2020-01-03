@@ -1,3 +1,1 @@
-# Dotfiles
-
-My simple dotfiles
+![shot](shot.png)

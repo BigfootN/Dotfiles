@@ -18,8 +18,8 @@ You can use the `dotfile_manager.py` script.
     dotfile_manager.py --operation [save|deploy] [config_file]
 
 Where:
-    - **save**: save config files, copy local config files to git repo
-    - **deploy**: copy config files to local host
-    - **config_file**: a `json` file telling where the config files should be saved/deployed
+- **save**: save config files, copy local config files to git repo
+- **deploy**: copy config files to local host
+- **config_file**: a `json` file telling where the config files should be saved/deployed
 
 #### config json file

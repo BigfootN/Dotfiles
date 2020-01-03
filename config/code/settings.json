@@ -1,6 +1,10 @@
 {
+    // // -----------------
+    // // ---- General ----    
+    // // -----------------
+
     /* Editor Settings*/
-    "editor.fontFamily": "Iosevka",
+    "editor.fontFamily": "Iosevka,Iosevka Nerd Font",
     "editor.fontSize": 17.5,
     "editor.renderWhitespace": "all",
     
@@ -8,25 +12,35 @@
     "breadcrumbs.enabled": false,
     "breadcrumbs.filePath": "off",
     "breadcrumbs.symbolPath": "off",
-    "window.zoomLevel": 0.8,
+    "window.zoomLevel": 1,
     
     /* Better for code */
     "editor.smoothScrolling": false,
     
     /* Enable the menu with Alt */
     "window.menuBarVisibility": "toggle",
-
+    
+    /* number of lines surrounding cursor */
+    "editor.cursorSurroundingLines": 10,
+    
+    /* autosave */
+    "files.autoSave": "afterDelay",
+    
+    /* ignore recommendations */
+    "extensions.ignoreRecommendations": true,
+    
     // // ----------------
     // // ---- Colors ----    
     // // ----------------
 
     /* workbench */
     "workbench.colorTheme": "Gruvbox Dark Medium",
+    "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "[Gruvbox Dark Medium]": {
             /* gutter and line numbers */
             "editorLineNumber.activeForeground": "#69250a",
-            "editorGutter.background": "#1d2021",
+            "editorGutter.background": "#2f2f2f",
 
             /* status bar */
             "statusBar.background": "#3c3836",
@@ -38,6 +52,20 @@
         }
     },
 
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [ 
+            {
+                "scope": [
+                    "keyword",
+                    "storage.type"
+                ],
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            }
+        ]
+    },
+
     // ---------------------------
     // ---- Language Settings ----    
     // ---------------------------
@@ -45,7 +73,10 @@
     /* files */
     "files.associations": {
         "sxhkdrc": "sxhkdrc",
-        "*.h": "c"
+        "*.h": "c",
+        "**/.config/polybar/config": "ini",
+        "**/.i3/config": "i3",
+        "**/i3/config": "i3"
     },
 
     /* C/C++ */

@@ -4,7 +4,9 @@ Standard: Cpp11
 BasedOnStyle: LLVM
 AccessModifierOffset: 2
 IndentWidth: 4
+AlignAfterOpenBracket: Align
 AlignEscapedNewlines: Left
+AlignOperands: false
 AlignTrailingComments: true
 AllowAllArgumentsOnNextLine: false
 AllowAllParametersOfDeclarationOnNextLine: false
@@ -13,6 +15,7 @@ AlwaysBreakAfterReturnType: None
 AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: false
 BinPackParameters: false
+BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Custom
 BraceWrapping:
     AfterClass: true

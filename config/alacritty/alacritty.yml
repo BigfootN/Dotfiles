@@ -5,9 +5,9 @@
 # environment variables. Some entries may override variables
 # set by alacritty it self.
 env:
-  WINIT_HIDPI_FACTOR: 1.3
+  WINIT_HIDPI_FACTOR: "1.3"
   # TERM env customization.
-  TERM: xterm-256color
+  TERM: "xterm-256color"
 
 window:
   # Window dimensions in character columns and lines
@@ -36,17 +36,17 @@ draw_bold_text_with_bright_colors: true
 
 font:
   normal:
-    family: "Iosevka Nerd Font"
+    family: "Iosevka"
     style: Regular
 
   bold:
-     family: "Iosevka Nerd Font"
+     family: "Iosevka"
      style: Regular
 
   italic:
     family: monospace
 
-  size: 15
+  size: 13
 
   offset:
     x: -1
@@ -57,7 +57,7 @@ font:
     y: 0
 
 # Should display the render timer
-render_timer: false
+debug.render_timer: false
 
 colors:
   # Default colors

@@ -28,14 +28,16 @@ The `json` config must have the following code/syntax:
 
 ```json
 {
-    "path_to_git_file": "path_to_local_file",
+    "git_file1": "local_file1",
     "git_dir": {
         "...": "...",
         "sub_dir": {
-            "...": "..."
+            "git_file2": "local_file2"
         }
     }
 }
 ```
+
+In this example when calling `deploy`, the file `git_file1` will be copied to `local_file1`, and `git_dir/sub_dir/git_file2` will be copied to `local_file2`.
 
 Each `sub_dir` is relative to the parent directory.

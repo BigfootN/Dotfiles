@@ -2,13 +2,14 @@
 Language: Cpp
 Standard: Cpp11
 BasedOnStyle: LLVM
-AccessModifierOffset: 2
+AccessModifierOffset: -4
 IndentWidth: 4
 AlignAfterOpenBracket: Align
 AlignEscapedNewlines: Left
 AlignOperands: false
 AlignTrailingComments: true
 AllowAllArgumentsOnNextLine: false
+AllowAllConstructorInitializersOnNextLine: false
 AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortFunctionsOnASingleLine: None
 AlwaysBreakAfterReturnType: None
@@ -18,7 +19,7 @@ BinPackParameters: false
 BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Custom
 BraceWrapping:
-    AfterClass: true
+    AfterClass: false
     SplitEmptyFunction: false
     SplitEmptyRecord: false
     SplitEmptyNamespace: false

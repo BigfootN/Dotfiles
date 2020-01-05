@@ -56,7 +56,8 @@
         "textMateRules": [ 
             {
                 "scope": [
-                    "keyword",
+                    "keyword.other",
+                    "keyword.control",
                     "storage.type"
                 ],
                 "settings": {
@@ -83,6 +84,10 @@
     "C_Cpp.updateChannel": "Insiders",
     "C_Cpp.clang_format_path": "/usr/bin/clang-format",
     "[c]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": false
+    },
+    "[cpp]": {
         "editor.formatOnSave": true,
         "editor.formatOnType": false
     },

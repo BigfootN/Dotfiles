@@ -58,10 +58,11 @@
                 "scope": [
                     "keyword.other",
                     "keyword.control",
-                    "storage.type"
+                    "storage.type",
+                    "keyword.operator.new",
                 ],
                 "settings": {
-                    "fontStyle": "italic"
+                    "fontStyle": "bold italic"
                 }
             }
         ]

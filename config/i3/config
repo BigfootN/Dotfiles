@@ -94,6 +94,11 @@ bindsym XF86AudioLowerVolume exec --no-startup-id "/bin/zsh ~/.config/i3/volume.
 bindsym XF86AudioRaiseVolume exec --no-startup-id "/bin/zsh ~/.config/i3/volume.sh up"
 bindsym XF86AudioMute exec --no-startup-id "/bin/zsh ~/.config/i3/volume.sh toggle"
 
+# media
+bindsym XF86AudioPlay exec --no-startup-id "python ~/.config/i3/musicinfo.py command playpause"
+bindsym XF86AudioNext exec --no-startup-id "python ~/.config/i3/musicinfo.py command next"
+bindsym XF86AudioPrev exec --no-startup-id "python ~/.config/i3/musicinfo.py command previous"
+
 #------------------------#
 # Applications on launch #
 #------------------------#

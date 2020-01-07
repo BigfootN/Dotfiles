@@ -85,7 +85,7 @@ def parse_arguments(args, player):
     command_map_str = {
         'next': PlayerCommand.NEXT,
         'previous': PlayerCommand.PREV,
-        'playpayse': PlayerCommand.PLAY_PAUSE,
+        'playpause': PlayerCommand.PLAY_PAUSE,
         'stop': PlayerCommand.STOP,
         'pause': PlayerCommand.PAUSE,
         'play': PlayerCommand.PLAY

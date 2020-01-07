@@ -16,9 +16,19 @@ class PlayerCommand(Enum):
     PLAY_PAUSE = 4
     STOP = 5
     PLAY = 6
+    STATUS = 7
 
 
 class PlayerStatus(Enum):
+    def __str__(self):
+        str_conv_map = {
+            1: "Playing",
+            2: "Stopped",
+            3: "Paused",
+            4: "Unknown"
+        }
+        return str_conv_map.get(self.value)
+    
     PLAYING = 1
     STOPPED = 2
     PAUSED = 3
@@ -49,7 +59,8 @@ def init_arguments():
             'previous',
             'playpause',
             'stop',
-            'play'],
+            'play',
+            'status'],
         help="The command to send")
 
     parser.add_argument(
@@ -88,7 +99,8 @@ def parse_arguments(args, player):
         'playpause': PlayerCommand.PLAY_PAUSE,
         'stop': PlayerCommand.STOP,
         'pause': PlayerCommand.PAUSE,
-        'play': PlayerCommand.PLAY
+        'play': PlayerCommand.PLAY,
+        'status': PlayerCommand.STATUS
     }
 
     if args.action == 'command':
@@ -221,7 +233,8 @@ class Player:
                               PlayerCommand.STOP: self._stop,
                               PlayerCommand.PREV: self._prev,
                               PlayerCommand.PLAY_PAUSE: self._play_pause,
-                              PlayerCommand.PLAY: self._play}
+                              PlayerCommand.PLAY: self._play,
+                              PlayerCommand.STATUS: self._status}
 
     def send_command(self, player_command):
         command = self._map_commands[player_command]
@@ -308,6 +321,8 @@ class MpdPlayer(Player):
         else:
             self._pause()
 
+    def _status(self):
+        print(self.status())
 
 class DBusConnection:
     def __init__(self, object_path, bus_name, interface_name):
@@ -379,6 +394,8 @@ class MprisMediaPlayer(Player):
     def _pause(self):
         self._media_player_player.call_method("Pause")
 
+    def _status(self):
+        print(self.status())
 
 def main():
     args = init_arguments()

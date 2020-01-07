@@ -93,7 +93,7 @@ offset-x = 1.7%
 
 ; modules
 modules-right = date time
-modules-center = artist title
+modules-center = status artist title
 modules-left = i3
 
 ; language
@@ -301,6 +301,25 @@ label = %{B#a2a2a2 F#000000}%{O-10} %output% %{B- F-}
 ; exec
 exec = ~/.config/polybar/updates.sh
 interval = 10
+
+[module/status]
+type = custom/script
+tail = true
+
+; inherit
+inherit = section/base
+
+; format
+format = <label>
+
+; exec
+exec-if = /usr/bin/python ~/.config/polybar/musicinfo.py command status
+exec = ~/.config/polybar/musicstatus.sh
+interval = 1
+
+; label
+label = %{B#d87c47 F#000000}%{O-15}  %output% %{B- F-}
+label-font = 2
 
 [module/sound]
 type = internal/alsa

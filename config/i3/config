@@ -84,7 +84,8 @@ bindsym Mod4+Up focus up
 bindsym Mod4+Down focus down
 
 # rofi
-bindsym Mod1+F2 exec --no-startup-id rofi -modi "run" -drun-display-format \{name\} -show run
+bindsym Mod1+F2 exec --no-startup-id rofi -show run
+bindsym Mod4+w exec --no-startup-id rofi -show window
 
 # screenshot
 bindsym Mod4+p exec --no-startup-id scrot ~/Images/Shots/shot.png

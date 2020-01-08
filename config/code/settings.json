@@ -78,7 +78,8 @@
         "*.h": "c",
         "**/.config/polybar/config": "ini",
         "**/.i3/config": "i3",
-        "**/i3/config": "i3"
+        "**/i3/config": "i3",
+        "**/*.rasi": "css"
     },
 
     /* C/C++ */

@@ -48,16 +48,20 @@ def parse_arguments():
 
 def run(args):
     config_file = args.config_file
+    data = None
 
     with open(config_file) as f:
         data = json.load(f)
-        
-    json_dict = iterate_through_json_data(data)
+    
+    if (not data is None):
+        json_dict = iterate_through_json_data(data)
 
-    if args.operation == "save":
-        save_files(json_dict)
-    elif args.operation == "deploy":
-        deploy_files(json_dict)
+        if args.operation == "save":
+            save_files(json_dict)
+        elif args.operation == "deploy":
+            deploy_files(json_dict)
+    else:
+        print("ERROR! Config file " + config_file + " not found", file=sys.stderr)
 
 def main():
     args = parse_arguments()

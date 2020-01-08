@@ -1,0 +1,68 @@
+configuration {
+    modi: "run";
+    threads: 0;
+    lines: 5;
+    show-icons: false;
+    width: 30;
+    padding: 20;
+}
+
+window {
+    location: center;
+    border: 2px;
+    padding: 10px;
+    border-color: #d65d0e;
+    border-radius: 5px;
+    background-color: #d5c4a1;
+}
+
+listview {
+    background-color: inherit;
+    font: "Iosevka 14";
+}
+
+prompt {
+    font: "Pacifico 20";
+    background-color: #a89984;
+    padding: 0px 8px;
+    border: 0px;
+    margin: 0px;
+}
+
+entry {
+    padding: 8px;
+    y-offset: 100px;
+    font: "Iosevka 20";
+    background-color: inherit;
+    border: 0 dash 0 dash 2 solid 0 dash;
+    border-color: #282828;
+}
+
+inputbar {
+    background-color: inherit;
+}
+
+
+mainbox {
+    background-color: inherit;
+}
+
+case-indicator {
+    background-color: inherit;
+}
+
+element {
+    font: inherit;
+    background-color: inherit;
+    padding: 4px;
+}
+
+element normal {
+    font: inherit;
+    highlight: italic bold #234567;
+}
+
+element selected {
+    highlight: italic bold #234567;
+    background-color: #ebdbb2;
+}

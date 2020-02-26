@@ -28,6 +28,10 @@
     
     /* ignore recommendations */
     "extensions.ignoreRecommendations": true,
+
+    /* number of editors opened */
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.value": 5,
     
     // // ----------------
     // // ---- Colors ----    

@@ -22,7 +22,7 @@ format-prefix-padding = 1
 [colors]
 
 ; background
-bg = #c4c4c4
+bg = #2d2d2d
 
 ; border color
 border = #767676
@@ -36,9 +36,9 @@ background = ${colors.bg}
 foreground = #ffffff
 
 ; borders color
-border-top-color = #c4c4c4
-border-bottom-color = #c4c4c4
-border-right-color = #c4c4c4
+border-top-color = #2d2d2d
+border-bottom-color = #2d2d2d
+border-right-color = #2d2d2d
 
 ; center modules
 fixed-center = true

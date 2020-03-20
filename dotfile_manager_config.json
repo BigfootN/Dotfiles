@@ -24,7 +24,8 @@
             "updates.sh": "~/.config/polybar/updates.sh"
         },
         "gtk-3.0": {
-            "settings.ini": "~/.config/gtk-3.0/settings.ini"
+            "settings.ini": "~/.config/gtk-3.0/settings.ini",
+            "gtk.css": "~/.config/gtk-3.0/gtk.css"
         },
         "i3": {
             "config": "~/.config/i3/config",

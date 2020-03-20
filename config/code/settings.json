@@ -89,6 +89,7 @@
     /* C/C++ */
     "C_Cpp.updateChannel": "Insiders",
     "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/debug/compile_commands.json",
     "[c]": {
         "editor.formatOnSave": true,
         "editor.formatOnType": false

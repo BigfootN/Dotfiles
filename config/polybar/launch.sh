@@ -144,14 +144,6 @@ ws-icon-default = ""
 
 label-seperator-padding = 0
 
-
-[module/cpu]
-type = internal/cpu
-
-format = <label>
-format-prefix = %{O0}
-format-prefix-background = ${colors.bg}
-
 [module/wireless-network]
 type = internal/network
 interface = wlp2s0
@@ -222,65 +214,6 @@ label = %{F#458588} %output:0:100% %{F-}
 exec-if = ~/.config/polybar/musicinfo.py song "%a  %t"
 exec = ~/.config/polybar/musicinfo.py song "%a  %t"
 interval = 1
-
-[module/title]
-type = custom/script
-tail = true
-
-; inherit
-inherit = section/base
-
-; format
-format = <label>
-format-prefix =  %{O0}
-format-prefix-background = #d3869b
-format-prefix-foreground = #000000
-
-; label
-label = %{B#a2a2a2 F#000000}%{O-10} %output:0:100% %{B- F-}
-
-; exec
-exec-if = ~/.config/polybar/musicinfo.py song "%t"
-exec = ~/.config/polybar/musicinfo.py song "%t"
-interval = 1
-
-[module/updates]
-type = custom/script
-tail = true
-
-; inherit
-inherit = section/base
-
-; format
-format = <label>
-format-prefix = ﰶ %{O0}
-format-prefix-background = #d79921
-format-prefix-foreground = #000000
-
-; label
-label = %{B#a2a2a2 F#000000}%{O-10} %output% %{B- F-}
-
-; exec
-exec = ~/.config/polybar/updates.sh
-interval = 10
-
-[module/status]
-type = custom/script
-tail = true
-
-; inherit
-inherit = section/base
-
-; format
-format = <label>
-
-; exec
-exec-if = /usr/bin/python ~/.config/polybar/musicinfo.py command status
-exec = ~/.config/polybar/musicstatus.sh
-interval = 1
-
-; label
-label = %{B#d87c47 F#000000}%{O-15}  %output% %{B- F-}
 
 [module/sound]
 type = internal/alsa

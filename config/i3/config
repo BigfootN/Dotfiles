@@ -24,7 +24,7 @@ client.unfocused #935401 #000000 #000000 #935401 #935401
 
 # outer gaps (screen edge)
 gaps top 45
-gaps bottom 45
+gaps bottom 12
 gaps left 12
 gaps right 12
 

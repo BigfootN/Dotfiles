@@ -29,7 +29,7 @@ border = #767676
 
 [section/bar_settings]
 ; height
-height = 2.7%
+height = 2.8%
 
 ; colors
 background = ${colors.bg}
@@ -44,10 +44,7 @@ border-right-color = #2d2d2d
 fixed-center = true
 
 ; font
-; font-0 = "Iosevka:size=12;3"
-font-0 = "UbuntuCondensed Nerd Font:size=13;3"
-font-1 = "Iosevka Term:size=18;5"
-font-2 = "Iosevka Term:size=22;5"
+font-0 = "UbuntuCondensed Nerd Font:size=14;3"
 
 ; padding
 padding = 2
@@ -93,7 +90,7 @@ offset-y = 0
 offset-x = 0
 
 ; modules
-modules-right = wireless-network date time
+modules-right = sound wireless-network date time
 modules-center = song
 modules-left = i3
 
@@ -153,7 +150,7 @@ type = internal/cpu
 
 format = <label>
 format-prefix = %{O0}
-format-prefix-background = ${colors.batime
+format-prefix-background = ${colors.bg}
 
 [module/wireless-network]
 type = internal/network
@@ -162,14 +159,13 @@ inherit = section/base
 
 ; format
 format-connected = <label-connected>
-format-connected-prefix =  %{O0}
-format-connected-prefix-background = #fe8019
-format-connected-prefix-foreground = #000000
-format-connected-prefix-font = 2
+format-connected-prefix = 
+format-connected-prefix-background = ${colors.bg}
+format-connected-prefix-foreground = #98971a
 format-connected-prefix-padding = 1
 
 ; label
-label-connected = %{B#a2a2a2 F#000000}%{O-10} %essid% %{B- F-}
+label-connected = %{F#98971a} %essid% %{F-}
 
 ; refresh time
 interval = 1
@@ -193,21 +189,20 @@ inherit = section/base
 
 [module/date]
 type = internal/date
-date = %a %d/%m
+date = %d/%m
 interval = 1
 inherit = section/base
 
 ; format
 format = <label>
-format-prefix = %{O0}
-format-prefix-background = #cc241d
-format-prefix-foreground = #000000
+format-prefix =
+format-prefix-background = ${colors.bg}
+format-prefix-foreground = #d65d0e
 
 ; label
-label = %{B#a2a2a2 F#000000}%{O-10} %date% %{B- F-}
-format-label-background = #a2a2a2
+label = %{F#d65d0e} %date% %{F-}
 
-[module/artist]
+[module/song]
 type = custom/script
 tail = true
 
@@ -216,40 +211,19 @@ inherit = section/base
 
 ; format
 format = <label>
-format-prefix = ﴁ %{O0}
-format-prefix-background = #076678
-format-prefix-foreground = #000000
+format-prefix = 
+format-prefix-background = ${colors.bg}
+format-prefix-foreground = #458588
 
 ; label
-label = %{B#a2a2a2 F#000000}%{O-10} %output:0:100% %{B- F-}
+label = %{F#458588} %output:0:100% %{F-}
 
 ; exec
-exec-if = ~/.config/polybar/musicinfo.py song "%a"
-exec = ~/.config/polybar/musicinfo.py song "%a"
+exec-if = ~/.config/polybar/musicinfo.py song "%a  %t"
+exec = ~/.config/polybar/musicinfo.py song "%a  %t"
 interval = 1
 
 [module/title]
-type = custom/script
-tail = true
-
-; inherit
-inherit = section/base
-
-; format
-format = <label>
-format-prefix =  %{O0}
-format-prefix-background = #d3869b
-format-prefix-foreground = #000000
-
-; label
-label = %{B#a2a2a2 F#000000}%{O-10} %output:0:100% %{B- F-}
-
-; exec
-exec-if = ~/.config/polybar/musicinfo.py song "%t"
-exec = ~/.config/polybar/musicinfo.py song "%t"
-interval = 1
-
-[module/song]
 type = custom/script
 tail = true
 
@@ -307,7 +281,6 @@ interval = 1
 
 ; label
 label = %{B#d87c47 F#000000}%{O-15}  %output% %{B- F-}
-label-font = 2
 
 [module/sound]
 type = internal/alsa
@@ -322,26 +295,23 @@ headphone-soundcard = hw:0
 
 ; format muted
 format-muted = <label-muted>
-label-muted-foreground = #000000
-label-muted-background = #686868
+label-muted-foreground = #d79921
+label-muted-background = ${colors.bg}
 
 ; label muted
-label-muted = %{B#686868 F#000000} 婢 %{B-F-}
-label-muted-font = 2
+label-muted = %{F#d79921} 婢 %{F-}
 
 ; format volume
 format-volume = <ramp-volume> <label-volume>
-format-volume-foreground = #000000
-format-volume-background = #686868
-format-volume-font = 2
+format-volume-foreground = #d79921
+format-volume-background = ${colors.bg}
 
 ; label volume
 label-volume = " %percentage% "
-label-volume-font = 1
-label-volume-foreground = #000000
-label-volume-background = #a2a2a2
+label-volume-foreground = #d79921
+label-volume-background = ${colors.bg}
 
 ; ramp
-ramp-volume-0 = " "
-ramp-volume-1 = " "
 ramp-volume-2 = " "
+ramp-volume-1 = " "
+ramp-volume-0 = " "

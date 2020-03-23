@@ -157,7 +157,7 @@ format-connected-prefix-foreground = #98971a
 format-connected-prefix-padding = 1
 
 ; label
-label-connected = %{F#98971a} %essid% %{F-}
+label-connected = %{F#98971a} %essid% %{F-}%{F#585858}/%{F-}
 
 ; refresh time
 interval = 1
@@ -192,7 +192,7 @@ format-prefix-background = ${colors.bg}
 format-prefix-foreground = #d65d0e
 
 ; label
-label = %{F#d65d0e} %date% %{F-}
+label = %{F#d65d0e} %date% %{F-}%{F#585858}/%{F-}
 
 [module/song]
 type = custom/script
@@ -232,7 +232,7 @@ label-muted-foreground = #d79921
 label-muted-background = ${colors.bg}
 
 ; label muted
-label-muted = %{F#d79921} 婢 %{F-}
+label-muted = %{F#d79921} 婢 %{F-}%{F#585858}/%{F-}
 
 ; format volume
 format-volume = <ramp-volume> <label-volume>
@@ -240,7 +240,7 @@ format-volume-foreground = #d79921
 format-volume-background = ${colors.bg}
 
 ; label volume
-label-volume = " %percentage% "
+label-volume = " %percentage% %{F#585858}/%{F-}"
 label-volume-foreground = #d79921
 label-volume-background = ${colors.bg}
 

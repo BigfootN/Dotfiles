@@ -56,6 +56,15 @@ bindsym Mod4+s exec --no-startup-id "shutdown -h now"
 # reboot
 bindsym Mod4+r exec --no-startup-id "shutdown -r now"
 
+# terminal
+bindsym Mod4+t exec --no-startup-id "gnome-terminal --hide-menubar"
+
+# browser
+bindsym Mod4+b exec --no-startup-id "firefox"
+
+# code
+bindsym Mod4+c exec --no-startup-id "code"
+
 # close the application
 bindsym Mod1+F4 kill
 

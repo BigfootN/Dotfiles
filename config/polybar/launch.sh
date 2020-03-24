@@ -27,6 +27,9 @@ bg = #2d2d2d
 ; border color
 border = #767676
 
+; label text
+labeltext = #b5b5b5
+
 [section/bar_settings]
 ; height
 height = 2.8%
@@ -45,6 +48,7 @@ fixed-center = true
 
 ; font
 font-0 = "UbuntuCondensed Nerd Font:size=14;3"
+font-1 = "UbuntuCondensed Nerd Font:style=bold:size=14;3"
 
 ; padding
 padding = 2
@@ -115,34 +119,30 @@ format = <label-state>
 label-focused = ""
 label-focused-foreground = #e87d4c
 label-focused-background = ${colors.bg}
-label-focused-font = 3
 label-focused-padding = 1
 
 ; unfocused format
 label-unfocused = %icon%
 label-unfocused-foreground = #b5b5b5
 label-unfocused-background = ${colors.bg}
-label-unfocused-font = 3
 label-unfocused-padding = 1
 
 ; visible format
 label-visible = %icon%
 label-visible-foreground = #b5b5b5
 label-visible-background = ${colors.bg}
-label-visible-font = 3
 label-visible-padding = 1
 
 ; urgent format
 label-urgent = %icon%
 label-urgent-foreground = #b5b5b5
 label-urgent-background = ${colors.bg}
-label-urgent-font = 3
 label-urgent-padding = 1
 
 ; default icon
 ws-icon-default = ""
 
-label-seperator-padding = 0
+label-seperator-padding = 1
 
 [module/wireless-network]
 type = internal/network
@@ -157,7 +157,7 @@ format-connected-prefix-foreground = #98971a
 format-connected-prefix-padding = 1
 
 ; label
-label-connected = %{F#98971a} %essid% %{F-}%{F#585858}/%{F-}
+label-connected = %{F#b5b5b5} %essid% %{F-}%{F#585858}%{T1}/%{T-}%{F-}
 
 ; refresh time
 interval = 1
@@ -174,7 +174,7 @@ format-prefix-background = ${colors.bg}
 format-prefix-foreground = #cc241d
 
 ; label
-label = %{F#cc241d}%time%%{F-}
+label = %{F#b5b5b5}%time%%{F-}
 
 ; inheritance
 inherit = section/base
@@ -192,7 +192,7 @@ format-prefix-background = ${colors.bg}
 format-prefix-foreground = #d65d0e
 
 ; label
-label = %{F#d65d0e} %date% %{F-}%{F#585858}/%{F-}
+label = %{F#b5b5b5} %date% %{F-}%{F#585858}%{T1}/%{T-}%{F-}
 
 [module/song]
 type = custom/script
@@ -232,7 +232,7 @@ label-muted-foreground = #d79921
 label-muted-background = ${colors.bg}
 
 ; label muted
-label-muted = %{F#d79921} 婢 %{F-}%{F#585858}/%{F-}
+label-muted = %{F#b5b5b5} 婢 %{F-}%{F#585858}%{T1}/%{T-}%{F-}
 
 ; format volume
 format-volume = <ramp-volume> <label-volume>
@@ -240,7 +240,7 @@ format-volume-foreground = #d79921
 format-volume-background = ${colors.bg}
 
 ; label volume
-label-volume = " %percentage% %{F#585858}/%{F-}"
+label-volume = "%{F#b5b5b5} %percentage% %{F-} %{F#585858}%{T1}/%{T-}%{F-}"
 label-volume-foreground = #d79921
 label-volume-background = ${colors.bg}
 

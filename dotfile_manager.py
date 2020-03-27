@@ -2,6 +2,8 @@ import sys
 import os
 import argparse
 import json
+import pathlib
+import subprocess
 from shutil import copyfile
 
 def init_argument_parser():
@@ -22,13 +24,11 @@ def save_files(config_files_dict):
 
 def deploy_files(config_files_dict):
     for git_path, local_path in config_files_dict.items():
-        if os.path.isfile(git_path):
-            local_dir = os.path.dirname(git_path)
-            if not os.path.exists(local_dir):
-                os.makedirs(local_dir)
-            copyfile(git_path, local_path)
-        else:
-            print("File " + git_path + " not found!", file = sys.stderr)
+        local_path_tilde = os.path.expanduser(local_path)
+        abs_path = pathlib.Path(local_path_tilde).parent.absolute()
+        if not os.path.exists(abs_path):
+            os.makedirs(abs_path)
+        copyfile(git_path, local_path_tilde)
 
 def iterate_through_json_data(json_data, path = os.path.dirname(os.path.realpath(__file__))):
     ret = dict()
@@ -46,6 +46,12 @@ def parse_arguments():
 
     return args
 
+def install_packages(packages_array):
+    cmd = ["sysinstall"]
+    for package in packages_array:
+        cmd.append(package)
+    subprocess.run(cmd)
+
 def run(args):
     config_file = args.config_file
     data = None
@@ -54,12 +60,16 @@ def run(args):
         data = json.load(f)
     
     if (not data is None):
-        json_dict = iterate_through_json_data(data)
+        data_files = data["files"]
+        json_dict = iterate_through_json_data(data_files)
 
         if args.operation == "save":
             save_files(json_dict)
+
         elif args.operation == "deploy":
+            data_packages = data["packages"]
             deploy_files(json_dict)
+            install_packages(data_packages)
     else:
         print("ERROR! Config file " + config_file + " not found", file=sys.stderr)
 

@@ -1,43 +1,49 @@
 {
-    "zshrc":"~/.zshrc",
-    "wallpaper": {
-        "wall.jpg": "~/.wallpaper/wall.jpg"
-    },
-    "config": {
-        "alacritty": {
-            "alacritty.yml": "~/.config/alacritty/alacritty.yml"
+    "files": {
+        "zshrc": "~/.zshrc",
+        "wallpaper": {
+            "wall.jpg": "~/.wallpaper/wall.jpg"
         },
-        "code": {
-            "settings.json": "~/.config/Code/User/settings.json",
-            "extensions.list": "~/.config/Code/User/extensions.list"
-        },
-        "picom": {
-            "picom.conf": "~/.config/picom/picom.conf"
-        },
-        "yay": {
-            "config.json": "~/.config/yay/config.json"
-        },
-        "polybar": {
-            "config": "~/.config/polybar/config",
-            "launch.sh": "~/.config/polybar/config",
-            "musicinfo.py": "~/.config/polybar/musicinfo.py",
-            "updates.sh": "~/.config/polybar/updates.sh"
-        },
-        "gtk-3.0": {
-            "settings.ini": "~/.config/gtk-3.0/settings.ini",
-            "gtk.css": "~/.config/gtk-3.0/gtk.css"
-        },
-        "i3": {
-            "config": "~/.config/i3/config",
-            "goto_workspace.py": "~/.config/i3/goto_workspace.py",
-            "move_container.py": "~/.config/i3/move_container.py",
-            "volume.sh": "~/.config/i3/volume.sh"
-        },
-        "clang-format": {
-            "clang-format": "~/.config/clang-format/clang-format"
-        },
-        "rofi": {
-            "config.rasi": "~/.config/rofi/config.rasi"
+        "config": {
+            "code": {
+                "settings.json": "~/.config/Code/User/settings.json",
+                "extensions.list": "~/.config/Code/User/extensions.list"
+            },
+            "picom": {
+                "picom.conf": "~/.config/picom/picom.conf"
+            },
+            "yay": {
+                "config.json": "~/.config/yay/config.json"
+            },
+            "polybar": {
+                "config": "~/.config/polybar/config",
+                "launch.sh": "~/.config/polybar/launch.sh",
+                "musicinfo.py": "~/.config/polybar/musicinfo.py",
+                "updates.sh": "~/.config/polybar/updates.sh"
+            },
+            "gtk-3.0": {
+                "settings.ini": "~/.config/gtk-3.0/settings.ini",
+                "gtk.css": "~/.config/gtk-3.0/gtk.css"
+            },
+            "i3": {
+                "config": "~/.config/i3/config",
+                "goto_workspace.py": "~/.config/i3/goto_workspace.py",
+                "move_container.py": "~/.config/i3/move_container.py",
+                "volume.sh": "~/.config/i3/volume.sh"
+            },
+            "clang-format": {
+                "clang-format": "~/.config/clang-format/clang-format"
+            }
         }
-    }
+    },
+    "packages": [
+        "base",
+        "base-devel",
+        "visual-studio-code-bin",
+        "python-i3ipc",
+        "clang",
+        "gnome-terminal",
+        "lightdm",
+        "lightdm-webkit-theme-litarvan"
+    ]
 }

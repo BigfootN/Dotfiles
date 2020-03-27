@@ -44,6 +44,13 @@
         "clang",
         "gnome-terminal",
         "lightdm",
-        "lightdm-webkit-theme-litarvan"
+        "lightdm-webkit-theme-litarvan",
+        "git",
+        "nerd-fonts-complete",
+        "firefox",
+        "polybar",
+        "feh",
+        "xorg-server",
+        "mesa"
     ]
 }

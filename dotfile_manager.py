@@ -4,6 +4,9 @@ import argparse
 import json
 import pathlib
 import subprocess
+import git
+import stat
+from pathlib import Path
 from shutil import copyfile
 
 def init_argument_parser():
@@ -29,6 +32,9 @@ def deploy_files(config_files_dict):
         if not os.path.exists(abs_path):
             os.makedirs(abs_path)
         copyfile(git_path, local_path_tilde)
+        if Path(local_path).suffix == ".sh":
+            st = os.stat(local_path)
+            os.chmod(local_path, st.st_mode | stat.S_IEXEC)
 
 def iterate_through_json_data(json_data, path = os.path.dirname(os.path.realpath(__file__))):
     ret = dict()
@@ -46,11 +52,29 @@ def parse_arguments():
 
     return args
 
+def install_yay():
+    cwd = os.getcwd()
+    yay_git_url = "https://github.com/Jguer/yay"
+    yay_clone_path = "/tmp/yay.git"
+    
+    yay_repo = git.repo.base.Repo(yay_git_url)
+    yay_repo.clone(yay_clone_path)
+    os.chdir(yay_clone_path)
+    subprocess.run(["sudo", "makepkg", "-si"])
+    os.chdir(cwd)
+    os.rmdir(yay_clone_path)
+
 def install_packages(packages_array):
     cmd = ["sysinstall"]
     for package in packages_array:
         cmd.append(package)
     subprocess.run(cmd)
+
+def configure_xorg():
+    subprocess.run(["sudo", "Xorg", ":0", "-configure"])
+    subprocess.run(["sudo", "mkdir", "-p", "/etc/X11"])
+    subprocess.run(["sudo", "cp", "/root/xorg.conf.new", "/etc/X11/xorg.conf"])
+    subprocess.run(["sudo", "setxkbmap", "-layout", "de"])
 
 def run(args):
     config_file = args.config_file
@@ -68,6 +92,9 @@ def run(args):
 
         elif args.operation == "deploy":
             data_packages = data["packages"]
+
+            configure_xorg()
+            install_yay()
             deploy_files(json_dict)
             install_packages(data_packages)
     else:

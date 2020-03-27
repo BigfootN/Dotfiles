@@ -49,8 +49,14 @@
         "nerd-fonts-complete",
         "firefox",
         "polybar",
+        "grub",
         "feh",
         "xorg-server",
-        "mesa"
+        "mesa",
+        "iwd",
+        "i3-gaps",
+        "nemo",
+        "transmission-gtk",
+        "cmake"
     ]
 }

@@ -76,6 +76,13 @@ def configure_xorg():
     subprocess.run(["sudo", "cp", "/root/xorg.conf.new", "/etc/X11/xorg.conf"])
     subprocess.run(["sudo", "setxkbmap", "-layout", "de"])
 
+def configure_grub():
+    subprocess.run(["sudo", "grub-install", "--target=x86_64-efi", "--efi-directory=/efi", "--bootloader-id=GRUB"])
+
+def enable_services():
+    subprocess.run(["sudo", "systemctl", "enable", "--force", "lightdm"])
+    subprocess.run(["sudo", "systemctl", "enable", "iwd"])
+
 def run(args):
     config_file = args.config_file
     data = None
@@ -93,10 +100,12 @@ def run(args):
         elif args.operation == "deploy":
             data_packages = data["packages"]
 
-            configure_xorg()
             install_yay()
             deploy_files(json_dict)
             install_packages(data_packages)
+            configure_xorg()
+            configure_grub()
+            enable_services()
     else:
         print("ERROR! Config file " + config_file + " not found", file=sys.stderr)
 

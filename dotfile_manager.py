@@ -6,6 +6,7 @@ import pathlib
 import subprocess
 import git
 import stat
+import shutil
 from pathlib import Path
 from shutil import copyfile
 
@@ -54,34 +55,22 @@ def parse_arguments():
 
 def install_yay():
     cwd = os.getcwd()
-    yay_git_url = "https://github.com/Jguer/yay"
+    yay_pkgbuild_url = "https://aur.archlinux.org/yay.git"
     yay_clone_path = "/tmp/yay.git"
-    
-    yay_repo = git.repo.base.Repo(yay_git_url)
-    yay_repo.clone(yay_clone_path)
-    os.chdir(yay_clone_path)
-    subprocess.run(["sudo", "makepkg", "-si"])
+
+    pathlib.Path(yay_clone_path).mkdir(parents=True, exist_ok=True)    
+    yay_repo = git.Git(yay_clone_path)
+    yay_repo.clone(yay_pkgbuild_url)
+    os.chdir(yay_clone_path+"/yay")
+    subprocess.run(["makepkg", "-si"])
     os.chdir(cwd)
-    os.rmdir(yay_clone_path)
+    shutil.rmtree(yay_clone_path, ignore_errors=True)
 
 def install_packages(packages_array):
-    cmd = ["sysinstall"]
+    cmd = ["yay", "-Sy", "--noconfirm"]
     for package in packages_array:
         cmd.append(package)
     subprocess.run(cmd)
-
-def configure_xorg():
-    subprocess.run(["sudo", "Xorg", ":0", "-configure"])
-    subprocess.run(["sudo", "mkdir", "-p", "/etc/X11"])
-    subprocess.run(["sudo", "cp", "/root/xorg.conf.new", "/etc/X11/xorg.conf"])
-    subprocess.run(["sudo", "setxkbmap", "-layout", "de"])
-
-def configure_grub():
-    subprocess.run(["sudo", "grub-install", "--target=x86_64-efi", "--efi-directory=/efi", "--bootloader-id=GRUB"])
-
-def enable_services():
-    subprocess.run(["sudo", "systemctl", "enable", "--force", "lightdm"])
-    subprocess.run(["sudo", "systemctl", "enable", "iwd"])
 
 def run(args):
     config_file = args.config_file
@@ -101,11 +90,8 @@ def run(args):
             data_packages = data["packages"]
 
             install_yay()
-            deploy_files(json_dict)
+            deploy_files(json_dict) 
             install_packages(data_packages)
-            configure_xorg()
-            configure_grub()
-            enable_services()
     else:
         print("ERROR! Config file " + config_file + " not found", file=sys.stderr)
 

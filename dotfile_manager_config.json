@@ -39,6 +39,8 @@
     "packages": [
         "base",
         "base-devel",
+        "linux",
+        "linux-firmware",
         "visual-studio-code-bin",
         "python-i3ipc",
         "clang",
@@ -58,6 +60,11 @@
         "nemo",
         "transmission-gtk",
         "cmake",
-        "xorg-xset"
+        "xorg-xset",
+        "picom",
+        "dhcpcd",
+        "adapta-gtk-theme",
+        "papirus-icon-theme",
+        "spotify"
     ]
 }

@@ -87,6 +87,8 @@ copy_files() {
         mkdir -p $dir
         cp $git_path $local_path
     done
+
+    dconf load /org/gnome/terminal/ < $PWD/config/gnome-terminal/settings.txt
 }
 
 configure_xorg() {

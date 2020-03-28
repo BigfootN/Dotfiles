@@ -27,9 +27,6 @@ xset r rate 150 170
 # SETTINGS
 # ————————
 
-# antigen plugin path
-ADOTDIR="$HOME/.antigen"
-
 # keyboard speed
 xset r rate 180 100
 
@@ -37,7 +34,7 @@ xset r rate 180 100
 export LANG=fr_FR.UTF-8
 
 # editor
-export EDITOR=/usr/bin/nvim
+export EDITOR=/usr/bin/code
 
 # config path
 export XDG_CONFIG_HOME=$HOME/.config
@@ -45,9 +42,6 @@ export XDG_CONFIG_HOME=$HOME/.config
 # npm
 PATH="$HOME/.node_modules/bin/:$HOME/.scripts:$PATH"
 export npm_config_prefix=~/.node/modules
-
-# height of polybar
-export POLYBAR_HEIGHT=50
 
 # ———————
 # ANTIGEN
@@ -76,10 +70,10 @@ antigen apply
 # ————————————————
 
 # cmake build init
-cmake_build_prepare() {
-	mkdir -p build/{debug,release}
-	cmake -G "Unix Makefiles" -DBUILD_TYPE=Debug build/debug .
-	cmake -G "Unix Makefiles" -DBUILD_TYPE=Release build/release .
+update_mirrors() {
+	servers=$(curl -s "https://www.archlinux.org/mirrorlist/?country=FR&protocol=https&ip_version=6" | sed -e 's/^#Server/Server/' -e '/^#/d')
+    echo $servers > mirrorlist
+    sudo mv mirrorlist /etc/pacman.d/mirrorlist
 }
 
 # exit i3
@@ -128,19 +122,13 @@ export SPACESHIP_HOST_PREFIX="$(printf '\u0040')"
 # named directories
 export dev=~/Documents/Dev
 
-# utils
-alias mirrupg="sudo reflector --country France --sort rate --age 12 --protocol https --save /etc/pacman.d/mirrorlist"
-
 # vpn
 alias vpn_connect="sudo expressvpn connect smart"
 alias vpn_disconnect="sudo expressvpn disconnect"
 
 # package mgmt
-alias sysupg="mirrupg && yay -Syu --noconfirm"
+alias sysupg="yay -Syu --noconfirm"
 alias sysinstall="yay -Sy --noconfirm"
 alias sysrm="yay -Rcsn --noconfirm"
 alias syspkgsrc="yay -Qs"
 alias sysclean="yay -Scc && sysrm $(yay -Qtdq)"
-
-# cmake/prog
-alias cmakeinit="cmake_build_prepare"

@@ -34,12 +34,11 @@ PACKAGES=(
     "spotify"
     "wget"
     "vulkan-intel"
+    "python-dbus"
+    "pacman-contrib"
 )
 
 declare -A CONFIG_FILES
-CONFIG_FILES[test]=test
-
-echo "${(k)CONFIG_FILES[@]}"
 CONFIG_FILES=(
     ["config/clang-format/clang-format"]="~/.config/clang-format/clang-format"
     ["config/code/settings.json"]="~/.config/Code/User/settings.json"
@@ -68,6 +67,16 @@ source_zshrc() {
     mkdir -p ~/.antigen
     curl -L git.io/antigen > ~/.antigen/antigen.zsh
     source ~/.zshrc
+}
+
+configure_mirrors() {
+    servers=$(curl -s "https://www.archlinux.org/mirrorlist/?country=FR&protocol=https&ip_version=6" | sed -e 's/^#Server/Server/' -e '/^#/d')
+    echo $servers > mirrorlist
+    sudo mv mirrorlist /etc/pacman.d/mirrorlist
+}
+
+configure_shell() {
+    chsh -s $SHELL $USERNAME
 }
 
 copy_files() {
@@ -119,4 +128,4 @@ install_packages() {
     sysinstall $packages_str
 }
 
-copy_files
+configure_mirrors

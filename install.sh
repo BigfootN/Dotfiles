@@ -102,17 +102,17 @@ configure_time() {
     timedatectl set-timezone Europe/Paris
 }
 
-install_yay() {
-    yay_url=https://aur.archlinux.org/yay.git
-    yay_wd=/tmp/yay
+install_pikaur() {
+    pikaur_url=https://aur.archlinux.org/pikaur.git
+    pikaur_wd=/tmp/pikaur
 
     cwd=$PWD
-    mkdir -p $yay_wd
-    git clone $yay_url $yay_wd
-    cd $yay_wd
-    makepkg -si
+    mkdir -p $pikaur_wd
+    git clone $pikaur_url $pikaur_wd
+    cd $pikaur_wd
+    makepkg -fsri
     cd $cwd
-    rm -rf $yay_wd
+    rm -rf $pikaur_wd
 }
 
 install_packages() {

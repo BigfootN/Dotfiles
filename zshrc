@@ -66,9 +66,9 @@ antigen apply
 # HELPER FUNCTIONS
 # ————————————————
 
-# cmake build init
+# update mirrors
 update_mirrors() {
-	servers=$(curl -s "https://www.archlinux.org/mirrorlist/?country=FR&protocol=https&ip_version=6" | sed -e 's/^#Server/Server/' -e '/^#/d')
+	servers=$(curl -s "https://www.archlinux.org/mirrorlist/?country=FR&protocol=https&ip_version=4&ip_version=6" | sed -e 's/^#Server/Server/' -e '/^#/d')
     echo $servers > mirrorlist
     sudo mv mirrorlist /etc/pacman.d/mirrorlist
 }
@@ -124,7 +124,7 @@ alias vpn_connect="sudo expressvpn connect smart"
 alias vpn_disconnect="sudo expressvpn disconnect"
 
 # package mgmt
-alias sysupg="yay -Syu --noconfirm"
+alias sysupg="pikaur -Syu --noconfirm"
 alias sysinstall="yay -Sy --noconfirm"
 alias sysrm="yay -Rcsn --noconfirm"
 alias syspkgsrc="yay -Qs"

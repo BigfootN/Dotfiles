@@ -20,15 +20,12 @@ fi
 # INIT
 # ————
 
-# cursor speed
-xset r rate 150 170
+# keyboard
+xset r rate 200 110
 
 # ————————
 # SETTINGS
 # ————————
-
-# keyboard speed
-xset r rate 180 100
 
 # language environment
 export LANG=fr_FR.UTF-8

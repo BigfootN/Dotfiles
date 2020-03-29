@@ -14,4 +14,5 @@ CONFIG_FILES=(
     ["config/polybar/config"]="~/.config/polybar/config"
     ["config/polybar/musicinfo.py"]="~/.config/polybar/launch"
     ["config/polybar/updates.sh"]="~/.config/polybar/updates.sh"
+    ["wallpaper/wall.jpg"]="~/.wallpaper/wall.jpg"
 )

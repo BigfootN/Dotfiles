@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-. files.sh
+. config_files.sh
 
 declare -a PACKAGES
 PACKAGES=(

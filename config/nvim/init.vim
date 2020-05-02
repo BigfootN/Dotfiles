@@ -12,7 +12,9 @@
 "
 " *******************************************
 
-" ************* plugins *************
+" ―――――――――――――
+" ―― plugins ――
+" ―――――――――――――
 
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -21,7 +23,6 @@ Plug 'morhetz/gruvbox'
 
 " -- vim airline
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 " -- improve syntax color
 Plug 'sheerun/vim-polyglot'
@@ -36,15 +37,10 @@ Plug 'w0rp/ale'
 Plug 'Chiel92/vim-autoformat'
 
 " -- code completion
-Plug 'Valloric/YouCompleteMe'
-Plug 'artur-shaik/vim-javacomplete2'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " -- snippets
-Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
-
-" -- change project root automatically
-Plug 'airblade/vim-rooter'
 
 " -- complete brackets, parentheses, ...
 Plug 'jiangmiao/auto-pairs'
@@ -70,10 +66,46 @@ Plug 'konfekt/fastfold'
 " -- ctrlp
 Plug 'ctrlpvim/ctrlp.vim'
 
+" -- github
+Plug 'tpope/vim-fugitive'
+
 call plug#end()
 
-" ************* editor configuration *************
+" ―――――――――――――――
+" ―― Functions ――
+" ―――――――――――――――
 
+" change working directory and nerd tree root
+function! s:ChangeWorkingDirectory(wd)
+	execute "cd " . a:wd
+	execute "NERDTreeCWD"
+endfunction
+
+" remove useless tabs/spaces
+function! s:RemoveWhiteSpacesTabs()
+	let l:save = winsaveview()
+	keeppatterns %s/\s\+$//e
+	call winrestview(l:save)
+endfunction
+
+" join consecutive blank lines
+function! s:JoinBlankEmptyLines()
+	let l:save = winsaveview()
+	keeppatterns v/\S/,/\S/-j
+	call winrestview(l:save)
+endfunction
+
+" remove useless lines
+function! s:RemoveUselessLines()
+	call s:RemoveWhiteSpacesTabs()
+	call s:JoinBlankEmptyLines()
+endfunction
+
+" ――――――――――――――――――――――――――
+" ―― Editor configuration ――
+" ――――――――――――――――――――――――――
+
+" general global settings
 filetype plugin on
 filetype indent on
 syntax on
@@ -93,16 +125,23 @@ set termguicolors
 " leave buffer with modifications
 set hidden
 
+" set headers (*.h) to c file type not cpp
 au BufNewFile,BufRead *.h setlocal ft=c
+
+" trim whitespaces
+au BufWrite *.* call s:RemoveUselessLines()
 
 " python indent
 autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4
 
+" lua indent
+autocmd FileType lua setlocal noexpandtab tabstop=4|%retab!
+
 " disable ansible, sshconfig indent
-autocmd FileType conf,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_autoindent=0
-autocmd FileType conf,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_retab=0
-autocmd FileType conf,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_remove_trailing_spaces=0
-autocmd FileType conf,tex,vim,yaml,sshconfig,dockerfile,make let b:did_indent=0
+autocmd FileType conf,lua,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_autoindent=0
+autocmd FileType conf,lua,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_retab=0
+autocmd FileType conf,lua,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_remove_trailing_spaces=0
+autocmd FileType conf,lua,tex,vim,yaml,sshconfig,dockerfile,make let b:did_indent=0
 
 " yaml tab size
 autocmd FileType yaml setlocal expandtab shiftwidth=4 tabstop=4
@@ -110,10 +149,9 @@ autocmd FileType yaml setlocal expandtab shiftwidth=4 tabstop=4
 " popup height
 set pumheight=10
 
-" indentation guide
-set list lcs=tab:\|\ 
-
-" ************* eye-candy configuration *************
+" ―――――――――――――――
+" ―― Eye candy ――
+" ―――――――――――――――
 
 " show line numbers
 set nu
@@ -125,23 +163,31 @@ set background=dark
 colorscheme gruvbox
 
 " veritcal split character
-" set fillchars+=vert:\┃
+set list
+set lcs=tab:\|\·,precedes:\·,space:\·
 
-" ************* Keymaps *************
+" ――――――――――――――
+" ―― Commands ――
+" ――――――――――――――
+
+" change wroking directory
+com! -nargs=1 -complete=file CWD call s:ChangeWorkingDirectory(<f-args>)
+
+" close buffer and jump to next one
+com! DeleteBuffer :bp | :bd #
+
+" ――――――――――――
+" ―― Kymaps ――
+" ――――――――――――
 
 let mapleader = ","
 
 nnoremap <leader>vc :e ~/.config/nvim/init.vim<CR>
-nnoremap <leader>tnw :tabnew<CR>
-nnoremap <leader>tp :tabprevious<CR>
-nnoremap <leader>tn :tabnext<CR>
-nnoremap <leader>tc :wa <bar> :tabclose<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q!<CR>
 
-" YouCompleteMe maps
-nnoremap <leader>yd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>yt :YcmCompleter GetType<CR>
+" delete buffer and jump to next one
+nnoremap <leader>bd :DeleteBuffer<CR>
 
 " line numbers relative/absolute
 set number relativenumber
@@ -152,13 +198,22 @@ nnoremap <leader>pc :PlugClean<CR>
 
 " CtrlP mappings
 nnoremap <leader>cpb :CtrlPBuffer<CR>
-nnoremap <leader>cpf :CtrlP<CR>
+nnoremap <leader>cpd :CtrlPCurWD<CR>
+nnoremap <leader>cpf :CtrlPCurFile<CR>
 
 " NerdTree mappings
-nnoremap <leader>nt :NERDTreeToggle<CR> 
+nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFocus<CR>
 
-" ************* CtrlP configuration *************
+" change wd
+nnoremap <leader>cd :CWD
+
+" jump to definition
+nnoremap <leader>d <Plug>(coc-defintion)
+
+" ―――――――――――
+" ―― CtrlP ――
+" ―――――――――――
 
 " ignore spaces when searching
 let g:ctrlp_abbrev = {
@@ -180,10 +235,16 @@ let g:ctrlp_custom_ignore = {
 	\ 'file' : '\v.(build|debug).|.\.o$',
 	\ }
 
-" ************* Airline configuration *************
+" ―――――――――――――
+" ―― Airline ――
+" ―――――――――――――
 
-let g:airline_powerline_fonts = 0
-let g:airline_theme = "gruvbox"
+" don't use powerline fonts
+let g:airline_powerline_fonts = 1
+
+" seperators
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
 
 " symbols
 if !exists('g:airline_symbols')
@@ -192,7 +253,7 @@ endif
 let g:airline_symbols.space = "\ua0"
 
 " extensions
-let g:airline_extensions = ['tabline']
+let g:airline_extensions = ['tabline', 'ctrlp', 'ale']
 let g:airline#extensions#default#section_truncate_width = {}
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -221,7 +282,9 @@ let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 
-" ************* VimTex configuration *************
+" ――――――――――――
+" ―― VimTex ――
+" ――――――――――――
 
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
@@ -230,23 +293,9 @@ let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 let g:tex_fold_enabled = 1
 let g:fastfold_fold_command_suffixes = ['x']
 
-" ************* YouCompleteMe configuration *************
-
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_max_num_candidates = 10
-let g:ycm_max_num_identifier_candidates = 10
-
-" ************* Ultisnips configuration *************
-
-" UltiSnips triggering
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-
-" ************* Startify configuration *************
+" ――――――――――――――
+" ―― Startify ――
+" ――――――――――――――
 
 let g:startify_custom_header = [
 			\"   _   _                   _            ",
@@ -274,16 +323,19 @@ let g:startify_bookmarks = [
 			\ '~/Documents/Prog/mdata/'
 			\ ]
 
-" ************* ale configuration *************
+" ―――――――――
+" ―― Ale ――
+" ―――――――――
 
 " global settings
 let g:ale_lint_on_text_changed = 1
 let g:ale_lint_on_enter = 1
-let g:ale_lint_on_save = 1 
+let g:ale_lint_on_save = 1
 let g:ale_completion_enabled = 0
 let g:ale_linters = {
 	\ 'c': ['clangd'],
-	\ 'cpp': ['clangcheck']
+	\ 'cpp': ['clangd'],
+	\ 'lua': []
 	\}
 
 " loclist/window settings
@@ -298,7 +350,29 @@ augroup END
 let g:ale_c_parse_compile_commands = 1
 let g:ale_c_build_dir_names = ['build', 'build/debug', 'build/release']
 
-" ************* NERDTree configuration *************
+" cpp linter settings
+
+" ――――――――――――――
+" ―― Coc.nvim ――
+" ――――――――――――――
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+" use <c-space>for trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" ――――――――――――――
+" ―― Nerdtree ――
+" ――――――――――――――
 
 autocmd VimEnter *
 			\   if !argc()
@@ -310,7 +384,9 @@ autocmd VimEnter *
 " -- ignore files
 let NERDTreeIgnore = ['^build$']
 
-" ************* Autoformat configuration *************
+" ――――――――――――――――
+" ―― Autoformat ――
+" ――――――――――――――――
 
 " Cpp language
 let g:formatdef_uncrustify_cpp = '"uncrustify -q -c ~/.config/uncrustify/uncrustify.cfg -l CPP"'
@@ -326,14 +402,17 @@ autocmd BufWritePre * if index(blacklist, &ft) < 0 | :Autoformat
 " python
 let g:formatter_yapf_style = 'google'
 
-" ************* Gruvbox configuration *************
+" ―――――――――――――
+" ―― Gruvbox ――
+" ―――――――――――――
 
 let g:gruvbox_number_column = 'bg1'
 let g:gruvbox_contrast_dark = 'hard'
 
-" ************* Vim Devicons configuration ************* 
+" ――――――――――――――
+" ―― Devicons ――
+" ――――――――――――――
 
 let g:NERDTreeLimitedSyntax = 1
 
 set guifont=Iosevka\ Nerd\ Font\ Mono\ 11
-

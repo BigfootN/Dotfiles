@@ -9,7 +9,6 @@ PACKAGES=(
 	"linux"
 	"linux-firmware"
 	"neovim"
-	"python-i3ipc"
 	"clang"
 	"ncmpcpp"
 	"mpd"
@@ -37,10 +36,10 @@ PACKAGES=(
 	"papirus-icon-theme"
 	"wget"
 	"vulkan-intel"
-	"python-dbus"
 	"pacman-contrib"
 	"man"
 	"betterlockscreen"
+	"freetype2-cleartype"
 )
 
 # keyboard layout
@@ -59,9 +58,8 @@ source_zshrc() {
 }
 
 configure_mirrors() {
-	servers=$(curl -s "https://www.archlinux.org/mirrorlist/?country=FR&protocol=https&ip_version=6" | sed -e 's/^#Server/Server/' -e '/^#/d')
-	echo $servers > mirrorlist
-	mv mirrorlist /etc/pacman.d/mirrorlist
+	reflector -c France --ipv6 -p https -f 10 > /tmp/mirrors
+	sudo mv /tmp/mirrors /etc/pacman.d/mirrorlist
 }
 
 copy_files() {
@@ -72,9 +70,12 @@ copy_files() {
 		su - $USERNAME -c "mkdir -p $dir"
 		su - $USERNAME -c "cp -r $git_path $local_path"
 	done
+}
 
-	su - $USERNAME -c "dconf load /org/gnome/terminal/ < $PWD/config/gnome-terminal/settings.txt"
-	su - $USERNAME -c "cat config/code/extensions.list | xargs -L 1 code --install-extension"
+configure_fonts() {
+	wd=$PWD
+	cd /etc/fonts/conf.d
+	sudo ln -s ../conf.avail/10-sub-pixel-rgb.conf
 }
 
 configure_xorg() {
@@ -108,12 +109,12 @@ install_yay() {
 	yay_wd=/tmp/yay
 
 	cwd=$PWD
-	mkdir -p $pikaur_wd
-	git clone $pikaur_url $pikaur_wd
-	cd $pikaur_wd
+	mkdir -p $yay_wd
+	git clone $yay_url $yay_wd
+	cd $yay_wd
 	makepkg -si
 	cd $cwd
-	rm -rf $pikaur_wd
+	rm -rf $yay_wd
 }
 
 install_packages() {

@@ -70,7 +70,7 @@ copy_files() {
 		local_path=${CONFIG_FILES[$git_path]}
 		dir=${local_path%/*}
 		su - $USERNAME -c "mkdir -p $dir"
-		su - $USERNAME -c "cp $git_path $local_path"
+		su - $USERNAME -c "cp -r $git_path $local_path"
 	done
 
 	su - $USERNAME -c "dconf load /org/gnome/terminal/ < $PWD/config/gnome-terminal/settings.txt"

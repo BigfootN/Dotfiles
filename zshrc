@@ -1,27 +1,17 @@
-# ——————————————————————————————————————————————
-#
-# ▒███████▒  ██████  ██░ ██  ██▀███   ▄████▄
-# ▒ ▒ ▒ ▄▀░▒██    ▒ ▓██░ ██▒▓██ ▒ ██▒▒██▀ ▀█
-# ░ ▒ ▄▀▒░ ░ ▓██▄   ▒██▀▀██░▓██ ░▄█ ▒▒▓█    ▄
-#   ▄▀▒   ░  ▒   ██▒░▓█ ░██ ▒██▀▀█▄  ▒▓▓▄ ▄██▒
-# ▒███████▒▒██████▒▒░▓█▒░██▓░██▓ ▒██▒▒ ▓███▀ ░
-# ░▒▒ ▓░▒░▒▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒░ ▒▓ ░▒▓░░ ░▒ ▒  ░
-# ░░▒ ▒ ░ ▒░ ░▒  ░ ░ ▒ ░▒░ ░  ░▒ ░ ▒░  ░  ▒
-# ░ ░ ░ ░ ░░  ░  ░   ░  ░░ ░  ░░   ░ ░
-#
-# ——————————————————————————————————————————————
-
+# ————————————————————————————————————————————————————————
+# /$$           /$$   /$$                /$$
+#|__/          |__/  | $$               |__/
+# /$$ /$$$$$$$  /$$ /$$$$$$   /$$    /$$ /$$ /$$$$$$/$$$$
+#| $$| $$__  $$| $$|_  $$_/  |  $$  /$$/| $$| $$_  $$_  $$
+#| $$| $$  \ $$| $$  | $$     \  $$/$$/ | $$| $$ \ $$ \ $$
+#| $$| $$  | $$| $$  | $$ /$$  \  $$$/  | $$| $$ | $$ | $$
+#| $$| $$  | $$| $$  |  $$$$//$$\  $/   | $$| $$ | $$ | $$
+#|__/|__/  |__/|__/   \___/ |__/ \_/    |__/|__/ |__/ |__/
+# ————————————————————————————————————————————————————————
 
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
 	source /etc/profile.d/vte.sh
 fi
-
-# ————
-# INIT
-# ————
-
-# keyboard
-xset r rate 200 110
 
 # ————————
 # SETTINGS
@@ -31,7 +21,7 @@ xset r rate 200 110
 export LANG=fr_FR.UTF-8
 
 # editor
-export EDITOR=/usr/bin/code
+export EDITOR=/usr/bin/nvim
 
 # config path
 export XDG_CONFIG_HOME=$HOME/.config
@@ -66,18 +56,23 @@ antigen apply
 # HELPER FUNCTIONS
 # ————————————————
 
-# update mirrors
-update_mirrors() {
-	servers=$(curl -s "https://www.archlinux.org/mirrorlist/?country=FR&protocol=https&ip_version=4&ip_version=6" | sed -e 's/^#Server/Server/' -e '/^#/d')
-    echo $servers > mirrorlist
-    sudo mv mirrorlist /etc/pacman.d/mirrorlist
-}
-
 # exit i3
 exit_i3() {
 	killall feh
-	killall polybar
 	i3-msg exit
+}
+
+# upgrade st terminal
+upgrade_terminal() {
+	dir=$(pwd)
+
+	rm -rf /tmp/st
+	git clone git://git.suckless.org/st /tmp/st
+	cp ~/.config/st/config.h /tmp/st
+	cd /tmp/st
+	sudo make install
+	cd $dir
+	rm -rf /tmp/st
 }
 
 # —————————————
@@ -107,7 +102,8 @@ char          # Prompt character
 export SPACESHIP_USER_SUFFIX=""
 
 # char
-export SPACESHIP_CHAR_SYMBOL="➜ "
+export SPACESHIP_CHAR_SYMBOL=">"
+export SPACESHIP_CHAR_SUFFIX=" "
 
 # host
 export SPACESHIP_HOST_PREFIX="$(printf '\u0040')"
@@ -119,13 +115,19 @@ export SPACESHIP_HOST_PREFIX="$(printf '\u0040')"
 # named directories
 export dev=~/Documents/Dev
 
+# utils
+alias mirrupg="sudo reflector --country France --sort rate --age 12 --protocol https --save /etc/pacman.d/mirrorlist"
+
 # vpn
 alias vpn_connect="sudo expressvpn connect smart"
 alias vpn_disconnect="sudo expressvpn disconnect"
 
 # package mgmt
-alias sysupg="pikaur -Syu --noconfirm"
-alias sysinstall="yay -Sy --noconfirm"
+alias sysupg="yay -Syu"
+alias sysinstall="yay -S"
 alias sysrm="yay -Rcsn --noconfirm"
 alias syspkgsrc="yay -Qs"
 alias sysclean="yay -Scc && sysrm $(yay -Qtdq)"
+
+# cmake/prog
+alias cmakeinit="cmake_build_prepare"

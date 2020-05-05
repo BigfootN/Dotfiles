@@ -1,20 +1,17 @@
-" *******************************************
-"
-"
-"  ██▒   █▓ ██▓ ███▄ ▄███▓ ██▀███   ▄████▄
-" ▓██░   █▒▓██▒▓██▒▀█▀ ██▒▓██ ▒ ██▒▒██▀ ▀█
-"  ▓██  █▒░▒██▒▓██    ▓██░▓██ ░▄█ ▒▒▓█    ▄
-"   ▒██ █░░░██░▒██    ▒██ ▒██▀▀█▄  ▒▓▓▄ ▄██▒
-"    ▒▀█░  ░██░▒██▒   ░██▒░██▓ ▒██▒▒ ▓███▀ ░
-"    ░ ▐░  ░▓  ░ ▒░   ░  ░░ ▒▓ ░▒▓░░ ░▒ ▒  ░
-"    ░ ░░   ▒ ░░  ░      ░  ░▒ ░ ▒░  ░  ▒
-"      ░░   ▒ ░░      ░     ░░   ░ ░
-"
-" *******************************************
+"―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+"  /$$           /$$   /$$                /$$
+" |__/          |__/  | $$               |__/
+"  /$$ /$$$$$$$  /$$ /$$$$$$   /$$    /$$ /$$ /$$$$$$/$$$$
+" | $$| $$__  $$| $$|_  $$_/  |  $$  /$$/| $$| $$_  $$_  $$
+" | $$| $$  \ $$| $$  | $$     \  $$/$$/ | $$| $$ \ $$ \ $$
+" | $$| $$  | $$| $$  | $$ /$$  \  $$$/  | $$| $$ | $$ | $$
+" | $$| $$  | $$| $$  |  $$$$//$$\  $/   | $$| $$ | $$ | $$
+" |__/|__/  |__/|__/   \___/ |__/ \_/    |__/|__/ |__/ |__/
+"―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 
-" ―――――――――――――
-" ―― plugins ――
-" ―――――――――――――
+"―――――――――――――
+"―― plugins ――
+"―――――――――――――
 
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -71,9 +68,9 @@ Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
-" ―――――――――――――――
-" ―― Functions ――
-" ―――――――――――――――
+"―――――――――――――――
+"―― Functions ――
+"―――――――――――――――
 
 " change working directory and nerd tree root
 function! s:ChangeWorkingDirectory(wd)
@@ -88,7 +85,7 @@ function! s:RemoveWhiteSpacesTabs()
 	call winrestview(l:save)
 endfunction
 
-" join consecutive blank lines
+"" join consecutive blank lines
 function! s:JoinBlankEmptyLines()
 	let l:save = winsaveview()
 	keeppatterns v/\S/,/\S/-j
@@ -101,9 +98,9 @@ function! s:RemoveUselessLines()
 	call s:JoinBlankEmptyLines()
 endfunction
 
-" ――――――――――――――――――――――――――
-" ―― Editor configuration ――
-" ――――――――――――――――――――――――――
+"――――――――――――――――――――――――――
+"―― Editor configuration ――
+"――――――――――――――――――――――――――
 
 " general global settings
 filetype plugin on
@@ -115,7 +112,6 @@ set smarttab
 set splitright
 set nohlsearch
 set autoread
-set t_Co=16
 set scrolloff=8
 set completeopt=menuone
 
@@ -149,9 +145,9 @@ autocmd FileType yaml setlocal expandtab shiftwidth=4 tabstop=4
 " popup height
 set pumheight=10
 
-" ―――――――――――――――
-" ―― Eye candy ――
-" ―――――――――――――――
+"―――――――――――――――
+"―― Eye candy ――
+"―――――――――――――――
 
 " show line numbers
 set nu
@@ -166,9 +162,9 @@ colorscheme gruvbox
 set list
 set lcs=tab:\|\·,precedes:\·,space:\·
 
-" ――――――――――――――
-" ―― Commands ――
-" ――――――――――――――
+"――――――――――――――
+"―― Commands ――
+"――――――――――――――
 
 " change wroking directory
 com! -nargs=1 -complete=file CWD call s:ChangeWorkingDirectory(<f-args>)
@@ -176,9 +172,9 @@ com! -nargs=1 -complete=file CWD call s:ChangeWorkingDirectory(<f-args>)
 " close buffer and jump to next one
 com! DeleteBuffer :bp | :bd #
 
-" ――――――――――――
-" ―― Kymaps ――
-" ――――――――――――
+"――――――――――――
+"―― Kymaps ――
+"――――――――――――
 
 let mapleader = ","
 
@@ -211,9 +207,9 @@ nnoremap <leader>cd :CWD
 " jump to definition
 nnoremap <leader>d <Plug>(coc-defintion)
 
-" ―――――――――――
-" ―― CtrlP ――
-" ―――――――――――
+"―――――――――――
+"―― CtrlP ――
+"―――――――――――
 
 " ignore spaces when searching
 let g:ctrlp_abbrev = {
@@ -235,16 +231,12 @@ let g:ctrlp_custom_ignore = {
 	\ 'file' : '\v.(build|debug).|.\.o$',
 	\ }
 
-" ―――――――――――――
-" ―― Airline ――
-" ―――――――――――――
+"―――――――――――――
+"―― Airline ――
+"―――――――――――――
 
 " don't use powerline fonts
-let g:airline_powerline_fonts = 1
-
-" seperators
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
+let g:airline_powerline_fonts = 0
 
 " symbols
 if !exists('g:airline_symbols')
@@ -282,20 +274,20 @@ let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 
-" ――――――――――――
-" ―― VimTex ――
-" ――――――――――――
+"――――――――――――
+"―― VimTex ――
+"――――――――――――
 
 if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
+	let g:ycm_semantic_triggers = {}
   endif
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 let g:tex_fold_enabled = 1
 let g:fastfold_fold_command_suffixes = ['x']
 
-" ――――――――――――――
-" ―― Startify ――
-" ――――――――――――――
+"――――――――――――――
+"―― Startify ――
+"――――――――――――――
 
 let g:startify_custom_header = [
 			\"   _   _                   _            ",
@@ -323,9 +315,9 @@ let g:startify_bookmarks = [
 			\ '~/Documents/Prog/mdata/'
 			\ ]
 
-" ―――――――――
-" ―― Ale ――
-" ―――――――――
+"―――――――――
+"―― Ale ――
+"―――――――――
 
 " global settings
 let g:ale_lint_on_text_changed = 1
@@ -342,8 +334,8 @@ let g:ale_linters = {
 let g:ale_open_list = 1
 let g:ale_list_window_size = 8
 augroup CloseLoclistWindowGroup
-    autocmd!
-    autocmd QuitPre * if empty(&buftype) | lclose | endif
+	autocmd!
+	autocmd QuitPre * if empty(&buftype) | lclose | endif
 augroup END
 
 " c linter settings
@@ -352,9 +344,9 @@ let g:ale_c_build_dir_names = ['build', 'build/debug', 'build/release']
 
 " cpp linter settings
 
-" ――――――――――――――
-" ―― Coc.nvim ――
-" ――――――――――――――
+"――――――――――――――
+"―― Coc.nvim ――
+"――――――――――――――
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -363,16 +355,16 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+	  \ pumvisible() ? "\<C-n>" :
+	  \ <SID>check_back_space() ? "\<Tab>" :
+	  \ coc#refresh()
 
 " use <c-space>for trigger completion
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" ――――――――――――――
-" ―― Nerdtree ――
-" ――――――――――――――
+"――――――――――――――
+"―― Nerdtree ――
+"――――――――――――――
 
 autocmd VimEnter *
 			\   if !argc()
@@ -384,9 +376,9 @@ autocmd VimEnter *
 " -- ignore files
 let NERDTreeIgnore = ['^build$']
 
-" ――――――――――――――――
-" ―― Autoformat ――
-" ――――――――――――――――
+"――――――――――――――――
+"―― Autoformat ――
+"――――――――――――――――
 
 " Cpp language
 let g:formatdef_uncrustify_cpp = '"uncrustify -q -c ~/.config/uncrustify/uncrustify.cfg -l CPP"'
@@ -402,16 +394,16 @@ autocmd BufWritePre * if index(blacklist, &ft) < 0 | :Autoformat
 " python
 let g:formatter_yapf_style = 'google'
 
-" ―――――――――――――
-" ―― Gruvbox ――
-" ―――――――――――――
+"―――――――――――――
+"―― Gruvbox ――
+"―――――――――――――
 
 let g:gruvbox_number_column = 'bg1'
 let g:gruvbox_contrast_dark = 'hard'
 
-" ――――――――――――――
-" ―― Devicons ――
-" ――――――――――――――
+"――――――――――――――
+"―― Devicons ――
+"――――――――――――――
 
 let g:NERDTreeLimitedSyntax = 1
 

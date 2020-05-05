@@ -14,6 +14,6 @@
 !―――――――――――――――
 
 ! settings
-st.font: Iosevka Term:size=14:antialias=true:autohint=true
+st.font: Iosevka Term:size=15:antialias=true:autohint=true
 st.alpha: 1
 st.borderpx: 35

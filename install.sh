@@ -93,7 +93,8 @@ update_st() {
 		patch -p1 < $patch
 	done
 
-	sudo make clean install
+	cp ~/.config/st/config.h $PWD/config.def.h
+	sudo make install
 
 	cd $cwd
 }

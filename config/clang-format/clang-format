@@ -1,3 +1,16 @@
+#----------------------------------------------------------------------------------------------------------
+#   /$$$$$$  /$$                               /$$$$$$$$                                            /$$
+#  /$$__  $$| $$                              | $$_____/                                           | $$
+# | $$  \__/| $$  /$$$$$$  /$$$$$$$   /$$$$$$ | $$     /$$$$$$   /$$$$$$  /$$$$$$/$$$$   /$$$$$$  /$$$$$$
+# | $$      | $$ |____  $$| $$__  $$ /$$__  $$| $$$$$ /$$__  $$ /$$__  $$| $$_  $$_  $$ |____  $$|_  $$_/
+# | $$      | $$  /$$$$$$$| $$  \ $$| $$  \ $$| $$__/| $$  \ $$| $$  \__/| $$ \ $$ \ $$  /$$$$$$$  | $$
+# | $$    $$| $$ /$$__  $$| $$  | $$| $$  | $$| $$   | $$  | $$| $$      | $$ | $$ | $$ /$$__  $$  | $$ /$$
+# |  $$$$$$/| $$|  $$$$$$$| $$  | $$|  $$$$$$$| $$   |  $$$$$$/| $$      | $$ | $$ | $$|  $$$$$$$  |  $$$$/
+#  \______/ |__/ \_______/|__/  |__/ \____  $$|__/    \______/ |__/      |__/ |__/ |__/ \_______/   \___/
+#                                    /$$  \ $$
+#                                   |  $$$$$$/
+#                                    \______/
+#----------------------------------------------------------------------------------------------------------
 ---
 Language: Cpp
 Standard: Cpp11
@@ -19,10 +32,10 @@ BinPackParameters: false
 BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Custom
 BraceWrapping:
-    AfterClass: false
-    SplitEmptyFunction: false
-    SplitEmptyRecord: false
-    SplitEmptyNamespace: false
+AfterClass: false
+SplitEmptyFunction: false
+SplitEmptyRecord: false
+SplitEmptyNamespace: false
 BreakInheritanceList: AfterColon
 BreakBeforeTernaryOperators: false
 BreakConstructorInitializers: AfterColon

@@ -58,6 +58,7 @@ source_zshrc() {
 }
 
 configure_mirrors() {
+	su - $USERNAME -c "yay -Sy reflector"
 	reflector -c France --ipv6 -p https -f 10 > /tmp/mirrors
 	sudo mv /tmp/mirrors /etc/pacman.d/mirrorlist
 }
@@ -70,6 +71,31 @@ copy_files() {
 		su - $USERNAME -c "mkdir -p $dir"
 		su - $USERNAME -c "cp -r $git_path $local_path"
 	done
+}
+
+update_st() {
+	declare -A PATCHES
+
+	PATCHES[st-xresources-20180309-c5ba9c0.diff]="https://st.suckless.org/patches/xresources/st-xresources-20180309-c5ba9c0.diff"
+	PATCHES[st-gruvbox-dark-0.8.2.diff]="https://st.suckless.org/patches/gruvbox/st-gruvbox-dark-0.8.2.diff"
+	PATCHES[st-font2-20190416-ba72400.diff]="https://st.suckless.org/patches/font2/st-font2-20190416-ba72400.diff"
+	PATCHES[st-autosync-0.8.3.diff]="https://st.suckless.org/patches/sync/st-autosync-0.8.3.diff"
+	PATCHES[st-appsync-0.8.3.diff]="https://st.suckless.org/patches/sync/st-appsync-0.8.3.diff"
+
+	cwd=$PWD
+
+	rm -rf /tmp/st
+	git clone git://git.suckless.org/st /tmp/st
+
+	cd /tmp/st
+	for patch url in ${(kv)PATCHES}; do
+		curl -O $url
+		patch -p1 < $patch
+	done
+
+	sudo make clean install
+
+	cd $cwd
 }
 
 configure_fonts() {
@@ -93,6 +119,18 @@ configure_keyboard() {
 	sudo localectl --no-convert set-x11-keymap $KEYBOARD_LAYOUT
 }
 
+install_yay() {
+	cwd=$PWD
+
+	pacman -S git
+	rm -rf /tmp/yay
+	git clone https://aur.archlinux.org/yay.git
+	cd /tmp/yay
+	makepkg -si
+
+	cd $cwd
+}
+
 create_user() {
 	pacman -S nano sudo
 	export EDITOR=nano
@@ -102,19 +140,6 @@ create_user() {
 
 configure_time() {
 	timedatectl set-timezone Europe/Paris
-}
-
-install_yay() {
-	yay_url=https://aur.archlinux.org/yay.git
-	yay_wd=/tmp/yay
-
-	cwd=$PWD
-	mkdir -p $yay_wd
-	git clone $yay_url $yay_wd
-	cd $yay_wd
-	makepkg -si
-	cd $cwd
-	rm -rf $yay_wd
 }
 
 install_packages() {
@@ -128,11 +153,10 @@ install_packages() {
 	su - $USERNAME -c "sysinstall $packages_str"
 }
 
-install_yay_pkg=`declare -f install_yay`
-
+install_yay
 configure_mirrors
+update_st
 create_user
-su - $USERNAME -c "$install_yay_pkg; install_yay"
 install_packages
 copy_files
 configure_keyboard

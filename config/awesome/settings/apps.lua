@@ -16,15 +16,11 @@ local apps = {}
 
 -- terminal
 apps.terminal = {
-	name = "xfce4-terminal",
+	name = "st",
 	ruled = true,
-	bin = "xfce4-terminal",
+	bin = "st",
 	args = "",
-	class = {
-		"xfce4-terminal",
-		"Xfce4-terminal"
-	},
-	main_class = "xfce4-terminal",
+	instance = "st",
 	single_instance = false,
 	tag = awful.tag.find_by_name(screen[1], theme.tag_names.TAG_TERMINAL_NAME_ICON),
 	autostart = false
@@ -36,11 +32,7 @@ apps.browser = {
 	ruled = true,
 	bin = "firefox",
 	args = "",
-	class = {
-		"firefox",
-		"Firefox"
-	},
-	main_class = "firefox",
+	instance = "Navigator",
 	single_instance = true,
 	tag = awful.tag.find_by_name(screen[1], theme.tag_names.TAG_BROWSER_NAME_ICON),
 	autostart = false
@@ -52,11 +44,7 @@ apps.file_manager = {
 	ruled = true,
 	bin = "nemo",
 	args = "",
-	class = {
-		"nemo",
-		"Nemo"
-	},
-	main_class = "nemo",
+	instance = "nemo",
 	single_instance = true,
 	tag = awful.tag.find_by_name(screen[1], theme.tag_names.TAG_FILE_NAME_ICON),
 	autostart = false
@@ -68,11 +56,7 @@ apps.torrent_client = {
 	ruled = true,
 	bin = "transmission-gtk",
 	args = "",
-	class = {
-		"transmission-gtk",
-		"Transmission-gtk"
-	},
-	main_class = "transmission_gtk",
+	instance = "transmission-gtk",
 	single_instance = true,
 	tag = awful.tag.find_by_name(screen[1], theme.tag_names.TAG_TORRENT_NAME_ICON),
 	autostart = false
@@ -83,13 +67,21 @@ apps.editor = {
 	name = "nvim",
 	ruled = true,
 	bin = apps.terminal.bin,
-	args = [[-e "nvim"]],
-	class = {
-		"neovim"
-	},
-	main_class = "neovim",
-	single_instance = false,
+	args = [[-n neovim -e nvim]],
+	instance = "neovim",
+	single_instance = true,
 	tag = awful.tag.find_by_name(screen[1], theme.tag_names.TAG_CODE_NAME_ICON),
+	autostart = false
+}
+
+apps.music = {
+	name="ncmpcpp",
+	ruled = true,
+	bin = apps.terminal.bin,
+	args = [[-n ncmpcpp -e ncmpcpp]],
+	instance = "ncmpcpp",
+	single_instance = true,
+	tag = awful.tag.find_by_name(screen[1], theme.tag_names.TAG_MUSIC_NAME_ICON),
 	autostart = false
 }
 
@@ -99,7 +91,7 @@ apps.compositor = {
 	ruled = false,
 	bin = "picom",
 	args = "",
-	class = nil,
+	instance = nil,
 	tag = nil,
 	single_instance = true,
 	autostart = true
@@ -111,7 +103,7 @@ apps.screen_locker = {
 	ruled = false,
 	bin = "betterlockscreen",
 	args = "-l",
-	class = nil,
+	instance = nil,
 	tag = nil,
 	single_instance = false,
 	autostart = false
@@ -122,7 +114,7 @@ apps.keyboard = {
 	name = "xset",
 	ruled = false,
 	bin = "xset",
-	class = nil,
+	instance = nil,
 	args = "r rate 150 130",
 	single_instance = false,
 	autostart = true
@@ -135,7 +127,7 @@ local focus_or_spawn = function(app)
 	local cmd = app.bin..[[ ]]..app.args
 
 	for _, c in pairs(clients) do
-		local found = string.find(app.main_class, c.class)
+		local found = string.find(app.instance, c.instance)
 
 		if found ~= nil then
 			app_client = c

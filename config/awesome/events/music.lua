@@ -109,10 +109,13 @@ local update_current_music_status = function()
 
 	awful.spawn.easy_async_with_shell(cmd,
 		function(stdout, stderr, exitcode, exitreason)
+			local status = string.gsub(stdout, "\n*$", "")
+
 			CHECK_COMPLETED = false
 			CURRENT_MUSIC = {}
-			if string.len(stdout) >= 2 then
-				CURRENT_MUSIC.status = stdout
+
+			if string.len(status) >= 2 then
+				CURRENT_MUSIC.status = status
 				update_metadata()
 			else
 				LAST_MUSIC = {}
@@ -122,7 +125,6 @@ local update_current_music_status = function()
 		end
 	)
 end
-
 
 gears.timer {
 	timeout = 1.5,

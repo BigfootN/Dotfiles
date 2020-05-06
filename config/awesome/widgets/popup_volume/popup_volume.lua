@@ -89,6 +89,8 @@ awesome.connect_signal("volume::updated",
 
 			if not volume.toggled then
 				popup_volume_set_icon(" ")
+			else
+				popup_volume_set_icon(" ")
 			end
 
 			display_timed_popup(timed_popup)

@@ -94,6 +94,11 @@ awful.keyboard.append_global_keybindings({
 		function()
 			apps.spawn_app(apps.screen_locker)
 		end
+	),
+	awful.key({modkey}, "m",
+		function()
+			apps.spawn_app(apps.music)
+		end
 	)
 })
 

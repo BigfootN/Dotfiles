@@ -34,7 +34,7 @@ local update_volume_is_set = function(volume)
 			else
 				volume.toggled = false
 			end
-			
+
 			if not table_equals(LAST_VOLUME_STATUS, volume) then
 				LAST_VOLUME_STATUS = volume
 				awesome.emit_signal("volume::updated", volume)
@@ -51,7 +51,7 @@ local update_volume_height = function()
 	awful.spawn.easy_async_with_shell(cmd,
 		function(stdout, stderr, exitreason, exitcode)
 			local volume = {}
-			
+
 			volume.height = string.gsub(stdout, "\n*$", "")
 
 			update_volume_is_set(volume)

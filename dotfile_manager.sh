@@ -154,6 +154,24 @@ install_packages() {
 	su - $USERNAME -c "sysinstall $packages_str"
 }
 
+parse_arguments() {
+	if ["$#" -ne 2]; then
+		{echo "Only 1 argument required!" 2>&1 1>/dev/null} | cat
+	else
+		case "$1" in
+			"install_all")
+				install_all()
+				;;
+			"install_files")
+				install_files()
+				;;
+			"push"
+				push_files()
+				;;
+		esac
+	fi
+}
+
 install_yay
 configure_mirrors
 update_st

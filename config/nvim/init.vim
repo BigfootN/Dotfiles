@@ -27,11 +27,8 @@ Plug 'sheerun/vim-polyglot'
 " -- start page
 Plug 'mhinz/vim-startify'
 
-" -- code check
-Plug 'w0rp/ale'
-
-" -- format
-Plug 'Chiel92/vim-autoformat'
+" -- neoformat
+Plug 'sbdchd/neoformat'
 
 " -- code completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -60,11 +57,12 @@ Plug 'tpope/vim-surround'
 " -- fold
 Plug 'konfekt/fastfold'
 
-" -- ctrlp
-Plug 'ctrlpvim/ctrlp.vim'
-
 " -- github
 Plug 'tpope/vim-fugitive'
+
+" -- fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -76,19 +74,20 @@ call plug#end()
 function! s:ChangeWorkingDirectory(wd)
 	execute "cd " . a:wd
 	execute "NERDTreeCWD"
+	execute "wincmd l"
 endfunction
 
 " remove useless tabs/spaces
 function! s:RemoveWhiteSpacesTabs()
 	let l:save = winsaveview()
-	keeppatterns %s/\s\+$//e
+	keeppatterns silent! %s/\s\+$//e
 	call winrestview(l:save)
 endfunction
 
 "" join consecutive blank lines
 function! s:JoinBlankEmptyLines()
 	let l:save = winsaveview()
-	keeppatterns v/\S/,/\S/-j
+	keeppatterns silent! v/\S/,/\S/-j
 	call winrestview(l:save)
 endfunction
 
@@ -132,12 +131,6 @@ autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4
 
 " lua indent
 autocmd FileType lua setlocal noexpandtab tabstop=4|%retab!
-
-" disable ansible, sshconfig indent
-autocmd FileType conf,lua,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_autoindent=0
-autocmd FileType conf,lua,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_retab=0
-autocmd FileType conf,lua,tex,yaml,vim,sshconfig,dockerfile,make let b:autoformat_remove_trailing_spaces=0
-autocmd FileType conf,lua,tex,vim,yaml,sshconfig,dockerfile,make let b:did_indent=0
 
 " yaml tab size
 autocmd FileType yaml setlocal expandtab shiftwidth=4 tabstop=4
@@ -192,10 +185,10 @@ set number relativenumber
 nnoremap <leader>pu :PlugUpdate<CR>
 nnoremap <leader>pc :PlugClean<CR>
 
-" CtrlP mappings
-nnoremap <leader>cpb :CtrlPBuffer<CR>
-nnoremap <leader>cpd :CtrlPCurWD<CR>
-nnoremap <leader>cpf :CtrlPCurFile<CR>
+" fzf mappings
+nnoremap <leader>sb :Buffers<CR>
+nnoremap <leader>sf :Files<CR>
+nnoremap <leader>sc :Rg<CR>
 
 " NerdTree mappings
 nnoremap <leader>nt :NERDTreeToggle<CR>
@@ -206,30 +199,6 @@ nnoremap <leader>cd :CWD
 
 " jump to definition
 nnoremap <leader>d <Plug>(coc-defintion)
-
-"―――――――――――
-"―― CtrlP ――
-"―――――――――――
-
-" ignore spaces when searching
-let g:ctrlp_abbrev = {
-			\ 'abbrevs': [
-			\ {
-			\ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
-			\ 'expanded': '',
-			\ 'mode': 'fprz',
-			\ },
-			\ ]
-			\ }
-
-" root markers / root directory
-let g:ctrlp_root_markers = ['compile_commands.json', '.ycm_extra_config.py', 'src/', 'lib/']
-
-" ignore build or debug
-let g:ctrlp_custom_ignore = {
-	\ 'dir' : '\v.(build|debug).$',
-	\ 'file' : '\v.(build|debug).|.\.o$',
-	\ }
 
 "―――――――――――――
 "―― Airline ――
@@ -245,10 +214,10 @@ endif
 let g:airline_symbols.space = "\ua0"
 
 " extensions
-let g:airline_extensions = ['tabline', 'ctrlp', 'ale']
+let g:airline_extensions = ['coc']
 let g:airline#extensions#default#section_truncate_width = {}
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#coc#enabled = 1
 
 " left sections
 let g:airline_section_a = airline#section#create(['mode'])
@@ -262,17 +231,6 @@ let g:airline_section_getter = ''
 let g:airline_section_x = ''
 let g:airline_section_y = airline#section#create(['filetype'])
 let g:airline_section_z = airline#section#create(['%3.3l'])
-let g:airline_section_error = airline#section#create(['ale'])
-let g:airline_section_warning = airline#section#create([''])
-
-" tabline options
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#buffer_nr_show = 0
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#tab_nr_type = 1
-let g:airline#extensions#tabline#show_tab_nr = 1
 
 "――――――――――――
 "―― VimTex ――
@@ -315,35 +273,6 @@ let g:startify_bookmarks = [
 			\ '~/Documents/Prog/mdata/'
 			\ ]
 
-"―――――――――
-"―― Ale ――
-"―――――――――
-
-" global settings
-let g:ale_lint_on_text_changed = 1
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_save = 1
-let g:ale_completion_enabled = 0
-let g:ale_linters = {
-	\ 'c': ['clangd'],
-	\ 'cpp': ['clangd'],
-	\ 'lua': []
-	\}
-
-" loclist/window settings
-let g:ale_open_list = 1
-let g:ale_list_window_size = 8
-augroup CloseLoclistWindowGroup
-	autocmd!
-	autocmd QuitPre * if empty(&buftype) | lclose | endif
-augroup END
-
-" c linter settings
-let g:ale_c_parse_compile_commands = 1
-let g:ale_c_build_dir_names = ['build', 'build/debug', 'build/release']
-
-" cpp linter settings
-
 "――――――――――――――
 "―― Coc.nvim ――
 "――――――――――――――
@@ -377,19 +306,24 @@ autocmd VimEnter *
 let NERDTreeIgnore = ['^build$']
 
 "――――――――――――――――
-"―― Autoformat ――
+"―― Neoformat ――
 "――――――――――――――――
 
 " Cpp language
-let g:formatdef_uncrustify_cpp = '"uncrustify -q -c ~/.config/uncrustify/uncrustify.cfg -l CPP"'
-let g:formatters_cpp = ['uncrustify_cpp']
+let g:neoformat_cpp_clang_format = {
+			\ 'exe': 'clang-format',
+			\ 'args': ['-style=file', '-i'],
+			\ 'replace': 1,
+			\ 'env': [],
+			\ 'valid_exit_codes': [0],
+			\ 'no_append': 1,
+			\}
+
+let g:neoformat_enabled_cpp = ['clang-format']
 
 " C language
 let g:formatdef_uncrustify_c = '"uncrustify -q -c ~/.config/uncrustify/uncrustify.cfg -l C"'
 let g:formatters_c = ['uncrustify_c']
-
-let blacklist = ['xml']
-autocmd BufWritePre * if index(blacklist, &ft) < 0 | :Autoformat
 
 " python
 let g:formatter_yapf_style = 'google'

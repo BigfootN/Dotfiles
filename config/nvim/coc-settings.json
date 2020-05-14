@@ -1,6 +1,5 @@
 {
 	"diagnostic.messageDelay": 10,
-	"diagnostic.displayByAle": true,
 	"codeLens.enable": true,
 	"suggest.maxCompleteItemCount": 10,
 	"suggest.enablePreview": true,
@@ -40,6 +39,18 @@
 				"eruby",
 				"markdown",
 				"yaml"
+			]
+		},
+		"bash":{
+			"command": "bash-language-server",
+			"args":[
+				"start"
+			],
+			"filetypes": [
+				"sh"
+			],
+			"ignoredRootPaths": [
+				"~"
 			]
 		}
 	}

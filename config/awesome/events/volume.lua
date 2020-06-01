@@ -46,7 +46,7 @@ local update_volume_is_set = function(volume)
 end
 
 local update_volume_height = function()
-	local cmd = [[amixer sget Master | tail -1 | awk -F" " '{print $4}' | sed 's/\[//g' | sed 's/\]//g']]
+	local cmd = [[amixer sget Master | tail -1 | awk -F" " '{print $5}' | sed 's/\[//g' | sed 's/\]//g']]
 
 	awful.spawn.easy_async_with_shell(cmd,
 		function(stdout, stderr, exitreason, exitcode)

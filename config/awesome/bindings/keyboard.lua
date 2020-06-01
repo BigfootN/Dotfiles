@@ -208,6 +208,46 @@ awful.keyboard.append_global_keybindings({
 				end
 			)
 		end
+	),
+	awful.key({},"XF86AudioNext",
+		function()
+			local cmd = [[mpc next]]
+
+			awful.spawn.easy_async_with_shell(cmd,
+				function(stdout, stderr, exitcode, exitreason)
+				end
+			)
+		end
+	),
+	awful.key({},"XF86AudioPrev",
+		function()
+			local cmd = [[mpc prev]]
+
+			awful.spawn.easy_async_with_shell(cmd,
+				function(stdout, stderr, exitcode, exitreason)
+				end
+			)
+		end
+	),
+	awful.key({},"XF86AudioPlay",
+		function()
+			local cmd = [[mpc toggle]]
+
+			awful.spawn.easy_async_with_shell(cmd,
+				function(stdout, stderr, exitcode, exitreason)
+				end
+			)
+		end
+	),
+	awful.key({},"XF86AudioStop",
+		function()
+			local cmd = [[mpc stop]]
+
+			awful.spawn.easy_async_with_shell(cmd,
+				function(stdout, stderr, exitcode, exitreason)
+				end
+			)
+		end
 	)
 })
 

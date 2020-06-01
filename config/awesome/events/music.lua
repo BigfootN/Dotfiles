@@ -17,6 +17,7 @@ require "utils.table"
 LAST_MUSIC = {}
 CURRENT_MUSIC = {}
 CHECK_COMPLETED = true
+COVER_IMAGE_PATH = "/tmp/mpd_cover.jpg"
 
 ---------------
 -- functions --
@@ -24,13 +25,17 @@ CHECK_COMPLETED = true
 
 -- extract cover
 local extract_cover = function(file_path)
-	local cover_image_path = "/tmp/mpd_cover.jpg"
-	local cmd = [[ffmpeg -y -i "]]..file_path..[[" ]]..cover_image_path
-	local file = io.open("/tmp/mpd", "w+")
+	local cmd = ""
+	local file = io.open("/tmp/mpd_cover_tmp", "w+")
+
+	os.remove(COVER_IMAGE_PATH)
+	COVER_IMAGE_PATH = [[/tmp/]]..LAST_MUSIC.artist..[[.jpg]]
+	cmd = [[ffmpeg -y -i "]]..file_path..[[" ]]..[["]]..COVER_IMAGE_PATH..[["]]
+	collectgarbage("collect")
 
 	awful.spawn.easy_async_with_shell(cmd,
 		function(stdout, stderr, exitcode, exitreason)
-			awesome.emit_signal("music::changed", LAST_MUSIC, cover_image_path)
+			awesome.emit_signal("music::changed", LAST_MUSIC, COVER_IMAGE_PATH)
 			CHECK_COMPLETED = true
 		end
 	)
@@ -127,7 +132,7 @@ local update_current_music_status = function()
 end
 
 gears.timer {
-	timeout = 1.5,
+	timeout = 1,
 	autostart = true,
 	call_now = true,
 	callback = function()

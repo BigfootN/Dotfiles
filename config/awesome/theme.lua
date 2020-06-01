@@ -69,17 +69,17 @@ local theme = {
 	wallpaper = env_variables.home.."/.wallpaper/wall.jpg",
 
 	-- top bar geometry (percentage)
-	bar_height_perc = 4,
+	bar_height_perc = 3.5,
 
 	-- bar bg
 	bar_bg = bar_bg,
 
 	-- bar font
-	bar_font = "RobotoMono Nerd Font 13",
+	bar_font = "RobotoMono Nerd Font 12",
 	bar_font_color = "#928374",
 
 	-- bar taglist font
-	bar_taglist_font = "UbuntuCondensed Nerd Font 15",
+	bar_taglist_font = "UbuntuCondensed Nerd Font 14",
 
 	-- underline height (percentage)
 	bar_underline_height_perc = 9,
@@ -91,7 +91,7 @@ local theme = {
 	bar_radius = 0,
 
 	-- tag width
-	bar_single_tag_width_perc = 3,
+	bar_single_tag_width_perc = 2.7,
 
 	-- bar modules color
 	bar_module_time_color = "#cc241d",
@@ -144,7 +144,7 @@ local theme = {
 	gap_between_clients = 10,
 
 	-- music playing widget
-	widget_music_playing_font = "UbuntuCondensed Nerd Font 13",
+	widget_music_playing_font = "UbuntuCondensed Nerd Font 12",
 	widget_music_playing_font_color = "#504945",
 
 	-- popup music border

@@ -83,12 +83,16 @@ awesome.connect_signal("music::changed",
 		local title_textbox = music_text.title_textbox
 		local cover_imagebox = music_cover.cover_imagebox
 
+		collectgarbage("collect")
+
 		popup_music.visible = false
 
 		artist_textbox.text = music.artist
 		album_textbox.text = music.album
 		title_textbox.text = music.title
-		cover_imagebox:set_image(cover_file_path)
+		cover_imagebox.image = cover_file_path
+
+		collectgarbage("collect")
 
 		popup_music.placement = nil
 		awful.placement.top_right(popup_music, {

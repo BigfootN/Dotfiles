@@ -16,11 +16,11 @@ local apps = {}
 
 -- terminal
 apps.terminal = {
-	name = "st",
+	name = "kitty",
 	ruled = true,
-	bin = "st",
+	bin = "kitty",
 	args = "",
-	instance = "st",
+	instance = "kitty",
 	single_instance = false,
 	tag = awful.tag.find_by_name(screen[1], theme.tag_names.TAG_TERMINAL_NAME_ICON),
 	autostart = false
@@ -67,7 +67,7 @@ apps.editor = {
 	name = "nvim",
 	ruled = true,
 	bin = apps.terminal.bin,
-	args = [[-n neovim -e nvim]],
+	args = [[--name=neovim nvim]],
 	instance = "neovim",
 	single_instance = true,
 	tag = awful.tag.find_by_name(screen[1], theme.tag_names.TAG_CODE_NAME_ICON),

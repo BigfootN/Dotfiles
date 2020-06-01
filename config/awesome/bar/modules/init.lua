@@ -29,7 +29,7 @@ local modules_right = wibox.widget {
 	updates,
 	date,
 	time,
-	spacing = 15,
+	spacing = 25,
 	layout = wibox.layout.fixed.horizontal
 }
 

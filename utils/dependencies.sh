@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+USERNAME="bigfoot"
+
 install_yay() {
 	local cwd=$PWD
 

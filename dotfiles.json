@@ -1,0 +1,26 @@
+{
+	"config_files": {
+		"paths": [
+			{
+				"git_path": "config/clang-format/clang-format",
+				"local_path": "~/.config/clang-format/clang-format"
+			},
+			{
+				"git_path": "config/nvim",
+				"local_path": "~/.config/nvim/init.vim"
+			},
+			{
+				"git_path": "config/gtk-3.0/",
+				"local_path": "~/.config/gtk-3.0"
+			},
+			{
+				"git_path": "config/awesome",
+				"local_path": "~/.config/awesome"
+			},
+			{
+				"git_path": "wallpaper/wall.jpg",
+				"local_path": "~/.wallpaper/wall.jpg"
+			}
+		]
+	}
+}

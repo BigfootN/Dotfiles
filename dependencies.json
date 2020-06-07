@@ -37,6 +37,7 @@
 		"vulkan-intel",
 		"pacman-contrib",
 		"man",
+		"openssh",
 		"betterlockscreen",
 		"freetype2-cleartype",
 		"nfs-utils",

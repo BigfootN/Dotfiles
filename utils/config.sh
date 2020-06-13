@@ -19,7 +19,7 @@ conigure_xorg() {
 
 configure_grub() {
 	sudo grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-	sudo grub-mkconfig -o /boot/grub/grub.config
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 
 configure_keyboard() {

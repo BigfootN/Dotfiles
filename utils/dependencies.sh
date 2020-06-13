@@ -26,7 +26,7 @@ source_zshrc() {
 }
 
 install() {
-	local script_path=$0:A
+	local script_path=${0:a:h}
 	local idx=0
 	local package=$(cat "$script_path"/../dependencies.json | jq -r '.dependencies['"$idx"']')
 
@@ -41,6 +41,3 @@ install() {
 		package=$(cat "$script_path"/../dependencies.json | jq -r '.dependencies['"$idx"']')
 	done
 }
-
-unfunction install_yay
-unfunction configure_mirrors

@@ -20,15 +20,15 @@ configure_mirrors() {
 }
 
 source_zshrc() {
-	su - $USERNAME -c "mkdir -p ~/.antigen"
-	su - $USERNAME -c "curl -L git.io/antigen > ~/.antigen/antigen.zsh"
-	su - $USERNAME -c "source ~/.zshrc"
+	mkdir -p ~/.antigen
+	curl -L git.io/antigen > ~/.antigen/antigen.zsh
+	source ~/.zshrc
 }
 
 install() {
 	local script_path=${0:a:h}
 	local idx=0
-	local package=$(cat "$script_path"/../dependencies.json | jq -r '.dependencies['"$idx"']')
+	local package=$(cat "$script_path"/dependencies.json | jq -r '.dependencies['"$idx"']')
 
 	install_yay
 	configure_mirrors
@@ -38,6 +38,6 @@ install() {
 		yay -Sy --cleanafter --nodiffmenu --noconfirm "$package"
 
 		((idx++))
-		package=$(cat "$script_path"/../dependencies.json | jq -r '.dependencies['"$idx"']')
+		package=$(cat "$script_path"/dependencies.json | jq -r '.dependencies['"$idx"']')
 	done
 }

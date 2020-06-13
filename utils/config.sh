@@ -4,9 +4,12 @@
 KEYBOARD_LAYOUT=us
 
 configure_fonts() {
-	wd=$PWD
+	cwd=$PWD
+
 	cd /etc/fonts/conf.d
-	sudo ln -s ../conf.avail/10-sub-pixel-rgb.conf
+	sudo ln -sf ../conf.avail/10-sub-pixel-rgb.conf
+
+	cd "$cwd"
 }
 
 conigure_xorg() {
@@ -20,11 +23,13 @@ configure_grub() {
 }
 
 configure_keyboard() {
-	sudo setxkbmap $KEYBOARD_LAYOUT
-	sudo localectl --no-convert set-x11-keymap $KEYBOARD_LAYOUT
+	sudo setxkbmap "$KEYBOARD_LAYOUT"
+	sudo localectl set-keymap --noconvert "$KEYBOARD_LAYOUT"
 }
 
 configure_clock() {
+	sudo ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+	sudo hwclock --systohc
 	sudo timedatectl set-timezone "$(curl --fail https://ipapi.co/timezone)"
 }
 

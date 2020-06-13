@@ -77,22 +77,18 @@ local timed_popup = create_timed_popup(popup_music, 8)
 ------------------------
 
 awesome.connect_signal("music::changed",
-	function(music, cover_file_path)
+	function(music, cover_image_surface)
 		local artist_textbox = music_text.artist_textbox
 		local album_textbox = music_text.album_textbox
 		local title_textbox = music_text.title_textbox
 		local cover_imagebox = music_cover.cover_imagebox
-
-		collectgarbage("collect")
 
 		popup_music.visible = false
 
 		artist_textbox.text = music.artist
 		album_textbox.text = music.album
 		title_textbox.text = music.title
-		cover_imagebox.image = cover_file_path
-
-		collectgarbage("collect")
+		cover_imagebox.image = cover_image_surface
 
 		popup_music.placement = nil
 		awful.placement.top_right(popup_music, {

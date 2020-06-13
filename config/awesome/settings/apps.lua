@@ -74,11 +74,12 @@ apps.editor = {
 	autostart = false
 }
 
+-- music
 apps.music = {
 	name="ncmpcpp",
 	ruled = true,
 	bin = apps.terminal.bin,
-	args = [[-n ncmpcpp -e ncmpcpp]],
+	args = [[--name=ncmpcpp ncmpcpp]],
 	instance = "ncmpcpp",
 	single_instance = true,
 	tag = awful.tag.find_by_name(screen[1], theme.tag_names.TAG_MUSIC_NAME_ICON),

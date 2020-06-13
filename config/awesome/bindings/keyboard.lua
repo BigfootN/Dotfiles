@@ -137,6 +137,13 @@ awful.keyboard.append_global_keybindings({
 awful.keyboard.append_global_keybindings({
 	awful.key({modkey}, "q",
 		function()
+			local stop_mpd_cmd = [[mpc stop]]
+
+			awful.spawn.easy_async_with_shell(cmd,
+				function(stdout, stderr, exitcode, exitreason)
+				end
+			)
+
 			kill_all_clients()
 			awesome.quit()
 		end

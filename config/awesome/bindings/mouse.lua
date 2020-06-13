@@ -10,13 +10,13 @@ local awful = require "awful"
 ---------------------------
 
 client.connect_signal("request::default_mousebindings",
-    function()
-        awful.mouse.append_client_mousebindings({
-            awful.button({}, 1,
-                function(c)
-                    client.focus = c
-                end
-            )
-        })
-    end
+	function()
+		awful.mouse.append_client_mousebindings({
+			awful.button({}, 1,
+				function(c)
+					c:activate()
+				end
+			)
+		})
+	end
 )

@@ -25,12 +25,10 @@ function display_timed_popup(timed_popup)
 		timed_popup.timer = gears.timer.start_new(8,
 			function()
 				timed_popup.popup.visible = false
-				collectgarbage("collect")
 				return false
 			end
 		)
 	else
-		collectgarbage("collect")
 		timed_popup.timer:again()
 	end
 end

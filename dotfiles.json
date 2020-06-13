@@ -7,10 +7,10 @@
 			},
 			{
 				"git_path": "config/nvim",
-				"local_path": "~/.config/nvim/init.vim"
+				"local_path": "~/.config/nvim"
 			},
 			{
-				"git_path": "config/gtk-3.0/",
+				"git_path": "config/gtk-3.0",
 				"local_path": "~/.config/gtk-3.0"
 			},
 			{
@@ -20,6 +20,30 @@
 			{
 				"git_path": "wallpaper/wall.jpg",
 				"local_path": "~/.wallpaper/wall.jpg"
+			},
+			{
+				"git_path": "config/kitty/kitty.conf",
+				"local_path": "~/.config/kitty/kitty.conf"
+			},
+			{
+				"git_path": "zshrc",
+				"local_path": "~/.zshrc"
+			},
+			{
+				"git_path": "asoundrc",
+				"local_path": "~/.asoundrc"
+			},
+			{
+				"git_path": "config/picom/picom.conf",
+				"local_path": "~/.config/picom/picom.conf"
+			},
+			{
+				"git_path": "config/ncmpcpp/config",
+				"local_path": "~/.ncmpcpp/config"
+			},
+			{
+				"git_path": "config/mpd/mpd.conf",
+				"local_path": "~/.config/mpd/mpd.conf"
 			}
 		]
 	}

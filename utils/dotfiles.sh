@@ -4,7 +4,7 @@ copy_from_to() {
 	local path_from=$1
 	local path_to=$2
 
-	path_to=$(echo $path_to | sed 's@^~@'"$HOME"'@')
+	path_to=$(echo $path_to | sed 's@^\~@'"$HOME"'@')
 
 	if [[ -f "$path_from" ]]; then
 		local dir=$(dirname $(readlink -fm "$path_to"))

@@ -24,7 +24,7 @@ configure_grub() {
 
 configure_keyboard() {
 	sudo setxkbmap "$KEYBOARD_LAYOUT"
-	sudo localectl set-keymap --noconvert "$KEYBOARD_LAYOUT"
+	sudo localectl --no-convert set-x11-keymap "$KEYBOARD_LAYOUT"
 }
 
 configure_clock() {

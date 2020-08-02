@@ -40,7 +40,6 @@
 		"openssh",
 		"betterlockscreen",
 		"freetype2-cleartype",
-		"nfs-utils",
 		"alsa-utils",
 		"pulseaudio-alsa",
 		"efibootmgr"

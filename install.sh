@@ -50,3 +50,5 @@ dotfiles_deploy() {
 		path_to=$(cat "$script_path"/dotfiles.json | jq -r '.config_files.paths['"$idx"'].local_path')
 	done
 }
+
+dotfiles_deploy()

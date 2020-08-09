@@ -8,7 +8,8 @@
 		"clangd": {
 			"command": "clangd",
 			"rootPatterns": [
-				"build/debug/compile_commands.json"
+				"compile_commands.json",
+				".clang-format"
 			],
 			"filetypes": [
 				"c",
@@ -16,9 +17,9 @@
 				"objc",
 				"objcpp"
 			],
-			"initializationOptions": {
-				"compilationDatabasePath": "build/debug"
-			}
+			"args": [
+				"-cross-file-rename"
+			]
 		},
 		"lua": {
 			"command": "java",

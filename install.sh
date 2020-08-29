@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 copy_from_to() {
 	local path_from=$1
@@ -24,31 +24,31 @@ copy_from_to() {
 dotfiles_save() {
 	local script_path=${0:a:h}
 	local idx=0
-	local path_from=$(cat "$script_path"/dotfiles.json | jq -r '.config_files.paths['"$idx"'].local_path')
-	local path_to=$(cat "$script_path"/dotfiles.json | jq -r '.config_files.paths['"$idx"'].git_path')
+	local path_from=$(cat dotfiles.json | jq -r '.config_files.paths['"$idx"'].local_path')
+	local path_to=$(cat dotfiles.json | jq -r '.config_files.paths['"$idx"'].git_path')
 
 	while [[ (! "$path_from" = "null") && (! "$path_to" = "null") ]]; do
 		copy_from_to "$path_from" "$script_path"/"$path_to"
 
 		((idx++))
-		path_from=$(cat "$script_path"/dotfiles.json | jq -r '.config_files.paths['"$idx"'].local_path')
-		path_to=$(cat "$script_path"/dotfiles.json | jq -r '.config_files.paths['"$idx"'].git_path')
+		path_from=$(cat dotfiles.json | jq -r '.config_files.paths['"$idx"'].local_path')
+		path_to=$(cat dotfiles.json | jq -r '.config_files.paths['"$idx"'].git_path')
 	done
 }
 
 dotfiles_deploy() {
 	local script_path=${0:a:h}
 	local idx=0
-	local path_from=$(cat "$script_path"/dotfiles.json | jq -r '.config_files.paths['"$idx"'].git_path')
-	local path_to=$(cat "$script_path"/dotfiles.json | jq -r '.config_files.paths['"$idx"'].local_path')
+	local path_from=$(cat dotfiles.json | jq -r '.config_files.paths['"$idx"'].git_path')
+	local path_to=$(cat dotfiles.json | jq -r '.config_files.paths['"$idx"'].local_path')
 
 	while [[ (! "$path_from" = "null") && (! "$path_to" = "null") ]]; do
 		copy_from_to "$script_path"/"$path_from" "$path_to"
 
 		((idx++))
-		path_from=$(cat "$script_path"/dotfiles.json | jq -r '.config_files.paths['"$idx"'].git_path')
-		path_to=$(cat "$script_path"/dotfiles.json | jq -r '.config_files.paths['"$idx"'].local_path')
+		path_from=$(cat dotfiles.json | jq -r '.config_files.paths['"$idx"'].git_path')
+		path_to=$(cat dotfiles.json | jq -r '.config_files.paths['"$idx"'].local_path')
 	done
 }
 
-dotfiles_deploy()
+dotfiles_deploy

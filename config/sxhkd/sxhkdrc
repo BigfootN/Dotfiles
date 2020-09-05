@@ -10,10 +10,10 @@
 #----------------------------------------------------#
 
 XF86Audio{Prev,Next,Stop,Play}
-	mpc -q {prev,next,stop,play}
+	mpc -q {prev,next,stop,toggle}
 
 super + r
-	rofi -show run
+	rofi -show apps -modi "apps:~/.config/rofi/rofi_apps.sh"
 
 super + shift + {Left,Right}
 	bspc node -d {prev,next} --follow

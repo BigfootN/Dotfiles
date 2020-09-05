@@ -1,0 +1,34 @@
+#----------------------------------------------------#
+#   /$$$$$$  /$$   /$$ /$$   /$$ /$$   /$$ /$$$$$$$  #
+#  /$$__  $$| $$  / $$| $$  | $$| $$  /$$/| $$__  $$ #
+# | $$  \__/|  $$/ $$/| $$  | $$| $$ /$$/ | $$  \ $$ #
+# |  $$$$$$  \  $$$$/ | $$$$$$$$| $$$$$/  | $$  | $$ #
+#  \____  $$  >$$  $$ | $$__  $$| $$  $$  | $$  | $$ #
+#  /$$  \ $$ /$$/\  $$| $$  | $$| $$\  $$ | $$  | $$ #
+# |  $$$$$$/| $$  \ $$| $$  | $$| $$ \  $$| $$$$$$$/ #
+#  \______/ |__/  |__/|__/  |__/|__/  \__/|_______/  #
+#----------------------------------------------------#
+
+XF86Audio{Prev,Next,Stop,Play}
+	mpc -q {prev,next,stop,play}
+
+super + r
+	rofi -show run
+
+super + shift + {Left,Right}
+	bspc node -d {prev,next} --follow
+
+super + ctrl + alt + {Left,Right,Up,Down}
+	bpsc node -n {west,east,north,south} --follow
+
+super + {Left,Right,Up,Down}
+	bspc node -f {west,east,north,south}
+
+super + alt + {Left,Right}
+	bspc desktop -f {prev,next}
+
+super + k
+	bspc node -k
+
+super + q
+	~/.config/bspwm/bspwm_quit

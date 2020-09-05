@@ -67,16 +67,25 @@ bspc config left_padding   $DESKTOP_PADDING_LEFT
 # create desktops
 bspc monitor -d "browser" "code" "terminal" "files" "music" "downloads"
 
+#-------------#
+# -- RULES -- #
+#-------------#
+
+bspc rule -a nemo desktop='files' follow=on focus=on
+bspc rule -a transmission-gtk desktop='downloads' follow=on focus=on
+bspc rule -a firefox desktop='browser' follow=on focus=on
+bspc rule -a nvim desktop='code' follow=on focus=on
+bspc rule -a kitty desktop='terminal' follow=on focus=on
+
 #-----------------#
 # -- AUTOSTART -- #
 #-----------------#
 
 # start apps
 xsetroot -cursor_name left_ptr
-picom &
 mpd &
 polybar &
-picom --experimental-backends &
+picom --vsync-use-glfinish &
 sxhkd &
 polybar --config=~/.config/polybar/config.ini top &
 feh --bg-scale ~/.wallpaper/wall.jpg &

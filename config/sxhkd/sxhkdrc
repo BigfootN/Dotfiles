@@ -32,3 +32,6 @@ super + k
 
 super + q
 	~/.config/bspwm/bspwm_quit
+
+XF86Audio{LowerVolume,RaiseVolume,Mute}
+	amixer set Master {1%-,1%+,toggle}

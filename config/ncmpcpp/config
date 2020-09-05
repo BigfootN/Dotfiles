@@ -18,22 +18,23 @@ visualizer_fifo_path = /tmp/mpd.fifo
 visualizer_in_stereo = yes
 visualizer_sync_interval = 30
 
-song_list_format = $2%t$9 $3%b$9 $5%a$9
+song_list_format = $2%a$9 $3%t$9
 song_status_format = %t - %a
-now_playing_prefix = $b
+now_playing_prefix = » $2
 now_playing_suffix = $/b
-selected_item_prefix = $(241)
-selected_item_suffix = $(end)
-current_item_prefix = $1 $9
+selected_item_prefix = $2$b
+selected_item_suffix = $9$/b
+current_item_suffix = $9$/b
+current_item_prefix =  $2 - $9
 modified_item_prefix = $2+$9
 
 browser_sort_mode = name
 browser_sort_format = %t %b %a
 
-song_columns_list_format = (34)[red]{t:Titre} (33)[green]{b:Album} (33)[blue]{a:Artiste}
+song_columns_list_format = (50)[green]{a:Artist} (50)[blue]{t:Titre} 
 
 progressbar_look = ─
-progressbar_elapsed_color = magenta
+progressbar_elapsed_color = red
 media_library_primary_tag = artist
 default_find_mode = wrapped
 
@@ -42,3 +43,11 @@ fetch_lyrics_for_current_song_in_background = no
 
 enable_window_title = no
 jump_to_now_playing_song_at_start = yes
+
+browser_playlist_prefix = ""
+display_volume_level = no
+
+header_visibility = no
+titles_visibility = no
+
+player_state_color = 17:b

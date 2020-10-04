@@ -27,11 +27,18 @@ element-text {
 element {
 	text-color: #bdae93;
 	padding: 10px;
+	padding: 10px 5px 10px 20px;
 }
 
 element-text.selected {
 	highlight: italic;
 	highlight: bold italic underline #cc241d;
+}
+
+element.selected {
+	border-color: red;
+	border: 0 0 0 2px;
+	background-color: #928374;
 }
 
 listview {

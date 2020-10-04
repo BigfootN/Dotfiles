@@ -32,10 +32,10 @@ BinPackParameters: false
 BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Custom
 BraceWrapping:
-AfterClass: false
-SplitEmptyFunction: false
-SplitEmptyRecord: false
-SplitEmptyNamespace: false
+    AfterClass: false
+    SplitEmptyFunction: false
+    SplitEmptyRecord: false
+    SplitEmptyNamespace: false
 BreakInheritanceList: AfterColon
 BreakBeforeTernaryOperators: false
 BreakConstructorInitializers: AfterColon

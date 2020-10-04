@@ -16,7 +16,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " -- syntax theme
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 
 " -- vim airline
 Plug 'vim-airline/vim-airline'
@@ -104,15 +104,16 @@ endfunction
 " general global settings
 filetype plugin on
 filetype indent on
-syntax on
-set tabstop=4
-set shiftwidth=4
-set smarttab
+syntax enable
+" set smarttab
 set splitright
 set nohlsearch
 set autoread
 set scrolloff=8
 set completeopt=menuone
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 
 " support true colors
 set termguicolors
@@ -148,7 +149,7 @@ highlight LineNr ctermfg=26
 highlight LineNr ctermbg=25
 
 " colorscheme
-set background=dark
+" set background=dark
 colorscheme gruvbox
 
 " veritcal split character
@@ -198,7 +199,10 @@ nnoremap <leader>nf :NERDTreeFocus<CR>
 nnoremap <leader>cd :CWD
 
 " jump to definition
-nnoremap <leader>d <Plug>(coc-defintion)
+nmap <leader>d <Plug>(coc-defintion)
+nmap <leader>r <Plug>(coc-rename)
+nmap <leader>c <Plug>(coc-decleration)
+nmap <leader>o <Plug>(coc-openlink)
 
 "―――――――――――――
 "―― Airline ――
@@ -309,6 +313,11 @@ let NERDTreeIgnore = ['^build$']
 "―― Neoformat ――
 "――――――――――――――――
 
+augroup fmt
+	autocmd!
+	au BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
+augroup end
+
 " Cpp language
 let g:neoformat_cpp_clang_format = {
 			\ 'exe': 'clang-format',
@@ -322,18 +331,29 @@ let g:neoformat_cpp_clang_format = {
 let g:neoformat_enabled_cpp = ['clang-format']
 
 " C language
-let g:formatdef_uncrustify_c = '"uncrustify -q -c ~/.config/uncrustify/uncrustify.cfg -l C"'
-let g:formatters_c = ['uncrustify_c']
+let g:neoformat_c_clangformat = {
+			\ 'exe': 'clang-format',
+			\ 'args': ['-style=file'],
+			\ 'stdin': 1
+			\}
+
+let g:neoformat_enabled_c = ['clangformat']
 
 " python
 let g:formatter_yapf_style = 'google'
+
+"―――――――――
+"―― Fzf ――
+"―――――――――
+
+let $FZF_DEFAULT_COMMAND="fd -E build -E Build -E .svn -E .git"
 
 "―――――――――――――
 "―― Gruvbox ――
 "―――――――――――――
 
-let g:gruvbox_number_column = 'bg1'
-let g:gruvbox_contrast_dark = 'hard'
+"let g:gruvbox_number_column = 'bg1'
+"let g:gruvbox_contrast_dark = 'hard'
 
 "――――――――――――――
 "―― Devicons ――

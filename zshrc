@@ -43,12 +43,40 @@ export XDG_CONFIG_HOME=$HOME/.config
 PATH="$HOME/.node_modules/bin/:$HOME/.scripts:$PATH"
 export npm_config_prefix=~/.node/modules
 
+# fzf default command line
+export FZF_DEFAULT_COMMAND='fd -E build -E Build -E .svn -E .git'
+
 #——————————————————————————
 #—— AUTOSUGGEST SETTINGS ——
 #——————————————————————————
 
 # color
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
+
+#———————————————
+#—— FUNCTIONS ——
+#———————————————
+
+create_mpc_all_playlist() {
+	local IFS='$\n'
+	local playlist_name="Tout"
+
+	mpc rm "$playlist_name"
+
+	mpc listall |
+	while IFS='$\n' read -r artist
+	do
+		mpc add "$artist"
+	done
+	mpc save "$playlist_name"
+}
+
+sysclean() {
+	yay -Scc
+	sysrm $(yay -Qdt)
+	sysrm $(yay -Qet)
+	sysrm $(yay -Qtdq)
+}
 
 #——————————————————————
 #—— SPACESHIP PROMPT ——

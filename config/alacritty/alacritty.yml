@@ -1,0 +1,72 @@
+#------------------------------------------------------------------------------#
+#   /$$$$$$  /$$                               /$$   /$$     /$$               #
+#  /$$__  $$| $$                              |__/  | $$    | $$               #
+# | $$  \ $$| $$  /$$$$$$   /$$$$$$$  /$$$$$$  /$$ /$$$$$$ /$$$$$$   /$$   /$$ #
+# | $$$$$$$$| $$ |____  $$ /$$_____/ /$$__  $$| $$|_  $$_/|_  $$_/  | $$  | $$ #
+# | $$__  $$| $$  /$$$$$$$| $$      | $$  \__/| $$  | $$    | $$    | $$  | $$ #
+# | $$  | $$| $$ /$$__  $$| $$      | $$      | $$  | $$ /$$| $$ /$$| $$  | $$ #
+# | $$  | $$| $$|  $$$$$$$|  $$$$$$$| $$      | $$  |  $$$$/|  $$$$/|  $$$$$$$ #
+# |__/  |__/|__/ \_______/ \_______/|__/      |__/   \___/   \___/   \____  $$ #
+#                                                                    /$$  | $$ #
+#                                                                   |  $$$$$$/ #
+#                                                                    \______/  #
+#------------------------------------------------------------------------------#
+
+window:
+    padding:
+        x: 30
+        y: 20
+
+font:
+    normal:
+        family: Iosevka Nerd Font
+        style: Regular
+    bold:
+        family: Iosevka Nerd Font
+        style: Bold
+    italic:
+        family: Iosevka Nerd Font
+        style: Italic
+    bold_italic:
+        family: Iosevka Nerd Font
+        style: Bold Italic
+    size: 10.5
+
+# Colors (Gruvbox dark)
+colors:
+    # Default colors
+    primary:
+        # hard contrast: background = '#1d2021'
+        background: '#282828'
+        # soft contrast: background = '#32302f'
+        foreground: '#ebdbb2'
+
+    # Normal colors
+    normal:
+        black:   '#282828'
+        red:     '#cc241d'
+        green:   '#98971a'
+        yellow:  '#d79921'
+        blue:    '#458588'
+        magenta: '#b16286'
+        cyan:    '#689d6a'
+        white:   '#a89984'
+
+    # Bright colors
+    bright:
+        black:   '#928374'
+        red:     '#fb4934'
+        green:   '#b8bb26'
+        yellow:  '#fabd2f'
+        blue:    '#83a598'
+        magenta: '#d3869b'
+        cyan:    '#8ec07c'
+        white:   '#ebdbb2'
+
+bell:
+    duration: 0
+    command: None
+
+mouse:
+    url:
+        launche: None

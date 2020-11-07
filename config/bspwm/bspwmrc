@@ -75,7 +75,9 @@ bspc rule -a nemo desktop='files' follow=on focus=on
 bspc rule -a transmission-gtk desktop='downloads' follow=on focus=on
 bspc rule -a firefox desktop='browser' follow=on focus=on
 bspc rule -a nvim desktop='code' follow=on focus=on
-bspc rule -a kitty desktop='terminal' follow=on focus=on
+bspc rule -a Alacritty desktop='terminal' follow=on focus=on
+bspc rule -a ncmpcpp desktop="music" follow=on focus=on
+bspc rule -a easytag desktop="music" follow=on focus=on
 
 #-----------------#
 # -- AUTOSTART -- #

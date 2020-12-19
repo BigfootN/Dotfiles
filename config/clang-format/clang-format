@@ -1,58 +1,92 @@
-#----------------------------------------------------------------------------------------------------------
-#   /$$$$$$  /$$                               /$$$$$$$$                                            /$$
-#  /$$__  $$| $$                              | $$_____/                                           | $$
-# | $$  \__/| $$  /$$$$$$  /$$$$$$$   /$$$$$$ | $$     /$$$$$$   /$$$$$$  /$$$$$$/$$$$   /$$$$$$  /$$$$$$
-# | $$      | $$ |____  $$| $$__  $$ /$$__  $$| $$$$$ /$$__  $$ /$$__  $$| $$_  $$_  $$ |____  $$|_  $$_/
-# | $$      | $$  /$$$$$$$| $$  \ $$| $$  \ $$| $$__/| $$  \ $$| $$  \__/| $$ \ $$ \ $$  /$$$$$$$  | $$
-# | $$    $$| $$ /$$__  $$| $$  | $$| $$  | $$| $$   | $$  | $$| $$      | $$ | $$ | $$ /$$__  $$  | $$ /$$
-# |  $$$$$$/| $$|  $$$$$$$| $$  | $$|  $$$$$$$| $$   |  $$$$$$/| $$      | $$ | $$ | $$|  $$$$$$$  |  $$$$/
-#  \______/ |__/ \_______/|__/  |__/ \____  $$|__/    \______/ |__/      |__/ |__/ |__/ \_______/   \___/
-#                                    /$$  \ $$
-#                                   |  $$$$$$/
-#                                    \______/
-#----------------------------------------------------------------------------------------------------------
 ---
-Language: Cpp
-Standard: Cpp11
-BasedOnStyle: LLVM
 AccessModifierOffset: -4
-IndentWidth: 4
 AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignConsecutiveMacros: true
 AlignEscapedNewlines: Left
-AlignOperands: false
-AlignTrailingComments: true
+AlignOperands: Align
+AlignTrailingComments: false
 AllowAllArgumentsOnNextLine: false
 AllowAllConstructorInitializersOnNextLine: false
 AllowAllParametersOfDeclarationOnNextLine: false
-AllowShortFunctionsOnASingleLine: None
+AllowShortBlocksOnASingleLine: Empty
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Inline
+AllowShortLoopsOnASingleLine: false
 AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: false
 BinPackParameters: false
-BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Custom
 BraceWrapping:
-    AfterClass: false
-    SplitEmptyFunction: false
-    SplitEmptyRecord: false
-    SplitEmptyNamespace: false
-BreakInheritanceList: AfterColon
+  AfterCaseLabel: false
+  AfterClass: false
+  AfterControlStatement: Never
+  AfterEnum: false
+  AfterFunction: false
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  BeforeLambdaBody: false
+  BeforeWhile: false
+  IndentBraces: false
+  SplitEmptyFunction: false
+BreakBeforeBinaryOperators: None
 BreakBeforeTernaryOperators: false
 BreakConstructorInitializers: AfterColon
+BreakInheritanceList: AfterColon
+BreakStringLiterals: true
 ColumnLimit: 80
+CompactNamespaces: false
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
+ConstructorInitializerIndentWidth: 8
+Cpp11BracedListStyle: true
+DeriveLineEnding: true
+DerivePointerAlignment: false
+DisableFormat: false
 FixNamespaceComments: false
-IncludeBlocks: Merge
+IndentCaseBlocks: false
 IndentCaseLabels: true
+IndentExternBlock: false
+IndentPPDirectives: None
+IndentWidth: 4
+IndentWrappedFunctionNames: false
 KeepEmptyLinesAtTheStartOfBlocks: false
+Language: Cpp
+MaxEmptyLinesToKeep: 1
 NamespaceIndentation: All
-PenaltyReturnTypeOnItsOwnLine: 100000
-PointerAlignment: Right
+PointerAlignment: Left
+PenaltyBreakAssignment: 70
+PenaltyBreakBeforeFirstCallParameter: 70
 SortIncludes: false
-SpaceBeforeCpp11BracedList: true
+SortUsingDeclarations: true
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+SpaceAroundPointerQualifiers: Default
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: false
 SpaceBeforeCtorInitializerColon: false
 SpaceBeforeInheritanceColon: false
+SpaceBeforeParens: Never
 SpaceBeforeRangeBasedForLoopColon: false
-SpacesInContainerLiterals: false
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 4
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+SpacesInConditionalStatement: false
+SpacesInConditionalStatement: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
 TabWidth: 4
 UseTab: ForContinuationAndIndentation

@@ -11,23 +11,24 @@ spawn() {
 }
 
 case "$@" in
-	"neovim")
-		launch_in_term nvim
+	"VSCode")
+		coproc code > /dev/null 2>&1
+		exit 0
 		;;
 	"firefox")
-		coproc firefox
+		coproc firefox > /dev/null 2&>1
 		exit 0
 		;;
 	"nemo")
-		coproc nemo
+		coproc nemo > /dev/null 2&>1
 		exit 0
 		;;
 	"alacritty")
-		coproc alacritty > /dev/null 2>&1
+		coproc $HOME/.cargo/bin/alacritty > /dev/null 2>&1
 		exit 0
 		;;
 	"transmission-gtk")
-		corproc transmission-gtk > /dev/null 2>&1
+		coproc transmission-gtk > /dev/null 2>&1
 		exit 0
 		;;
 	"skype")
@@ -39,7 +40,7 @@ case "$@" in
 		;;
 esac
 
-echo "neovim"
+echo "VSCode"
 echo "alacritty"
 echo "firefox"
 echo "nemo"

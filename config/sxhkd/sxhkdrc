@@ -9,8 +9,11 @@
 #  \______/ |__/  |__/|__/  |__/|__/  \__/|_______/  #
 #----------------------------------------------------#
 
-XF86Audio{Prev,Next,Stop,Play}
-	mpc -q {prev,next,stop,toggle}
+XF86Audio{Prev,Next}
+	~/.scripts/music goto {prev,next}
+
+XF86Audio{Stop,Play}
+	~/.scripts/music {stop,play}
 
 super + r
 	rofi -show apps -modi "apps:~/.config/rofi/rofi_apps.sh"

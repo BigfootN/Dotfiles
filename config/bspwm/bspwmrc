@@ -73,8 +73,8 @@ bspc monitor -d "browser" "code" "terminal" "files" "music" "downloads"
 
 bspc rule -a nemo desktop='files' follow=on focus=on
 bspc rule -a transmission-gtk desktop='downloads' follow=on focus=on
-bspc rule -a firefox desktop='browser' follow=on focus=on
-bspc rule -a nvim desktop='code' follow=on focus=on
+bspc rule -a Firefox desktop='browser' follow=on focus=on
+bspc rule -a Code desktop='code' follow=on focus=on
 bspc rule -a Alacritty desktop='terminal' follow=on focus=on
 bspc rule -a ncmpcpp desktop="music" follow=on focus=on
 bspc rule -a easytag desktop="music" follow=on focus=on
@@ -85,9 +85,8 @@ bspc rule -a easytag desktop="music" follow=on focus=on
 
 # start apps
 xsetroot -cursor_name left_ptr
-mpd &
-polybar &
+# mpd &
 picom --vsync-use-glfinish &
 sxhkd &
-polybar --config=~/.config/polybar/config.ini top &
+polybar -c ~/.config/polybar/config.ini top &
 feh --bg-scale ~/.wallpaper/wall.jpg &

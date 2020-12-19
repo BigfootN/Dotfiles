@@ -9,6 +9,8 @@
 # |________/|_______/ |__/  |__/|__/       \_______/
 #―――――――――――――――――――――――――――――――――――――――――――――――――――
 
+source /home/bigfoot/.env_vars
+
 #———————————————
 #—— OH MY ZSH ——
 #———————————————
@@ -25,58 +27,6 @@ plugins=(
 # source base directory
 export ZSH="/home/bigfoot/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
-
-#——————————————
-#—— SETTINGS ——
-#——————————————
-
-# language environment
-export LANG=fr_FR.UTF-8
-
-# editor
-export EDITOR=/usr/bin/nvim
-
-# config path
-export XDG_CONFIG_HOME=$HOME/.config
-
-# npm
-PATH="$HOME/.node_modules/bin/:$HOME/.scripts:$PATH"
-export npm_config_prefix=~/.node/modules
-
-# fzf default command line
-export FZF_DEFAULT_COMMAND='fd -E build -E Build -E .svn -E .git'
-
-#——————————————————————————
-#—— AUTOSUGGEST SETTINGS ——
-#——————————————————————————
-
-# color
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
-
-#———————————————
-#—— FUNCTIONS ——
-#———————————————
-
-create_mpc_all_playlist() {
-	local IFS='$\n'
-	local playlist_name="Tout"
-
-	mpc rm "$playlist_name"
-
-	mpc listall |
-	while IFS='$\n' read -r artist
-	do
-		mpc add "$artist"
-	done
-	mpc save "$playlist_name"
-}
-
-sysclean() {
-	yay -Scc
-	sysrm $(yay -Qdt)
-	sysrm $(yay -Qet)
-	sysrm $(yay -Qtdq)
-}
 
 #——————————————————————
 #—— SPACESHIP PROMPT ——
@@ -109,16 +59,6 @@ export SPACESHIP_HOST_PREFIX="$(printf '\u0040')"
 #—— ALIAS ——
 #———————————
 
-# utils
-alias mirrupg="sudo reflector --country France --sort rate --age 12 --protocol https --save /etc/pacman.d/mirrorlist"
-
 # vpn
 alias vpn_connect="sudo expressvpn connect smart"
 alias vpn_disconnect="sudo expressvpn disconnect"
-
-# package mgmt
-alias sysupg="yay -Syu"
-alias sysinstall="yay -S"
-alias sysrm="yay -Rcsn --noconfirm"
-alias syspkgsrc="yay -Qs"
-alias sysclean="yay -Scc && sysrm $(yay -Qtdq)"

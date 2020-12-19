@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+#———————————————————————————
+#—— ENVIRONMENT VARIABLES ——
+#———————————————————————————
+
+# language environment
+export LANG=fr_FR.UTF-8
+
+# editor
+export EDITOR=/usr/bin/code
+
+# config path
+export XDG_CONFIG_HOME=$HOME/.config
+
+# githib clone dirs
+export GITHUB_CLONE_DIR="$HOME/.git"
+
+# cargo, script, ...
+PATH="$HOME/.cargo/bin:$HOME/.scripts:$HOME/.node_modules/bin:$PATH"
+
+# npm
+export npm_config_prefix=~/.node/modules
+
+# fzf default command line
+export FZF_DEFAULT_COMMAND='fd -E build -E Build -E .svn -E .git'
+
+# color for autosuggestion
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"

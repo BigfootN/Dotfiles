@@ -1,0 +1,4 @@
+Checks: 'readability-identifier-naming,cppcoreguidelines-*,performance-*,modernize-*,concurrency-*,-modernize-use-trailing-return-type,fuchsia-trailing-return,-modernize-pass-by-value,-cppcoreguidelines-owning-memory'
+WarningsAsErrors: '*'
+CheckOptions:
+    - { key: readability-identifier-naming.EnumCase, value: CamelCase }

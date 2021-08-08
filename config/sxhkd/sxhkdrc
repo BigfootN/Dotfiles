@@ -16,7 +16,7 @@ XF86Audio{Stop,Play}
 	~/.scripts/music {stop,play}
 
 super + r
-	rofi -show apps -modi "apps:~/.config/rofi/rofi_apps.sh"
+	rofi -show apps -modi "apps:~/.config/rofi/rofi_apps.sh" -theme config_apps
 
 super + shift + {Left,Right}
 	bspc node -d {prev,next} --follow
@@ -32,6 +32,9 @@ super + alt + {Left,Right}
 
 super + k
 	bspc node -k
+
+super + s
+	rofi -show apps -modi "apps:~/.config/rofi/rofi_system.sh" -theme config_system
 
 super + q
 	~/.config/bspwm/bspwm_quit

@@ -4,77 +4,38 @@
 #—— REMOVE PACKAGE ——
 #————————————————————
 remove () {
-	sudo apt-get --purge autoremove $1
-}
-
-#———————————————————————————
-#—— UPDATE FONT (IOSEVKA) ——
-#———————————————————————————
-update_iosevka () {
-	clone_dir="$GITHUB_CLONE_DIR/nerd-fonts"
-	cwd="$PWD"
-
-	if [[ ! -d "$clone_dir" ]]
-	then
-		git clone https://github.com/ryanoasis/nerd-fonts $clone_dir
-	else
-		cd "$clone_dir"
-		git pull
-	fi
-
-	cd $clone_dir
-	./install.sh Iosevka
-
-	cd $cwd
-}
-
-#——————————————————
-#—— UPDATE PICOM ——
-#——————————————————
-update_picom () {
-	clone_dir="$GITHUB_CLONE_DIR/picom"
-	cwd="$PWD"
-
-	if [[ ! -d "$clone_dir" ]]
-	then
-		git clone https://github.com/yshui/picom $clone_dir
-		cd "$clone_dir"
-		git submodule update --init --recursive
-	else
-		cd "$clone_dir"
-		git submodule update --init --recursive
-		git pull
-	fi
-
-	meson --buildtype=release . build
-	sudo ninja -C build install
-
-	cd $cwd
+	yes O | yay  -Rnus $@
 }
 
 #—————————————————————————
 #—— UPDATE WHOLE SYSTEM ——
 #—————————————————————————
 update () {
-	sudo apt-get update
-	sudo apt-get full-upgrade
-
-	update_iosevka
-	update_picom
+	yes O | yay --answerdiff N --answerupgrade A --answerclean A --answeredit N --cleanafter --devel -Syu
 }
 
 #—————————————
 #—— INSTALL ——
 #—————————————
 install () {
-	sudo apt-get install $1
+	yay --removemake --cleanafter --answerdiff N --answerupgrade A --answerclean A --answeredit N -Sy $1
 }
 
 #—————————————————————————
 #—— CLEAN WHOLE SYSTEM ——
 #—————————————————————————
 clean () {
-	sudo apt-get --purge autoremove
+	yes O | yay -Scc
+
+	OUTPUT=$(yay -Qtdq | tr '\n' ' ')
+	PKGS=$(echo $OUTPUT | sed "s/[^a-zA-Z]$//gm")
+
+	echo $PKGS
+
+	if [[ ! -z "$OUTPUT" ]]
+	then
+		remove $PKGS
+	fi
 }
 
 case "$1" in

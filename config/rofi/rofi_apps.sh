@@ -1,8 +1,15 @@
 #!/bin/zsh
 
+NEMO="\tNemo"
+BRAVE="爵\tBrave"
+ALACRITTY="\tAlacritty"
+TRANSMISSION="\tTransmission"
+EASYTAG="\tEasytag"
+VSCODE="\tCode"
+SPOTIFY="\tSpotify"
+
 launch_in_term () {
-	coproc alacritty --class $1,$1 -t $1 -e zsh -c "sleep 0.1 && $1" > /dev/null 2>&1
-	exit 0
+	coproc alacritty --class "$1","$1" -t "$1" -e zsh -c "sleep 0.1 && $1" > /dev/null 2>&1
 }
 
 spawn() {
@@ -11,39 +18,40 @@ spawn() {
 }
 
 case "$@" in
-	"VSCode")
-		coproc code > /dev/null 2>&1
+	*Code)
+		coproc code
 		exit 0
 		;;
-	"firefox")
-		coproc firefox > /dev/null 2&>1
+	*Brave)
+		coproc brave > /dev/null 2&>1
 		exit 0
 		;;
-	"nemo")
+	*Nemo)
 		coproc nemo > /dev/null 2&>1
 		exit 0
 		;;
-	"alacritty")
-		coproc $HOME/.cargo/bin/alacritty > /dev/null 2>&1
+	*Alacritty)
+		coproc alacritty > /dev/null 2>&1
 		exit 0
 		;;
-	"transmission-gtk")
+	*Transmission)
 		coproc transmission-gtk > /dev/null 2>&1
 		exit 0
 		;;
-	"skype")
-		coproc skypeforlinux > /dev/null 2>&1
+	*Spotify)
+		coproc spotify > /dev/null
 		exit 0
 		;;
-	"easytag")
+	*Easytag)
 		spawn easytag
 		;;
 esac
 
-echo "VSCode"
-echo "alacritty"
-echo "firefox"
-echo "nemo"
-echo "transmission-gtk"
-echo "skype"
-echo "easytag"
+echo -e $TRANSMISSION
+echo -e $NEMO
+echo -e $ALACRITTY
+echo -e $NEOVIM
+echo -e $EASYTAG
+echo -e $BRAVE
+echo -e $VSCODE
+echo -e $SPOTIFY

@@ -1,0 +1,40 @@
+@import "colors"
+
+window {
+	children: [mainbox];
+	height: 25%;
+}
+
+mainbox {
+	margin: 20px;
+	children: [inputbar, listview];
+}
+
+element-text {
+	highlight: underline #cc241d;
+}
+
+element {
+	text-color: #bdae93;
+	padding: 10px 5px 10px 20px;
+}
+
+listview {
+	margin: 0px 10px;
+	lines: 8;
+	columns: 1;
+	font: "Iosevka Term 10";
+}
+
+listview.selected {
+	highlight: italic;
+}
+
+inputbar {
+	children: [entry];
+}
+
+element.selected {
+	border-color: red;
+	border: 0 0 0 2px;
+}

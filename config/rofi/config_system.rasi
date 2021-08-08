@@ -1,0 +1,50 @@
+@import "colors"
+
+window {
+	border: 5;
+	font: "Iosevka 50";
+	location: center;
+	width: 700;
+	layout: horizontal;
+	children: [ marginw, listview, margine ];
+}
+
+marginw {
+	layout: horizontal;
+	enabled: false;
+	position: west;
+}
+
+margine {
+	enabled: false;
+	layout: horizontal;
+	position: east;
+}
+
+listview {
+	enabled: true;
+	cycle: true;
+	scrollbar: false;
+	columns: 4;
+	dynamic: true;
+	spacing: 30;
+	margin: 20;
+	lines: 1;
+}
+
+element {
+	padding: 30;
+	margin: 0;
+	position: center;
+	layout: horizontal;
+	children: [element-text];
+}
+
+element-text {
+	horizontal-align: 0.5;
+}
+
+element.selected {
+	border-color: red;
+	border: 1px;
+}

@@ -1,0 +1,80 @@
+{
+	"layer": "top",
+	"position": "top",
+	"height": "",
+	"width": 2560,
+	"modules-center": [
+		"sway/workspaces",
+		"custom/cpu_icon",
+		"cpu",
+		"pulseaudio#icon",
+		"pulseaudio#text",
+		"custom/date_icon",
+		"clock#date",
+		"custom/clock_icon",
+		"clock#clock"
+	],
+	"custom/workspaces_icon": {
+		"format": "",
+		"tooltip": false
+	},
+	"sway/workspaces": {
+		"format": "{icon}",
+		"tooltip": false,
+		"format-icons": {
+			"1": "爵",
+			"2": "",
+			"3": "",
+			"4": "",
+			"5": "",
+			"6": "ﯲ"
+		},
+		"persistent_workspaces": {
+			"1": [],
+			"2": [],
+			"3": [],
+			"4": [],
+			"5": [],
+			"6": []
+		}
+	},
+	"custom/cpu_icon": {
+		"format": "﬙",
+		"tooltip": false
+	},
+	"cpu": {
+		"interval": 5,
+		"tooltip": false,
+		"format": "{usage:3}%"
+	},
+	"pulseaudio#icon": {
+		"format": "{icon}",
+		"format-icons": {
+			"headphone": "",
+			"default": ["", ""]
+		},
+		"tooltip": false
+	},
+	"pulseaudio#text": {
+		"format": "{volume:3}%",
+		"tooltip": false
+	},
+	"custom/date_icon": {
+		"format": "",
+		"tooltip": false
+	},
+	"clock#date": {
+		"interval": "1",
+		"format":"{:%d/%m}",
+		"tooltip": false
+	},
+	"custom/clock_icon": {
+		"format": "",
+		"tooltip": false
+	},
+	"clock#clock": {
+		"interval": "1",
+		"format": "{:%H:%M}",
+		"tooltip": false
+	}
+}

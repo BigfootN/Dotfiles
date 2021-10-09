@@ -5,13 +5,15 @@
 * {
 	min-width: 0px;
 	min-height: 0px;
-	padding: 0px 5px;
+	font-size: 17px;
+	font-weight: 500;
+	font-family: Iosevka Nerd Font;
 }
 
 window#waybar {
 	border-radius: 0px;
 	border-width: 0px;
-	background: transparent;
+	background: #1d2021;
 	min-width: 0px;
 	min-height: 0px;
 }
@@ -21,14 +23,9 @@ window#waybar {
 /* =-----------------= */
 
 #workspaces {
-	border-radius: 0px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	margin-left: 5px;
-	margin-right: 1300px;
-	padding-top: 0px;
-	padding-bottom: 0px;
-	border-width: 0px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	margin-left: 15px;
 }
 
 #workspaces button:hover {
@@ -41,41 +38,38 @@ window#waybar {
 
 #workspaces button {
 	font-family: "Iosevka Nerd Font";
-	font-size: 20px;
 	border-width: 0px;
 	margin-left: 5px;
 	margin-right: 5px;
-	padding-right: 10px;
+	padding-right: 15px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	padding-left: 5px;
+	padding-left: 10px;
 	background-color: #1d2021;
 	color: #7c6f54;
 }
 
 #workspaces button.focused {
 	font-family: "Iosevka Nerd Font";
-	font-size: 20px;
-	background: #9d0006;
+	background: #fb4934;
 	color: #1d2021;
-	border-radius: 5px;
-	padding-right: 10px;
+	margin-right: 5px;
+	padding-right: 15px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	padding-left: 5px;
+	padding-left: 10px;
 	border-width: 0px;
+	min-width: 0px;
 }
 
 /* =---------------= */
 /* = -- Modules -- = */
 /* =---------------= */
 
-*.modules-center {
+*.modules-left,
+*.modules-right {
 	background: #1d2021;
-	border-color: #1d2021;
-	border-radius: 15px;
 	border-width: 0px;
-	margin-top: 10px;
 	margin-bottom: 5px;
 }
 
@@ -83,42 +77,15 @@ window#waybar {
 /* = -- Modules-- = */
 /* =--------------= */
 
-/* Text */
-#cpu,
-#pulseaudio.text,
-#clock.date,
-#clock.clock {
-	font-size: 17px;
-	background: #ebdbb2;
-	border-style: solid;
-	padding: 0px 5px;
-	font-family: "Iosevka Nerd Font Mono";
-	border-color:#ebdbb2;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-	margin-right: 15px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
 /* Icon */
-#custom-cpu_icon,
-#pulseaudio.icon,
-#custom-date_icon,
-#custom-clock_icon,
+#cpu,
+#memory,
+#pulseaudio,
+#clock.date,
+#clock.clock,
 #custom-workspaces_icon {
 	min-height: 0px;
-	font-size: 20px;
-	font-family: "Iosevka Nerd Font";
-	padding-left: 10px;
-	border-style: solid;
-	border-color:#ebdbb2;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	margin-right: 20px;
 }
 
 /* =-----------= */
@@ -126,10 +93,8 @@ window#waybar {
 /* =-----------= */
 
 /* icon */
-#custom-cpu_icon {
-	background: #79740e;
-	padding-right: 15px;
-	margin-left: 10px;
+#cpu {
+	color: #98971a;
 }
 
 /* =--------------= */
@@ -137,9 +102,8 @@ window#waybar {
 /* =--------------= */
 
 /* icon */
-#pulseaudio.icon {
-	background: #af3a03;
-	padding-right: 20px;
+#pulseaudio {
+	color: #d79921;
 }
 
 /* =------------= */
@@ -147,9 +111,8 @@ window#waybar {
 /* =------------= */
 
 /* icon */
-#custom-date_icon {
-	background: #427b58;
-	padding-right: 15px;
+#clock.date {
+	color: #458588;
 }
 
 /* =-------------= */
@@ -157,23 +120,16 @@ window#waybar {
 /* =-------------= */
 
 /* icon */
-#custom-clock_icon {
-	background: #076678;
-	padding-right: 15px;
-}
-
-/* text */
 #clock.clock {
-	margin-right: 10px;
+	color: #b16286;
+	margin-right: 20px;
 }
 
-/* =------------------= */
-/* = -- Workspaces -- = */
-/* =------------------= */
+/* =--------------= */
+/* = -- Memory -- = */
+/* =--------------= */
 
 /* icon */
-#custom-workspaces_icon {
-	background: #8f37f1;
-	border-width: 10px 0px 10px 10px;
-	padding-right: 10px;
+#memory {
+	color: #d65d0e;
 }

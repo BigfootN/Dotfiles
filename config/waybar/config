@@ -3,15 +3,14 @@
 	"position": "top",
 	"height": "",
 	"width": 2560,
-	"modules-center": [
-		"sway/workspaces",
-		"custom/cpu_icon",
+	"modules-left": [
+		"sway/workspaces"
+	],
+	"modules-right": [
 		"cpu",
-		"pulseaudio#icon",
-		"pulseaudio#text",
-		"custom/date_icon",
+		"memory",
+		"pulseaudio",
 		"clock#date",
-		"custom/clock_icon",
 		"clock#clock"
 	],
 	"custom/workspaces_icon": {
@@ -38,43 +37,32 @@
 			"6": []
 		}
 	},
-	"custom/cpu_icon": {
-		"format": "﬙",
-		"tooltip": false
-	},
 	"cpu": {
 		"interval": 5,
 		"tooltip": false,
-		"format": "{usage:3}%"
+		"format": "﬙  {usage:2}%"
 	},
-	"pulseaudio#icon": {
-		"format": "{icon}",
+	"pulseaudio": {
+		"format": "{icon} {volume:3}%",
 		"format-icons": {
 			"headphone": "",
 			"default": ["", ""]
 		},
 		"tooltip": false
 	},
-	"pulseaudio#text": {
-		"format": "{volume:3}%",
-		"tooltip": false
-	},
-	"custom/date_icon": {
-		"format": "",
-		"tooltip": false
-	},
 	"clock#date": {
 		"interval": "1",
-		"format":"{:%d/%m}",
-		"tooltip": false
-	},
-	"custom/clock_icon": {
-		"format": "",
+		"format": "  {:%d/%m}",
 		"tooltip": false
 	},
 	"clock#clock": {
 		"interval": "1",
-		"format": "{:%H:%M}",
+		"format": "  {:%H:%M}",
 		"tooltip": false
+	},
+	"memory": {
+		"interval": 5,
+		"tooltip": false,
+		"format": "  {percentage:2}%"
 	}
 }

@@ -115,11 +115,11 @@ client.focused_inactive $gray $gray $gray
 client.unfocused $gray $gray $gray
 
 # assign windows
-for_window [class="Nemo"] move container to wokspace number 4
+for_window [title="Home"] move container to wokspace number 4
 for_window [class="Transmission-gtk"] move container to workspace number 6
 for_window [class="Brave"] move container to workspace number 1
 for_window [class="Code"] move container to workspace number 2
-for_window [class="Alacritty"] move container to workspace number 3
+for_window [app_id="Alacritty"] move container to workspace number 3; workspace number 3
 
 #===========#
 # -- Bar -- #

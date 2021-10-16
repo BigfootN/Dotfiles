@@ -18,6 +18,18 @@ focus_on_window_activation focus
 # don't focus on mouse
 focus_follows_mouse no
 
+#====================#
+# -- Gtk Settings -- #
+#====================#
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+	gsettings set $gnome-schema gtk-theme "Flat-Remix-GTK-Blue-Darkest-Solid"
+	gsettings set $gnome-schema icon-theme "Papirus"
+	gsettings set $gnome-schema cursor-theme "Volantes Cursors"
+}
+
 #==================#
 # -- Background -- #
 #==================#

@@ -7,6 +7,7 @@ TRANSMISSION="\tTransmission"
 EASYTAG="\tEasytag"
 VSCODE="\tCode"
 SPOTIFY="\tSpotify"
+INTELLIJ="\tIntellij"
 
 launch_in_term () {
 	coproc alacritty --class "$1","$1" -t "$1" -e zsh -c "sleep 0.1 && $1" > /dev/null 2>&1
@@ -23,11 +24,15 @@ case "$@" in
 		exit 0
 		;;
 	*Brave)
-		coproc brave > /dev/null 2&>1
+		coproc brave > /dev/null 2>&1
 		exit 0
 		;;
 	*Nemo)
-		coproc nemo > /dev/null 2&>1
+		coproc nemo > /dev/null 2>&1
+		exit 0
+		;;
+	*Intellij)
+		coproc _JAVA_AWT_WM_NONREPARENTING=1 intellij-idea-ultimate-edition > /dev/null 2>&1
 		exit 0
 		;;
 	*Alacritty)
@@ -39,7 +44,7 @@ case "$@" in
 		exit 0
 		;;
 	*Spotify)
-		coproc spotify > /dev/null
+		coproc spotify > /dev/null 2>&1
 		exit 0
 		;;
 	*Easytag)

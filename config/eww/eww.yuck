@@ -1,0 +1,53 @@
+(include "./bar_modules/cpu.yuck")
+(include "./bar_modules/date.yuck")
+(include "./bar_modules/clock.yuck")
+(include "./bar_modules/memory.yuck")
+(include "./bar_modules/hdd.yuck")
+(include "./bar_modules/workspace_list.yuck")
+
+;============;
+; - Modules -;
+;============;
+(defwidget modules []
+  (box
+    :hexpand true
+    :space-evenly false
+    (cpu)
+    (memory)
+    (hdd)
+    (clock)
+    (date)
+  )
+)
+
+;=============;
+; - Top bar - ;
+;=============;
+(defwindow bar_top
+  :monitor 0
+  :class "bar_top"
+  :geometry (geometry :x "0%"
+    :y "0px"
+    :width  "100%"
+  :anchor "bottom center")
+  ;   :stacking "fg"
+  ;   :wm-ignore true
+  ; :reserve (struts :distance "2%" :side "top")
+  ; :windowtype "dock"
+  :stacking "fg"
+  :exclusive false
+  :focusable false
+  (centerbox
+    :class "bar_main_box"
+    :orientation "horizontal"
+    (box
+      :halign "start"
+      (workspace_list)
+    )
+    (label :text "")
+    (box
+      :halign "end"
+      (modules)
+    )
+  )
+)

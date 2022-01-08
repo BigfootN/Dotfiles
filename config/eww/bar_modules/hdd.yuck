@@ -1,0 +1,13 @@
+(include "./bar_modules/module.yuck")
+
+(deflisten hdd_usage :initial 0
+  `python ./scripts/hdd_usage.py`
+)
+
+(defwidget hdd []
+  (module
+    :name "hdd"
+    :icon ""
+    :value_widget "${hdd_usage}"
+  )
+)

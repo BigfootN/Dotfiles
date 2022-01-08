@@ -1,0 +1,8 @@
+(defwidget workspace [number icon focused_workspace]
+  (box
+    :class {number == focused_workspace ? "focused_workspace" : "workspace"}
+    (label
+      :text icon
+    )
+  )
+)

@@ -1,6 +1,0 @@
-killall -9 picom
-mpc stop
-killall -9 polybar
-killall -9 feh
-killall -9 sxhkd
-bspc quit

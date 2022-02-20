@@ -1,4 +1,4 @@
-(include "./bar_modules/module.yuck")
+(include "./modules/module.yuck")
 
 (defpoll date_value :interval "2s"
   `date +%d/%m`

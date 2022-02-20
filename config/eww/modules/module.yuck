@@ -1,14 +1,15 @@
 (defwidget module [name icon value_widget]
   (box
     :class "${name} module"
-    :orientation "horizontal"
+    :spacing 0
     (box
       :space-evenly false
+      :spacing 0
       (label  :class "${name}_icon module_icon"
         :text "${icon}"
       )
       (label  :class "${name}_value module_value"
-        :text "${value_widget}"
+        :markup "${value_widget}"
       )
     )
   )

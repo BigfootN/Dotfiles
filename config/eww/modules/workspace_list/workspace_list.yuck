@@ -1,4 +1,5 @@
-(include "./bar_modules/workspace.yuck")
+(include "./modules/workspace_list/workspace.yuck")
+(include "./modules/seperator/seperator.yuck")
 
 (defpoll focused_workspace :interval "50ms"
   :initial 1
@@ -8,31 +9,45 @@
 (defwidget workspace_list []
   (box
     :class "workspace_list"
-    :space-evenly false
     :spacing 0
     (workspace :number "1"
       :icon "אַ"
       :focused_workspace "${focused_workspace}"
+    )
+    (seperator :text ""
+      :name "ws"
     )
     (
       workspace :number "2"
       :icon ""
       :focused_workspace "${focused_workspace}"
     )
+    (seperator :text ""
+      :name "ws"
+    )
     (
       workspace :number "3"
       :icon ""
       :focused_workspace "${focused_workspace}"
+    )
+    (seperator :text ""
+      :name "ws"
     )
     (
       workspace :number "4"
       :icon ""
       :focused_workspace "${focused_workspace}"
     )
+    (seperator :text ""
+      :name "ws"
+    )
     (
       workspace :number "5"
       :icon ""
       :focused_workspace "${focused_workspace}"
+    )
+    (seperator :text ""
+      :name "ws"
     )
     (
       workspace :number "6"

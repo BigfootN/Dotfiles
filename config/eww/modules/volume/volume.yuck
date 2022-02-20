@@ -1,0 +1,17 @@
+(include "./modules/module.yuck")
+
+(deflisten muted
+  `python ./modules/volume/volume.py --muted`
+)
+
+(deflisten volume_value
+  `python ./modules/volume/volume.py --volume`
+)
+
+(defwidget volume []
+  (module :name "volume"
+    :space-evenly false
+    :icon {"${muted}" == "false" ? "墳" : "ﱝ"}
+    :value_widget "${volume_value}"
+  )
+)

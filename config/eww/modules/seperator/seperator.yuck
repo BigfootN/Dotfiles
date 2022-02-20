@@ -1,0 +1,5 @@
+(defwidget seperator [text name]
+  (label :class "seperator ${name}_seperator"
+    :text "${text}"
+  )
+)

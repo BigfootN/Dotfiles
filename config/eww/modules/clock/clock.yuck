@@ -1,4 +1,4 @@
-(include "./bar_modules/module.yuck")
+(include "./modules/module.yuck")
 
 (defpoll clock_value :interval "50ms"
   `date +%H:%M`

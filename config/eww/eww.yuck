@@ -1,22 +1,38 @@
-(include "./bar_modules/cpu.yuck")
-(include "./bar_modules/date.yuck")
-(include "./bar_modules/clock.yuck")
-(include "./bar_modules/memory.yuck")
-(include "./bar_modules/hdd.yuck")
-(include "./bar_modules/workspace_list.yuck")
+(include "./modules/date/date.yuck")
+(include "./modules/clock/clock.yuck")
+(include "./modules/updates/updates.yuck")
+(include "./modules/volume/volume.yuck")
+(include "./modules/workspace_list/workspace_list.yuck")
 
-;============;
-; - Modules -;
-;============;
-(defwidget modules []
+;===================;
+; - Modules Right - ;
+;===================;
+(defwidget modules_right []
+  (box
+    :space-evenly false
+    (updates)
+    (seperator :text ""
+      :name "module"
+    )
+    (volume)
+    (seperator :text ""
+      :name "module"
+    )
+    (date)
+    (seperator :text ""
+      :name "module"
+    )
+    (clock)
+  )
+)
+
+;====================;
+; - Modules Middle - ;
+;====================;
+(defwidget modules_center []
   (box
     :hexpand true
     :space-evenly false
-    (cpu)
-    (memory)
-    (hdd)
-    (clock)
-    (date)
   )
 )
 
@@ -27,15 +43,15 @@
   :monitor 0
   :class "bar_top"
   :geometry (geometry :x "0%"
-    :y "0px"
+    :y "0"
     :width  "100%"
-  :anchor "bottom center")
+  :anchor "top center")
   ;   :stacking "fg"
   ;   :wm-ignore true
   ; :reserve (struts :distance "2%" :side "top")
   ; :windowtype "dock"
   :stacking "fg"
-  :exclusive false
+  :exclusive true
   :focusable false
   (centerbox
     :class "bar_main_box"
@@ -44,10 +60,14 @@
       :halign "start"
       (workspace_list)
     )
-    (label :text "")
     (box
+      :halign "center"
+      (modules_center)
+    )
+    (box
+      :space-evenly false
       :halign "end"
-      (modules)
+      (modules_right)
     )
   )
 )

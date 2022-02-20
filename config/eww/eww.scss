@@ -1,242 +1,32 @@
 /*===============*/
-/* - Variables - */
+/* - Imports - */
 /*===============*/
 
-// background
-$bg: #292828;
-$bg0: #101010;
-$bg1: #1c1c1c;
-$bg2: #32302f;
-$bg3: #383432;
-$bg4: #3c3836;
-$bg5: #45403d;
-$bg6: #504945;
-$bg7: #5a524c;
-$bg8: #665c54;
-$bg9: #7c6f64;
-
-// foreground
-$fg0: #e2cca9;
-$fg: #e2cca9;
-$fg1: #c5b18d;
-
-// grey
-$grey0: #7c6f64;
-$grey1: #928374;
-$grey2: #a89984;
-
-// red
-$red: #f2594b;
-$dimRed: #b85651;
-
-// orange
-$orange: #f28534;
-$dimOrange: #bd6f3e;
-
-// yellow
-$yellow: #e9b143;
-$dimYellow: #c18f41;
-
-// green
-$green: #b0b846;
-$dimGreen: #8f9a52;
-
-// aqua
-$aqua: #8bba7f;
-$dimAqua: #72966c;
-
-// blue
-$blue: #80aa9e;
-$dimBlue: #68948a;
-
-// purple
-$purple: #d3869b;
-$dimPurple: #ab6c7d;
-
-// brown
-$brown: #644117;
-
-// module
-$module-spacing: 0.52em;
-$module-padding-top: 0.2em;
-$module-padding-bottom: 0.2em;
-$module-border-radius: 4px;
-$module-border-size: 2px;
-
-// bar main box
-$bar-main-box-padding-top: 0.5em;
-$bar-main-box-padding-bottom: 0.5em;
-$bar-main-box-padding-left: 0.7em;
-$bar-main-box-padding-right: 0.7em;
-
-// bar top
-$bar-background-color: $bg1;
-
-// icon
-$icon-font-family: "Iosevka Nerd Font";
-$icon-font-size: 1.4em;
-$icon-font-weight: 600;
-$icon-padding-left: 0.25em;
-$icon-padding-right: 0.5em;
-$icon-padding-top: 0.15em;
-$icon-padding-bottom: 0.15em;
-$icon-font-color: $bg0;
-
-// value
-$value-font-family: "Iosevka Term";
-$value-font-size: 1em;
-$value-font-weight: 600;
-$value-font-color: $bg0;
-$value-padding-right: 0.5em;
-$value-padding-left: 0.5em;
-$value-padding-top: 0.15em;
-$value-padding-bottom: 0.15em;
-$value-background-color: $fg1;
-
-// workspace
-$workspace-background-color: $bar-background-color;
-$workspace-font-family: "Iosevka Nerd Font";
-$workspace-font-size: 1.4em;
-$workspace-font-color: $bg8;
-$workspace-padding-left: 0.7em;
-$workspace-padding-right: 1em;
-$workspace-padding-top: 0.0em;
-$workspace-padding-bottom: 0.0em;
-$workspace-margin: 0em;
-$workspace-border-size: 0.15em;
-$workspace-border-radius: 4px;
-
-// workspace list
-$workspace-list-margin: 0em;
-$workspace-list-padding: 0em;
-
-// workspace focused
-$workspace-focused-color: $dimRed;
-$workspace-focused-border-color: $dimRed;
+@import "colors.scss";
+@import "./modules/clock/clock.scss";
+@import "./modules/date/date.scss";
+@import "./modules/module.scss";
+@import "./modules/volume/volume.scss";
+@import "./modules/updates/updates.py";
+@import "./modules/workspace_list/workspace_list.scss";
 
 /*=========*/
 /* - Bar - */
 /*=========*/
 
-.bar_top {
-	background-color: $bar-background-color;
-}
-
 // inside for elements
 .bar_main_box {
-	padding-top: $bar-main-box-padding-top;
-	padding-bottom: $bar-main-box-padding-bottom;
-	padding-right: $bar-main-box-padding-right;
-	padding-left: $bar-main-box-padding-right;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	padding-right: 20px;
+	padding-left: 20px;
+	background-color: $bg;
 }
 
-/*=============*/
-/* - Modules - */
-/*=============*/
-
-//common
-.module {
-	padding-left: $module-spacing;
-	padding-right: $module-spacing;
-	padding-bottom: $module-padding-bottom;
-	padding-top: $module-padding-top;
-}
-
-.module_icon {
-	padding-right: $icon-padding-right;
-	padding-left: $icon-padding-left;
-	padding-bottom: $icon-padding-bottom;
-	padding-top: $icon-padding-top;
-	border-bottom-left-radius: $module-border-radius;
-	border-top-left-radius: $module-border-radius;
-	font-size: $icon-font-size;
-	font-family: $icon-font-family;
-	font-weight: $icon-font-weight;
-	color: $icon-font-color;
-}
-
-.module_value {
-	background: $fg1;
-	padding-left: $value-padding-left;
-	padding-right: $value-padding-right;
-	padding-bottom: $value-padding-bottom;
-	padding-top: $value-padding-top;
-	border-top-right-radius: $module-border-radius;
-	border-bottom-right-radius: $module-border-radius;
-	font-family: $value-font-family;
-	font-size: $value-font-size;
-	font-weight: $value-font-weight;
-	color: $value-font-color;
-	border-style: solid;
-	border-width: $module-border-size;
-}
-
-// cpu
-.cpu_icon {
-	background-color: $red;
-}
-
-.cpu_value {
-	border-color: $red;
-}
-
-// date
-.date_icon {
-	background-color: $blue;
-}
-
-.date_value {
-	border-color: $blue;
-}
-
-// clock
-.clock_icon {
-	background-color: $orange;
-}
-
-.clock_value {
-	border-color: $orange;
-}
-
-// memory
-.memory_icon {
-	background-color: $green;
-}
-
-.memory_value {
-	border-color: $green;
-}
-
-// hdd
-.hdd_icon {
-	background-color: $purple;
-}
-
-.hdd_value {
-	border-color: $purple;
-}
-
-// workspace
-.workspace_list {
-	padding: $workspace-list-padding;
-	margin: $workspace-list-margin;
-}
-
-.workspace,
-.focused_workspace {
-	padding-left: $workspace-padding-left;
-	padding-right: $workspace-padding-right;
-	padding-top: $workspace-padding-top;
-	padding-bottom: $workspace-padding-bottom;
-	font-family: $workspace-font-family;
-	font-size: $workspace-font-size;
-	color: $workspace-font-color;
-	border-radius: $workspace-border-radius;
-	margin: $workspace-margin;
-}
-
-.focused_workspace {
-	color: $workspace-focused-color;
-	border-color: $workspace-focused-border-color;
-	border-radius: 7px;
+.module_seperator {
+	color: $bg8;
+	margin-left: 15px;
+	margin-right: 15px;
+	font-family: $font;
+	font-size: 1.5em;
 }

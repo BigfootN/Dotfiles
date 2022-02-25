@@ -3,6 +3,7 @@
 /*===============*/
 
 @import "colors.scss";
+@import "shared.scss";
 @import "./modules/clock/clock.scss";
 @import "./modules/date/date.scss";
 @import "./modules/module.scss";
@@ -25,8 +26,8 @@
 
 .module_seperator {
 	color: $bg8;
-	margin-left: 15px;
-	margin-right: 15px;
+	margin-left: $seperator-margin-left-right;
+	margin-right: $seperator-margin-left-right;
 	font-family: $font;
 	font-size: 1.5em;
 }

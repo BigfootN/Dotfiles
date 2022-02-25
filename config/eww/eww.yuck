@@ -46,13 +46,10 @@
     :y "0"
     :width  "100%"
   :anchor "top center")
-  ;   :stacking "fg"
-  ;   :wm-ignore true
-  ; :reserve (struts :distance "2%" :side "top")
-  ; :windowtype "dock"
   :stacking "fg"
-  :exclusive true
-  :focusable false
+  :wm-ignore false
+  :reserve (struts :distance "2%" :side "top")
+  :windowtype "dock"
   (centerbox
     :class "bar_main_box"
     :orientation "horizontal"

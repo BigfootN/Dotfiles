@@ -38,7 +38,7 @@ def is_muted():
 
 def print_volume():
     volume = get_volume()
-    volume = str("{:>2}%".format(str(volume)))
+    volume = str("{:>3}%".format(str(volume)))
     print(volume, flush=True)
 
 

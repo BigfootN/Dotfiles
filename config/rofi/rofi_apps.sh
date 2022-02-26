@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-NEMO="\tNemo"
+THUNAR="\tThunar"
 BRAVE="爵\tBrave"
 ALACRITTY="\tAlacritty"
 TRANSMISSION="\tTransmission"
@@ -24,11 +24,11 @@ case "$@" in
 		exit 0
 		;;
 	*Brave)
-		coproc brave > /dev/null 2>&1
+		coproc brave
 		exit 0
 		;;
-	*Nemo)
-		coproc nemo > /dev/null 2>&1
+	*Thunar)
+		coproc thunar
 		exit 0
 		;;
 	*Intellij)
@@ -53,10 +53,11 @@ case "$@" in
 esac
 
 echo -e $TRANSMISSION
-echo -e $NEMO
+echo -e $THUNAR
 echo -e $ALACRITTY
 echo -e $NEOVIM
 echo -e $EASYTAG
 echo -e $BRAVE
 echo -e $VSCODE
 echo -e $SPOTIFY
+echo -e $INTELLIJ

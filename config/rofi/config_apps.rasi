@@ -10,6 +10,12 @@ mainbox {
 	children: [inputbar, listview];
 }
 
+element-text,
+element-icon {
+	background-color: inherit;
+	text-color: inherit;
+}
+
 element-text {
 	highlight: underline #cc241d;
 }

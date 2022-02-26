@@ -6,7 +6,13 @@ window {
 	location: center;
 	width: 700;
 	layout: horizontal;
-	children: [ marginw, listview, margine ];
+	children: [ marginw, listview, margine];
+}
+
+element-text,
+element-icon {
+	background-color: inherit;
+	text-color: inherit;
 }
 
 marginw {

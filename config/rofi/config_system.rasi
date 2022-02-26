@@ -6,25 +6,13 @@ window {
 	location: center;
 	width: 700;
 	layout: horizontal;
-	children: [ marginw, listview, margine];
+	children: [listview];
 }
 
 element-text,
 element-icon {
 	background-color: inherit;
 	text-color: inherit;
-}
-
-marginw {
-	layout: horizontal;
-	enabled: false;
-	position: west;
-}
-
-margine {
-	enabled: false;
-	layout: horizontal;
-	position: east;
 }
 
 listview {
@@ -51,6 +39,7 @@ element-text {
 }
 
 element.selected {
-	border-color: red;
 	border: 1px;
+	border-radius: 15px;
+	background-color: #504945;
 }

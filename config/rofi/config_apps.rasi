@@ -17,7 +17,7 @@ element-icon {
 }
 
 element-text {
-	highlight: underline #cc241d;
+	highlight: underline #f2594b;
 }
 
 element {
@@ -29,7 +29,6 @@ listview {
 	margin: 0px 10px;
 	lines: 8;
 	columns: 1;
-	font: "Iosevka Term 10";
 }
 
 listview.selected {
@@ -37,10 +36,24 @@ listview.selected {
 }
 
 inputbar {
-	children: [entry];
+	children: [prompt, entry];
+}
+
+prompt {
+	highlight: bold;
+	vertical-align: 0.5;
+	horizontal-align: 0.5;
+	padding: 0px 10px;
+	border: 10px 0px 10px;
+	margin: 0px 0px 0px 10px;
+	border-color: #32302f;
+	text-color: #32302f;
+	background-color: #f2594b;
+	font: "UbuntuCondensed Nerd Font 17";
 }
 
 element.selected {
-	border-color: red;
+	border-color: #f2594b;
 	border: 0 0 0 2px;
+	background-color: #504945;
 }

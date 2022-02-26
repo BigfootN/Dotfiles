@@ -1,0 +1,52 @@
+add_newline = true
+
+format = """[\\[](bold black)$username$hostname[\\]](bold black)$git_branch$git_state
+$directory$character
+"""
+
+[git_branch]
+format = "[  ](fg:black bold)[$symbol $branch]($style)"
+style = "fg:red"
+symbol = ""
+
+[character]
+format = "$symbol"
+success_symbol = "[ ](fg:#c5b18d)"
+error_symbol = "[ ](fg:red bold)"
+
+[hostname]
+ssh_only = true
+format = "[\\[](fg:black) [@$hostname]($style) [\\]](fg:black)"
+style = "bold red"
+
+[directory]
+truncation_length = 5
+truncate_to_repo = true
+format = "[$path]($style) "
+style = "fg:#bd6f3e"
+home_symbol = "~"
+
+[git_commit]
+commit_hash_length = 7
+format = "[ ($hash)]($style)"
+style = "fg:yellow"
+tag_disabled = true
+
+[username]
+style_user = "bold fg:#68948a"
+style_root = "bold red"
+format = "[$user]($style)"
+disabled = false
+show_always = true
+
+[git_state]
+rebase = "[](bold red)"
+merge = "[](bold red)"
+revert = "[](bold red)"
+cherry_pick = "[](bold red)"
+bisect = "[](bold red)"
+disabled = false
+format = "[\\(](bold red)$state[\\)](bold red)"
+
+[rust]
+format = "[ ($version)](bold fg:#8f9a52)"

@@ -58,8 +58,8 @@ bindsym $mod+Right focus right
 bindsym $mod+Down focus down
 
 # rofi
-bindsym $mod+r exec rofi -show apps \
-						 -modi "apps:~/.config/rofi/rofi_apps.sh" \
+bindsym $mod+r exec rofi -show Run \
+						 -modi "Run:~/.config/rofi/rofi_apps.sh" \
 						 -theme config_apps
 bindsym $mod+p exec rofi -show apps \
 						 -modi "apps:~/.config/rofi/rofi_system.sh" \
@@ -95,7 +95,7 @@ for_window [class="Transmission-gtk"] move container to workspace number 6; work
 for_window [class="Brave"] move container to workspace number 1; workspace 1
 for_window [class="Code"] move container to workspace number 2; workspace 2
 for_window [class="Alacritty"] move container to workspace number 3; workspace number 3
-for_window [class="Thunar"] move container to workspace 5; workspace 5
+for_window [class="Thunar"] move container to workspace 4; workspace 4
 
 #==================#
 # -- Background -- #

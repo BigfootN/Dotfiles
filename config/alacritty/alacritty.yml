@@ -30,13 +30,13 @@ font:
     bold_italic:
         family: FiraCode Nerd Font
         style: Bold Italic
-    size: 14
+    size: 15
 
     offset:
         x: 0
         y: 0
 
-# Colors (Gruvbox dark)
+# Colors (Gruvbox Material Dark Medium)
 colors:
   primary:
     background: '0x282828'

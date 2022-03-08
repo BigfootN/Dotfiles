@@ -9,14 +9,15 @@
 # |________/|_______/ |__/  |__/|__/       \_______/
 #―――――――――――――――――――――――――――――――――――――――――――――――――――
 
-source /home/bigfoot/.env_vars
+#————————————
+#—— PROMPT ——
+#————————————
+
+eval "$(starship init zsh)"
 
 #———————————————
 #—— OH MY ZSH ——
 #———————————————
-
-# theme
-ZSH_THEME="spaceship"
 
 # plugins
 plugins=(
@@ -28,33 +29,6 @@ plugins=(
 export ZSH="/home/bigfoot/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
-#——————————————————————
-#—— SPACESHIP PROMPT ——
-#——————————————————————
-
-# prompt order
-export SPACESHIP_PROMPT_ORDER=(
-time          # Time stamps section
-user          # Username section
-host          # Hostname section
-dir           # Current directory section
-git           # Git section (git_branch + git_status)
-exec_time     # Execution time
-line_sep      # Line break
-exit_code     # Exit code section
-char          # Prompt character
-)
-
-# user
-export SPACESHIP_USER_SUFFIX=""
-
-# char
-export SPACESHIP_CHAR_SYMBOL=">"
-export SPACESHIP_CHAR_SUFFIX=" "
-
-# host
-export SPACESHIP_HOST_PREFIX="$(printf '\u0040')"
-
 #———————————
 #—— ALIAS ——
 #———————————
@@ -62,3 +36,23 @@ export SPACESHIP_HOST_PREFIX="$(printf '\u0040')"
 # vpn
 alias vpn_connect="sudo expressvpn connect smart"
 alias vpn_disconnect="sudo expressvpn disconnect"
+#!/bin/zsh
+
+#———————————————————————————
+#—— ENVIRONMENT VARIABLES ——
+#———————————————————————————
+
+# language environment
+export LANG=fr_FR.UTF-8
+
+# editor
+export EDITOR=/usr/bin/code
+
+# config path
+export XDG_CONFIG_HOME=$HOME/.config
+
+# cargo, script, ...
+PATH="$HOME/.cargo/bin:$HOME/.scripts:$HOME/.node_modules/bin:$PATH"
+
+# color for autosuggestion
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"

@@ -7,19 +7,19 @@ RESTART=""
 
 case "$@" in
 	$SUSPEND)
-		systemctl suspend > /dev/null 2&>1
+		systemctl suspend
 		exit 0
 		;;
 	$LOGOUT)
-		coproc bspc quit > /dev/null 2&>1
+		coproc i3-msg exit
 		exit 0
 		;;
 	$SHUTDOWN)
-		systemctl poweroff > /dev/null 2&>1
+		systemctl poweroff
 		exit 0
 		;;
 	$RESTART)
-		systemctl reboot > /dev/null 2&>1
+		systemctl reboot
 		exit 0
 		;;
 esac

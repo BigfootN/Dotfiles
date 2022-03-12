@@ -1,101 +1,39 @@
 {
-    //============//
-    //== EDITOR ==//
-    //============//
-    "editor.insertSpaces": false,
-    "editor.useTabStops": true,
-    "editor.tabSize": 4,
-    "editor.fontFamily": "Iosevka Nerd Font",
-    "editor.fontWeight": "normal",
-    "editor.fontSize": 16,
-    "editor.fontLigatures": true,
-    "editor.suggestFontSize": 17,
-    "editor.formatOnType": false,
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.autoClosingBrackets": "always",
-    "window.zoomLevel": 0.5,
-
-    "json.format.enable": false,
-
-    //============//
-    //== WINDOW ==//
-    //============//
-
-    // Show whitespaces
-    "editor.renderWhitespace": "all",
-
-    // Files
-    "files.trimTrailingWhitespace": true,
-    "files.exclude": {
-        ".cache": true,
-        ".idea": true,
-        "build": true,
-        ".vscode": true,
-        ".browse.VC.db": true,
-        ".clang-format": true,
-        ".gitignore": true
-    },
-    "workbench.colorCustomizations": {
-        // Status Bar
-        "statusBar.background": "#3c3836",
-        "statusBar.foreground": "#bdae93",
-
-        // Editor
-        "editorGutter.background": "#32302f",
-        "editorWhitespace.foreground": "#665c54",
-        "editor.background": "#282828",
-
-        // Tab
-        "tab.activeBorder": "#af3a03",
-        "tab.activeBackground": "#3c3836",
-        "tab.unfocusedActiveBackground": "#3c3836",
-        "tab.unfocusedActiveBorder": "#af3a03",
-        "tab.unfocusedInactiveBackground": "#1d2021",
-
-        // Side Bar
-        "sideBar.background": "#282828",
-
-        // Activity Bar
-        "activityBar.foreground": "#af3a03",
-        "activityBar.background": "#282828",
-        "activityBar.activeBorder": "#af3a03",
-        "activityBar.inactiveForeground": "#928374"
-    },
-
-    //=================//
-    // == EXTENSIONS ==//
-    //=================//
-
-    // Cpp
-    "C_Cpp.updateChannel": "Insiders",
-    "C_Cpp.default.browse.databaseFilename": "${workspaceFolder}/.browse.VC.db",
-    "C_Cpp.loggingLevel": "Debug",
-    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-    "C_Cpp.intelliSenseEngine": "Default",
-
-    // Cmake
-    "cmake.configureOnOpen": true,
-
-    //============//
-    //== Window ==//
-    //============//
-    "window.autoDetectColorScheme": true,
-    "window.menuBarVisibility": "hidden",
-    "files.associations": {
-        "*.rasi": "css"
-    },
-    "workbench.editor.untitled.hint": "hidden",
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
-    },
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    },
-    "python.defaultInterpreterPath": "/bin/python",
     "workbench.colorTheme": "Gruvbox Material Dark",
-    "Lua.workspace.library": [
-        "/usr/share/awesome/lib"
-    ]
+    "window.zoomLevel": 0.75,
+    "window.menuBarVisibility": "toggle",
+    "editor.fontFamily": "Iosevka Term",
+    "editor.fontSize": 16,
+    "workbench.colorCustomizations": {
+        // activity bar
+        "activityBar.background": "#1c1c1c",
+
+        // sidebar
+        "sideBar.background": "#1c1c1c",
+
+        // editor
+        "editorGutter.background": "#292828",
+        "editor.background": "#32302f",
+
+        // statusbar
+        "statusBar.background": "#68948a",
+        "statusBar.foreground": "#1c1c1c",
+
+        // breadcrumb
+        "breadcrumb.background": "#383432",
+
+        // editor line number
+        "editorLineNumber.activeForeground": "#b85651",
+
+        // tab
+        "tab.activeBackground": "#45403d",
+        "tab.activeBorder": "#45403d",
+        "tab.hoverBackground": "#45403d",
+        "tab.hoverForeground": "#bd6f3e",
+        "tab.activeForeground": "#bd6f3e",
+
+        // tree
+        "list.inactiveSelectionForeground": "#68948a",
+        "list.activeSelectionForeground": "#68948a"
+    }
 }

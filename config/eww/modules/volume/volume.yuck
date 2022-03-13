@@ -1,11 +1,11 @@
 (include "./modules/module.yuck")
 
 (deflisten muted
-  `python ./modules/volume/volume.py --muted`
+  `python3 ./modules/volume/volume.py --muted`
 )
 
 (deflisten volume_value
-  `python ./modules/volume/volume.py --volume`
+  `python3 ./modules/volume/volume.py --volume`
 )
 
 (defwidget volume []

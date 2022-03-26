@@ -92,10 +92,10 @@ client.unfocused $gray $gray $gray
 
 # assign windows
 for_window [class="Transmission-gtk"] move container to workspace number 6; workspace 6
-for_window [class="Navigator"] move container to workspace number 1; workspace 1
+for_window [class="Firefox"] move container to workspace number 1; workspace 1
 for_window [class="Code"] move container to workspace number 2; workspace 2
-for_window [class="Alacritty"] move container to workspace number 3; workspace number 3
-for_window [class="org.gnome.Nautilus"] move container to workspace 4; workspace 4
+for_window [class="Alacritty"] move container to workspace number 3; workspace 3
+for_window [class="Org.gnome.Nautilus"] move container to workspace number 4; workspace 4
 
 #==================#
 # -- Background -- #

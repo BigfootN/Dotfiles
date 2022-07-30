@@ -1,39 +1,40 @@
 {
     "workbench.colorTheme": "Gruvbox Material Dark",
-    "window.zoomLevel": 0.75,
+    "window.zoomLevel": 0.8,
     "window.menuBarVisibility": "toggle",
     "editor.fontFamily": "Iosevka Term",
-    "editor.fontSize": 16,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
     "workbench.colorCustomizations": {
         // activity bar
         "activityBar.background": "#1c1c1c",
-
         // sidebar
         "sideBar.background": "#1c1c1c",
-
         // editor
         "editorGutter.background": "#292828",
         "editor.background": "#32302f",
-
         // statusbar
         "statusBar.background": "#68948a",
         "statusBar.foreground": "#1c1c1c",
-
         // breadcrumb
         "breadcrumb.background": "#383432",
-
         // editor line number
         "editorLineNumber.activeForeground": "#b85651",
-
         // tab
         "tab.activeBackground": "#45403d",
         "tab.activeBorder": "#45403d",
         "tab.hoverBackground": "#45403d",
         "tab.hoverForeground": "#bd6f3e",
         "tab.activeForeground": "#bd6f3e",
-
         // tree
         "list.inactiveSelectionForeground": "#68948a",
         "list.activeSelectionForeground": "#68948a"
-    }
+    },
+    "editor.formatOnSave": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    "timeline.excludeSources": [
+        "timeline.localHistory"
+    ],
+    "editor.bracketPairColorization.enabled": false,
+    "editor.fontSize": 17,
 }

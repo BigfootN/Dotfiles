@@ -1,0 +1,11 @@
+@import url("/home/bigfoot/.themes/Nordic-darker-v40/gnome-shell/gnome-shell.css");
+
+.calendar-day-base {
+    font-size: 1em;
+}
+
+#panel {
+    font-size: 1.1em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

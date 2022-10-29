@@ -15,6 +15,12 @@
 
 eval "$(starship init zsh)"
 
+#——————————
+#—— SNAP ——
+#——————————
+
+export SNAP_USER_DATA=~/.snap
+
 #———————————————
 #—— OH MY ZSH ——
 #———————————————
@@ -23,6 +29,7 @@ eval "$(starship init zsh)"
 plugins=(
 	git
 	zsh-autosuggestions
+	zsh-syntax-highlighting
 )
 
 # source base directory

@@ -1,5 +1,14 @@
-vte-terminal,
-TerminalScreen {
-    padding: 10px 20px 20px 60px;
-    -vte-terminal-inner-border: 30px 30px 30px 30px;
+vte-terminal {
+    padding-top: 10px;
+    padding-left: 50px;
+}
+
+headerbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+headerbar:backdrop {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }

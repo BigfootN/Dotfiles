@@ -64,3 +64,6 @@ export PATH="$HOME/.cargo/bin:$HOME/.scripts:$HOME/.node_modules/bin:$PATH"
 
 # color for autosuggestion
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
+
+# for flatpak
+export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:/home/bigfoot/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
